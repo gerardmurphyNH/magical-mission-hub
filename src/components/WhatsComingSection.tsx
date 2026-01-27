@@ -21,7 +21,7 @@ const cards = [
     icon: Package,
     title: "ToothSafe",
     label: "Coming soon",
-    description: "A special place to keep your tooth safe for the Tooth Fairy—designed by the workshop itself.",
+    description: "A special place to keep your tooth safe for the Tooth Fairy -designed by the workshop itself.",
   },
 ];
 

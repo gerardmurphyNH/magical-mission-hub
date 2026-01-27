@@ -110,7 +110,7 @@ const VirtueQuizSection = () => {
             What virtue is in your tooth?
           </h2>
           <p className="text-muted-foreground mb-8">
-            Every tooth carries something special—a virtue that belongs to you. 
+            Every tooth carries something special -a virtue that belongs to you. 
             Take a quick peek to see what gift your tooth might hold.
           </p>
 
