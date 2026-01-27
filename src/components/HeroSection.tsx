@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import heroFairy from "@/assets/hero-fairy.png";
+import { trackCTAClick } from "@/lib/analytics";
 
 const HeroSection = () => {
   const scrollToSignup = () => {
+    trackCTAClick("hero");
     document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" });
   };
 

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Sparkles, Check, Mail, AlertCircle } from "lucide-react";
 import { useVirtue } from "@/context/VirtueContext";
 import { GOOGLE_SHEETS_ENDPOINT, CONTACT_EMAIL } from "@/lib/config";
-import { trackSignupSuccess } from "@/lib/analytics";
+import { trackSignupSuccess, trackFormStart, trackFormError } from "@/lib/analytics";
 
 // Pre-computed star positions to avoid Math.random in render
 const stars = Array.from({ length: 15 }, (_, i) => ({
@@ -21,7 +21,15 @@ const SignupSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasStartedForm, setHasStartedForm] = useState(false);
   const { virtue } = useVirtue();
+
+  const handleFormInteraction = () => {
+    if (!hasStartedForm) {
+      setHasStartedForm(true);
+      trackFormStart();
+    }
+  };
 
   const isEndpointConfigured =
     GOOGLE_SHEETS_ENDPOINT !== "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
@@ -44,11 +52,13 @@ const SignupSection = () => {
 
     if (!email) {
       setError("Please enter your email address.");
+      trackFormError("empty_email");
       return;
     }
 
     if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
+      trackFormError("invalid_email");
       return;
     }
 
@@ -145,6 +155,7 @@ const SignupSection = () => {
                   placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onFocus={handleFormInteraction}
                   required
                   aria-label="Email address"
                   className="h-14 px-6 rounded-full bg-starlight/10 border-starlight/20 text-starlight placeholder:text-starlight/40 focus:border-primary focus:ring-primary"
@@ -154,6 +165,7 @@ const SignupSection = () => {
                   placeholder="First name (optional)"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  onFocus={handleFormInteraction}
                   aria-label="First name (optional)"
                   className="h-14 px-6 rounded-full bg-starlight/10 border-starlight/20 text-starlight placeholder:text-starlight/40 focus:border-primary focus:ring-primary"
                 />

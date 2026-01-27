@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { trackFAQOpen } from "@/lib/analytics";
 
 const faqs = [
   {
@@ -57,7 +58,17 @@ const FAQSection = () => {
             </p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-3">
+          <Accordion
+            type="single"
+            collapsible
+            className="space-y-3"
+            onValueChange={(value) => {
+              if (value) {
+                const index = parseInt(value.replace("item-", ""));
+                trackFAQOpen(faqs[index].question);
+              }
+            }}
+          >
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}

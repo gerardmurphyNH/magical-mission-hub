@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Heart, Lightbulb, Shield, Clock } from "lucide-react";
 import { useVirtue } from "@/context/VirtueContext";
-import { trackQuizCompletion } from "@/lib/analytics";
+import { trackQuizStart, trackQuizAnswer, trackQuizCompletion, trackQuizReset, trackCTAClick } from "@/lib/analytics";
 
 type Virtue = "bravery" | "kindness" | "creativity" | "patience";
 
@@ -68,9 +68,15 @@ const VirtueQuizSection = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const { setVirtue } = useVirtue();
 
+  const handleStartQuiz = () => {
+    setShowQuiz(true);
+    trackQuizStart();
+  };
+
   const handleAnswer = (virtue: Virtue) => {
     const newAnswers = [...selectedAnswers, virtue];
     setSelectedAnswers(newAnswers);
+    trackQuizAnswer(currentQuestion + 1, virtue);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
@@ -93,9 +99,11 @@ const VirtueQuizSection = () => {
     setSelectedAnswers([]);
     setResult(null);
     setVirtue(null);
+    trackQuizReset();
   };
 
   const scrollToSignup = () => {
+    trackCTAClick("quiz_result");
     document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -115,7 +123,7 @@ const VirtueQuizSection = () => {
           </p>
 
           {!showQuiz ? (
-            <Button variant="magical" size="lg" onClick={() => setShowQuiz(true)}>
+            <Button variant="magical" size="lg" onClick={handleStartQuiz}>
               <Sparkles className="w-4 h-4" />
               Discover Your Virtue
             </Button>

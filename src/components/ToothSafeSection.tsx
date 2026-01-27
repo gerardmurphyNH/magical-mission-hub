@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles } from "lucide-react";
 import toothsafeBox from "@/assets/toothsafe-box.png";
+import { trackCTAClick } from "@/lib/analytics";
 
 const benefits = [
   "Keeps your tooth safe all night long",
@@ -11,6 +12,7 @@ const benefits = [
 
 const ToothSafeSection = () => {
   const scrollToSignup = () => {
+    trackCTAClick("toothsafe");
     document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" });
   };
 
