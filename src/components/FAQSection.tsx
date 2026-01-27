@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     question: "Is the Tooth Fairy real?",
-    answer: "Some things are real in ways we can't always see. Kindness is real. Bravery is real. And something takes your teeth and leaves something behind. Whether you call it magic or mystery, something wonderful is happening.",
+    answer: "Yes, the Tooth Fairy is real. She just does her work in ways most people don't see. Like many important things, she works quietly, at night, fixing small problems and keeping the world in balance. When you lose a tooth, it doesn't disappear by accident. The Tooth Fairy takes it because every tooth holds memories and virtues you've grown while becoming yourself. She uses those to help make the world a little better, then leaves something behind as a thank-you. You may never see her, but the clues are there. And that's exactly how she likes it.",
   },
   {
     question: "How many teeth does the Tooth Fairy have?",
