@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
-import heroFairy from "@/assets/hero-fairy.jpg";
+import heroFairy from "@/assets/hero-fairy.png";
 
 const HeroSection = () => {
   const scrollToSignup = () => {
@@ -8,10 +8,10 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-[90vh] flex flex-col md:flex-row items-center justify-center overflow-hidden">
       {/* Night sky gradient background */}
       <div className="absolute inset-0 night-sky-section" />
-      
+
       {/* Animated stars */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
@@ -27,8 +27,8 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Hero fairy image with glow effect */}
-      <div className="absolute right-0 bottom-0 w-full md:w-2/3 lg:w-1/2 h-full opacity-40 md:opacity-60">
+      {/* Hero fairy image - desktop: positioned absolutely, mobile: below content */}
+      <div className="hidden md:block absolute right-0 bottom-0 w-2/3 lg:w-1/2 h-full opacity-60">
         <img
           src={heroFairy}
           alt="The Tooth Fairy holding a glowing tooth"
@@ -39,8 +39,8 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 px-6 py-20 text-center md:text-left">
-        <div className="max-w-xl">
+      <div className="container relative z-10 px-6 pt-20 pb-8 md:py-20 text-center md:text-left">
+        <div className="max-w-xl mx-auto md:mx-0">
           <div className="inline-flex items-center gap-2 bg-starlight/10 backdrop-blur-sm border border-starlight/20 rounded-full px-4 py-2 mb-6">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm text-starlight/90 font-medium">
@@ -55,7 +55,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-starlight/80 mb-8 leading-relaxed font-body">
-            Every tooth holds a memory. Every tooth holds a virtue. And in the Tooth Fairy's hands, 
+            Every tooth holds a memory. Every tooth holds a virtue. And in the Tooth Fairy's hands,
             these tiny treasures help quietly fix the world—one smile at a time.
           </p>
 
@@ -74,6 +74,18 @@ const HeroSection = () => {
           <p className="mt-6 text-sm text-starlight/50">
             By Gerard Murphy
           </p>
+        </div>
+      </div>
+
+      {/* Mobile hero fairy image - shown below content on mobile only */}
+      <div className="relative md:hidden w-full px-6 pb-12">
+        <div className="relative w-full max-w-sm mx-auto aspect-square rounded-3xl overflow-hidden shadow-magical">
+          <img
+            src={heroFairy}
+            alt="The Tooth Fairy holding a glowing tooth"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(244_45%_25%)/50] via-transparent to-transparent" />
         </div>
       </div>
     </section>

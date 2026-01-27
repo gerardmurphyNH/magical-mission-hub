@@ -1,73 +1,80 @@
-# Welcome to your Lovable project
+# The Tooth Fairy's Magical Mission
 
-## Project info
+Marketing website for the animated short film and children's book project.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live Site:** https://tooth-safe.com
 
-## How can I edit this code?
+## Tech Stack
 
-There are several ways of editing your application.
+- Vite + React + TypeScript
+- Tailwind CSS + shadcn/ui
+- GitHub Pages hosting
 
-**Use Lovable**
+## Local Development
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+```bash
+# Install dependencies
+npm install
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start dev server (http://localhost:8080)
 npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Pushes to `main` automatically deploy to GitHub Pages via GitHub Actions.
 
-**Use GitHub Codespaces**
+### First-Time GitHub Pages Setup
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. **Enable Pages:** Repo Settings → Pages → Source: "GitHub Actions"
+2. **Custom Domain:** Add `tooth-safe.com`, enable "Enforce HTTPS"
+3. **DNS Records (Squarespace Domains):**
 
-## What technologies are used for this project?
+   | Type | Host | Value |
+   |------|------|-------|
+   | A | @ | 185.199.108.153 |
+   | A | @ | 185.199.109.153 |
+   | A | @ | 185.199.110.153 |
+   | A | @ | 185.199.111.153 |
+   | CNAME | www | gerardmurphyNH.github.io |
 
-This project is built with:
+## Configuration
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Google Sheets (Email Signup)
 
-## How can I deploy this project?
+1. Create a Google Sheet with columns: `email`, `firstName`, `virtue`, `timestamp`
+2. Extensions → Apps Script → Deploy as Web App
+3. Edit `src/lib/config.ts`:
+   ```typescript
+   export const GOOGLE_SHEETS_ENDPOINT = "YOUR_APPS_SCRIPT_URL";
+   ```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Google Analytics
 
-## Can I connect a custom domain to my Lovable project?
+1. Create GA4 property, get Measurement ID
+2. Edit `index.html` - replace `G-XXXXXXXXXX` with your ID
+3. Edit `src/lib/config.ts`:
+   ```typescript
+   export const GA_MEASUREMENT_ID = "G-YOUR_ID";
+   ```
 
-Yes, you can!
+## Features
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- ✅ Email capture → Google Sheets
+- ✅ Interactive virtue quiz (4 outcomes)
+- ✅ Free coloring page download
+- ✅ 8-question FAQ with JSON-LD
+- ✅ Privacy & Terms pages
+- ✅ GA4 analytics with event tracking
+- ✅ Mobile-responsive design
+- ✅ SEO optimized
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Project Structure
+
+See [CLAUDE.md](./CLAUDE.md) for detailed documentation.

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 
 const Footer = () => {
@@ -13,27 +14,32 @@ const Footer = () => {
           </div>
 
           <p className="text-sm text-muted-foreground text-center md:text-left max-w-md">
-            Where every tiny tooth becomes part of something bigger. 
+            Where every tiny tooth becomes part of something bigger.
             Tinkering away, one smile at a time.
           </p>
 
           <div className="flex gap-6">
-            <a
-              href="#"
+            <Link
+              to="/privacy"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               Privacy
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/terms"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               Terms
-            </a>
+            </Link>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border text-center">
+        <div className="mt-8 pt-6 border-t border-border text-center space-y-3">
+          <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
+            Collaboration credit shown with permission. This site is operated by
+            Wiggly Tooth Workshop and is not an official website of FableVision
+            Studios or Peter H. Reynolds.
+          </p>
           <p className="text-xs text-muted-foreground">
             © 2026 Wiggly Tooth Workshop. All teeth carefully catalogued.
           </p>

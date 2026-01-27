@@ -1,8 +1,8 @@
 import { Film, BookOpen, Package } from "lucide-react";
-import filmScene1 from "@/assets/film-scene-1.jpg";
-import filmScene2 from "@/assets/film-scene-2.jpg";
-import filmScene3 from "@/assets/film-scene-3.jpg";
-import workshopScene from "@/assets/workshop-scene.jpg";
+import filmScene1 from "@/assets/film-scene-1.png";
+import filmScene2 from "@/assets/film-scene-2.png";
+import filmScene3 from "@/assets/film-scene-3.png";
+import workshopScene from "@/assets/workshop-scene.png";
 
 const cards = [
   {
@@ -71,7 +71,7 @@ const WhatsComingSection = () => {
           <h3 className="font-display text-xl font-semibold text-foreground text-center mb-6">
             Peek into the magic
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {filmImages.map((img, index) => (
               <div
                 key={index}

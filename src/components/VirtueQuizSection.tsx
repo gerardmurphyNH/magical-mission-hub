@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Heart, Lightbulb, Shield, Clock } from "lucide-react";
+import { useVirtue } from "@/context/VirtueContext";
+import { trackQuizCompletion } from "@/lib/analytics";
 
 type Virtue = "bravery" | "kindness" | "creativity" | "patience";
 
@@ -64,6 +66,7 @@ const VirtueQuizSection = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<Virtue[]>([]);
   const [result, setResult] = useState<VirtueResult | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
+  const { setVirtue } = useVirtue();
 
   const handleAnswer = (virtue: Virtue) => {
     const newAnswers = [...selectedAnswers, virtue];
@@ -80,6 +83,8 @@ const VirtueQuizSection = () => {
 
       const topVirtue = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0] as Virtue;
       setResult(virtues[topVirtue]);
+      setVirtue(topVirtue); // Store in context for signup form
+      trackQuizCompletion(topVirtue);
     }
   };
 
@@ -87,6 +92,7 @@ const VirtueQuizSection = () => {
     setCurrentQuestion(0);
     setSelectedAnswers([]);
     setResult(null);
+    setVirtue(null);
   };
 
   const scrollToSignup = () => {

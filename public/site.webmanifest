@@ -1,0 +1,19 @@
+{
+  "name": "The Tooth Fairy's Magical Mission",
+  "short_name": "Tooth Fairy",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#8b8cc8",
+  "background_color": "#1a1a2e",
+  "display": "standalone"
+}

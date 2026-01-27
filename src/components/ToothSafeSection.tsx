@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles } from "lucide-react";
-import toothsafeBox from "@/assets/toothsafe-box.jpg";
+import toothsafeBox from "@/assets/toothsafe-box.png";
 
 const benefits = [
   "Keeps your tooth safe all night long",
