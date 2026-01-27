@@ -56,7 +56,7 @@ const HeroSection = () => {
 
           <p className="text-lg md:text-xl text-starlight/80 mb-8 leading-relaxed font-body">
             Every tooth holds a memory. Every tooth holds a virtue. And in the Tooth Fairy's hands,
-            these tiny treasures help quietly fix the world -one smile at a time.
+            these tiny treasures help quietly fix the world - one smile at a time.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">

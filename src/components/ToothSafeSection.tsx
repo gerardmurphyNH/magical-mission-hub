@@ -43,7 +43,7 @@ const ToothSafeSection = () => {
               Meet ToothSafe
             </h2>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              When a tooth wiggles free, where does it go? Not under the pillow -at least, 
+              When a tooth wiggles free, where does it go? Not under the pillow - at least, 
               not just anywhere. ToothSafe is a special little keeper, designed by the 
               Tooth Fairy's workshop, to hold your precious tooth until she arrives.
             </p>

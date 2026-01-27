@@ -8,23 +8,23 @@ import {
 const faqs = [
   {
     question: "Why does the Tooth Fairy take my teeth?",
-    answer: "Every tooth you lose holds something special -a memory, a moment of bravery, a flash of kindness. The Tooth Fairy collects these tiny treasures because they contain the virtues of childhood. And those virtues? They're exactly what the world needs.",
+    answer: "Every tooth you lose holds something special - a memory, a moment of bravery, a flash of kindness. The Tooth Fairy collects these tiny treasures because they contain the virtues of childhood. And those virtues? They're exactly what the world needs.",
   },
   {
     question: "What does the Tooth Fairy do with my teeth?",
-    answer: "In her workshop, the Tooth Fairy carefully extracts the virtue from each tooth. These virtues are then woven into the fabric of the world -helping someone be a little braver, a little kinder, a little more patient. Your tooth might help a firefighter stay calm, or a shy kid make a new friend.",
+    answer: "In her workshop, the Tooth Fairy carefully extracts the virtue from each tooth. These virtues are then woven into the fabric of the world - helping someone be a little braver, a little kinder, a little more patient. Your tooth might help a firefighter stay calm, or a shy kid make a new friend.",
   },
   {
     question: "Why does the Tooth Fairy leave money?",
-    answer: "It's a trade, really. You're giving something precious -a piece of yourself that took time and care to grow. The coin is the Tooth Fairy's way of saying 'thank you' for trusting her with something so important.",
+    answer: "It's a trade, really. You're giving something precious - a piece of yourself that took time and care to grow. The coin is the Tooth Fairy's way of saying 'thank you' for trusting her with something so important.",
   },
   {
     question: "Why does the Tooth Fairy come at night?",
-    answer: "Fairies work best in the quiet hours, when dreams are deep and imaginations are wide open. Plus, there's something about starlight that helps the Tooth Fairy fly faster. She visits thousands of children each night -timing is everything!",
+    answer: "Fairies work best in the quiet hours, when dreams are deep and imaginations are wide open. Plus, there's something about starlight that helps the Tooth Fairy fly faster. She visits thousands of children each night - timing is everything!",
   },
   {
     question: "How does the Tooth Fairy get in my house?",
-    answer: "Fairies are very small -about the size of your hand -and they can slip through the tiniest spaces: a crack in a window, a gap under a door, even the space between moonbeams. Your house is never as sealed as you think.",
+    answer: "Fairies are very small - about the size of your hand - and they can slip through the tiniest spaces: a crack in a window, a gap under a door, even the space between moonbeams. Your house is never as sealed as you think.",
   },
   {
     question: "Is the Tooth Fairy real?",
@@ -32,11 +32,11 @@ const faqs = [
   },
   {
     question: "How many teeth does the Tooth Fairy have?",
-    answer: "Millions! The Tooth Fairy's workshop is full of them -sorted by virtue, organized by year, catalogued by country. It looks a bit like a library, if libraries sparkled.",
+    answer: "Millions! The Tooth Fairy's workshop is full of them - sorted by virtue, organized by year, catalogued by country. It looks a bit like a library, if libraries sparkled.",
   },
   {
     question: "What if I swallow my tooth?",
-    answer: "Don't worry. The Tooth Fairy has been doing this for a very long time. She always finds a way. Just leave a note under your pillow explaining what happened -the Tooth Fairy appreciates the honesty.",
+    answer: "Don't worry. The Tooth Fairy has been doing this for a very long time. She always finds a way. Just leave a note under your pillow explaining what happened - the Tooth Fairy appreciates the honesty.",
   },
 ];
 
