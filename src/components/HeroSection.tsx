@@ -1,7 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import heroFairy from "@/assets/hero-fairy.png";
-import { trackCTAClick } from "@/lib/analytics";
+import { trackCTAClick, trackEvent } from "@/lib/analytics";
+
+const InstagramIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+  </svg>
+);
+
+const TikTokIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+  </svg>
+);
 
 const HeroSection = () => {
   const scrollToSignup = () => {
@@ -57,11 +71,11 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-starlight/80 mb-8 leading-relaxed font-body">
-            Every tooth holds a memory. Every tooth holds a virtue. And in the Tooth Fairy's hands,
-            these tiny treasures help quietly fix the world - one smile at a time.
+            A magical story world for curious kids is coming to life. Follow Arlo, CeCe, and the Tooth Fairy through an animated film, a children's book, and ToothSafe - and be here from the very beginning.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          {/* Primary CTA */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
             <Button
               variant="hero"
               size="xl"
@@ -73,9 +87,39 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          <p className="mt-6 text-sm text-starlight/50">
-            By Gerard Murphy
-          </p>
+          {/* Secondary social CTA */}
+          <div className="border-t border-starlight/15 pt-6">
+            <p className="text-sm font-medium text-starlight/60 mb-3 text-center md:text-left">
+              Follow the Workshop
+            </p>
+            <div className="flex gap-3 justify-center md:justify-start flex-wrap">
+              <a
+                href="https://www.instagram.com/wigglytoothworkshop/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("social_click", { platform: "instagram", location: "hero" })}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-starlight/10 border border-starlight/20 text-starlight/80 hover:text-starlight hover:bg-starlight/20 hover:border-starlight/40 transition-all text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Follow Wiggly Tooth Workshop on Instagram"
+              >
+                <InstagramIcon />
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://www.tiktok.com/@wigglytoothworkshop"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("social_click", { platform: "tiktok", location: "hero" })}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-starlight/10 border border-starlight/20 text-starlight/80 hover:text-starlight hover:bg-starlight/20 hover:border-starlight/40 transition-all text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Follow Wiggly Tooth Workshop on TikTok"
+              >
+                <TikTokIcon />
+                <span>TikTok</span>
+              </a>
+            </div>
+            <p className="text-xs text-starlight/40 mt-2.5 text-center md:text-left">
+              Behind-the-scenes magic, sneak peeks, and Tooth Fairy fun
+            </p>
+          </div>
         </div>
       </div>
 

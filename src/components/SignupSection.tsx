@@ -128,11 +128,20 @@ const SignupSection = () => {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-starlight mb-4">
             Join the Workshop
           </h2>
-          <p className="text-starlight/70 mb-8 leading-relaxed">
-            Get occasional updates about the animated short film (Summer 2026),
-            the children's book, and ToothSafe. No spam, just a little magic in
-            your inbox.
-          </p>
+          <p className="text-starlight/60 text-sm mb-4">Join early and get:</p>
+          <ul className="text-left max-w-xs mx-auto mb-8 space-y-2.5">
+            {[
+              "Early launch news for the film, book, and ToothSafe",
+              "Behind-the-scenes sketches and story moments",
+              "First access to ToothSafe before public release",
+              "Occasional signed artwork and workshop surprises",
+            ].map((benefit) => (
+              <li key={benefit} className="flex items-start gap-2.5 text-sm text-starlight/70">
+                <Sparkles className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
 
           {isSubmitted ? (
             <div className="p-8 rounded-3xl bg-night-sky/80 backdrop-blur-sm border border-starlight/20 animate-fade-in-up">
