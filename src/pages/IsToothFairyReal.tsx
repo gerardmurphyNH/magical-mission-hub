@@ -25,6 +25,26 @@ const faqs = [
       "Yes. The Tooth Fairy is real - she just works in ways most people never see. She visits at night, takes the tooth a child has lost, and draws out the quality that grew inside it while it was theirs: courage, kindness, patience, creativity. Those qualities are real, and so is what she does with them. You may never catch sight of her, but the evidence is left behind every time.",
   },
   {
+    question: "Are tooth fairies real?",
+    answer:
+      "Yes - and there's more than one. Tooth fairies work all over the world, each looking after the children in their own corner of it. Some are girls, some are boys, each with their own name. The one at the heart of our story is CeCe, but she is only one of many. So when you ask if tooth fairies are real, the honest answer is yes, plural.",
+  },
+  {
+    question: "Is there proof the Tooth Fairy is real?",
+    answer:
+      "The proof is what she leaves behind. The tooth is gone by morning and something waits in its place - and the qualities that tooth carried, the courage and kindness and patience a child grew, are real and don't disappear. Like courage or kindness themselves, the Tooth Fairy is known by what she does, not by being caught in the act.",
+  },
+  {
+    question: "Does the Tooth Fairy really exist?",
+    answer:
+      "Yes. She exists the way the most important quiet things exist - not as something you can catch on camera, but as something real by its effects. A tooth vanishes, a small gift appears, and the good a child is growing keeps rippling outward. That's the Tooth Fairy, doing exactly what she has always done.",
+  },
+  {
+    question: "Is the Tooth Fairy real for grown-ups too?",
+    answer:
+      "In a way, yes. Grown-ups stop expecting to see her, but the thing the tradition points at stays true: children really do grow courage, kindness, and wonder, and those qualities really do make the world better. Believing in the Tooth Fairy, for an adult, is mostly believing that what children become matters. It does.",
+  },
+  {
     question: "Why does the Tooth Fairy take teeth?",
     answer:
       "Not because the teeth themselves are valuable, but because of what's inside them. Every tooth quietly absorbs the qualities a child grows - bravery from facing something scary, kindness from helping, patience from waiting. The Tooth Fairy collects those qualities and uses them to gently help keep the world in balance.",
@@ -105,6 +125,17 @@ const IsToothFairyReal = () => {
               mainEntityOfPage: { "@type": "WebPage", "@id": PAGE_URL },
               publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
+              // Ties this page to the film entity (and its Wikidata/IMDb/TMDB authority)
+              mentions: {
+                "@type": "Movie",
+                name: "The Tooth Fairy's Secret Workshop",
+                url: "https://wigglytoothworkshop.com/watch",
+                sameAs: [
+                  "https://www.wikidata.org/wiki/Q140607725",
+                  "https://www.imdb.com/title/tt43689600/",
+                  "https://www.themoviedb.org/movie/1733539-the-tooth-fairy-s-secret-workshop",
+                ],
+              },
             },
             {
               "@type": "FAQPage",
@@ -157,7 +188,8 @@ const IsToothFairyReal = () => {
             </h1>
 
             <p className="text-starlight/80 text-lg md:text-xl leading-relaxed max-w-xl mx-auto">
-              There's a real answer. It's more interesting than you've been told.
+              Yes - and the real answer is far more interesting than you've been
+              told.
             </p>
           </div>
         </section>
@@ -166,29 +198,31 @@ const IsToothFairyReal = () => {
         <section className="py-20 md:py-28 bg-background">
           <div className="container px-6 max-w-2xl mx-auto">
 
+            {/* Direct answer first — a self-contained answer for search + AI overviews */}
+            <div className="mb-12 p-6 rounded-2xl bg-secondary/40 border border-border">
+              <p className="text-foreground text-lg leading-relaxed">
+                <span className="font-display font-bold text-foreground">
+                  Yes - the Tooth Fairy is real.
+                </span>{" "}
+                She just works in ways most people never see. She visits at
+                night, takes each lost tooth for the quality that grew inside it
+                - courage, kindness, patience, creativity - and uses it to
+                quietly help the world. You may never catch sight of her, but
+                every tooth she collects leaves the evidence behind.
+              </p>
+            </div>
+
             <div className="space-y-6 text-foreground/80 text-lg leading-relaxed mb-10">
               <p>
-                Is the Tooth Fairy real? Why does she collect teeth? What
-                happens to them after they disappear beneath the pillow?
+                That's the short answer. The longer one is more interesting -
+                and it starts with a few questions worth asking. Why does she
+                collect teeth? What happens to them after they disappear beneath
+                the pillow?
               </p>
               <p>
                 These aren't small questions. They're the kind that open up
                 something larger - about what children are really doing when
                 they grow, and what that growing is quietly worth.
-              </p>
-            </div>
-
-            {/* Direct answer — for readers (and search) who want it plainly */}
-            <div className="mb-14 p-6 rounded-2xl bg-secondary/40 border border-border">
-              <p className="text-foreground text-lg leading-relaxed">
-                <span className="font-display font-bold text-foreground">
-                  The short answer: yes.
-                </span>{" "}
-                The Tooth Fairy is real - she just works in ways most people
-                never see. She takes each lost tooth for the quality that grew
-                inside it - courage, kindness, patience, creativity - and uses
-                it to quietly help the world. You may never see her, but every
-                tooth she collects leaves the evidence behind.
               </p>
             </div>
 
@@ -415,6 +449,37 @@ const IsToothFairyReal = () => {
                 Every child who learns to be patient, to share, to imagine, to
                 keep going. All of that is real. All of it accumulates. None of
                 it disappears - even when the tooth does.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Proof / how do you know ── */}
+        <section className="py-20 md:py-28 bg-background">
+          <div className="container px-6 max-w-2xl mx-auto">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight">
+              How Do You Know the
+              <br className="hidden sm:block" /> Tooth Fairy Is Real?
+            </h2>
+
+            <div className="space-y-6 text-foreground/80 text-lg leading-relaxed">
+              <p>
+                You look for the proof she leaves behind - because that's the
+                only way she has ever worked.
+              </p>
+              <p>
+                The tooth is gone by morning, and something waits in its place.
+                And the qualities that tooth carried - the bravery, the
+                kindness, the patience a child grew - are real, and they don't
+                disappear. You can watch a child keep growing them, day after
+                day. That is the evidence. Quiet, but everywhere.
+              </p>
+              <p>
+                Some of the most real things in the world work exactly like
+                this. You never see courage itself, only what it does. You never
+                see kindness, only where it lands. The Tooth Fairy belongs to
+                that same order of real - known by what she leaves, not by being
+                caught in the act.
               </p>
             </div>
           </div>
