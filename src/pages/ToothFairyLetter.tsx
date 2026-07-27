@@ -147,6 +147,11 @@ const magicByQuality = [
 
 const internalLinks = [
   {
+    label: "Letters to the Tooth Fairy",
+    teaser: "Read letters from other families — and share your child's own to our gallery.",
+    to: "/letters-to-the-tooth-fairy",
+  },
+  {
     label: "Free Tooth Fairy Printables",
     teaser: "Worksheet, coloring page, and teacher guide — all free.",
     to: "/tooth-fairy-printables",
