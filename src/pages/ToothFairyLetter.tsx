@@ -29,6 +29,7 @@ import {
   trackToothFairyLetterExampleImageDownload,
   trackToothFairyGuideDownload,
   trackFAQOpen,
+  trackEvent,
 } from "@/lib/analytics";
 import { GOOGLE_SHEETS_ENDPOINT, CONTACT_EMAIL } from "@/lib/config";
 
@@ -489,6 +490,29 @@ const ToothFairyLetter = () => {
             <p className="mt-4 text-xs text-starlight/60">
               Free printable · No email required · Print at home
             </p>
+          </div>
+        </section>
+
+        {/* ── Interactive UGC cross-promo ──────────────────────── */}
+        <section className="py-8 bg-primary/10 border-b border-border">
+          <div className="container px-6 max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <p className="font-display font-bold text-foreground text-lg">
+                Want to write your own letter to the Tooth Fairy?
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Share the quality in your child's tooth, read letters from other
+                families, and make a card to post.
+              </p>
+            </div>
+            <Button variant="hero" size="lg" asChild className="shrink-0">
+              <Link
+                to="/letters-to-the-tooth-fairy"
+                onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "tooth_fairy_letter_banner" })}
+              >
+                Write a Letter
+              </Link>
+            </Button>
           </div>
         </section>
 

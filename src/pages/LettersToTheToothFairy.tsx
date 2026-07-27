@@ -30,6 +30,31 @@ const QUALITIES = [
   "Joy",
 ];
 
+// Sample letters shown for inspiration until real, moderated submissions arrive.
+// Clearly labelled as examples so they're never mistaken for real families' letters.
+const EXAMPLE_LETTERS = [
+  {
+    quality: "Bravery",
+    body: "Dear Tooth Fairy, I lost my tooth at school today and I wasn't even scared. The quality in my tooth is bravery. Please use it to help someone who feels nervous.",
+    name: "Leo",
+  },
+  {
+    quality: "Kindness",
+    body: "Dear Tooth Fairy, my tooth has kindness in it because I helped my little sister when she was sad. Please share it with someone who needs a friend today.",
+    name: "Mia",
+  },
+  {
+    quality: "Perseverance",
+    body: "Dear Tooth Fairy, this tooth was so wiggly and took forever to come out, but I kept trying! The quality inside is perseverance. Please use it well.",
+    name: "Ada",
+  },
+  {
+    quality: "Curiosity",
+    body: "Dear Tooth Fairy, I always ask a hundred questions. The quality in my tooth is curiosity - maybe you can give it to someone who wants to learn something new.",
+    name: "Ren",
+  },
+];
+
 const faqs = [
   {
     question: "How do I write a letter to the Tooth Fairy?",
@@ -50,6 +75,16 @@ const faqs = [
     question: "Can I email or text the Tooth Fairy?",
     answer:
       "The Tooth Fairy doesn't have an inbox or a phone number - she works quietly at night. The real way to reach her is a letter left with the tooth. You can write one here and make a card to share, or print a letter for her to answer under the pillow.",
+  },
+  {
+    question: "What is the Tooth Fairy's email address or phone number?",
+    answer:
+      "The Tooth Fairy doesn't have an email address or a phone number - there's no inbox to write to and no number to call. That's by design: she works quietly, at night. The way to reach her is a letter left with your tooth, the way children always have.",
+  },
+  {
+    question: "How do you contact the Tooth Fairy?",
+    answer:
+      "You write her a letter and leave it where your tooth was. It's the preferred - and really the only - way to contact the Tooth Fairy. Write one here to share and turn into a card, or print our free Tooth Fairy letter for her to answer under the pillow.",
   },
   {
     question: "What should the letter say?",
@@ -122,8 +157,8 @@ const LettersToTheToothFairy = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Letters to the Tooth Fairy: Read & Write Your Own | Wiggly Tooth Workshop"
-        description="Read heartfelt letters to the Tooth Fairy from kids and families - then write your own. Share the quality in your child's tooth and make a card to share."
+        title="Letters to the Tooth Fairy: Write & Contact Her | Wiggly Tooth Workshop"
+        description="The best way to contact the Tooth Fairy is a letter. Read letters from kids and families, write your own, and turn it into a card to share."
         canonical={PAGE_URL}
         jsonLd={{
           "@context": "https://schema.org",
@@ -180,6 +215,32 @@ const LettersToTheToothFairy = () => {
                   Write your letter
                 </a>
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* ── How to contact / reach the Tooth Fairy (SEO: email/phone/contact intent) ── */}
+        <section className="py-14 md:py-16 bg-secondary/30">
+          <div className="container px-6 max-w-2xl mx-auto">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-5 leading-tight">
+              How do you contact the Tooth Fairy?
+            </h2>
+            <div className="space-y-4 text-foreground/80 text-lg leading-relaxed">
+              <p>
+                The Tooth Fairy doesn't have an email address or a phone number.
+                She works quietly at night, not from an inbox - so there's nothing
+                to email and no number to call.
+              </p>
+              <p>
+                The real way to reach her is the oldest one: <strong className="text-foreground">write
+                her a letter</strong> and leave it with your tooth. It's how children
+                have contacted the Tooth Fairy for generations, and it's still the
+                way that works. Write yours below to share and turn into a card, or{" "}
+                <Link to="/tooth-fairy-letter" className="text-primary hover:underline">
+                  print a letter for her to answer
+                </Link>{" "}
+                under the pillow.
+              </p>
             </div>
           </div>
         </section>
@@ -371,12 +432,29 @@ const LettersToTheToothFairy = () => {
             {galleryLoading ? (
               <p className="text-center text-muted-foreground">Gathering letters…</p>
             ) : letters.length === 0 ? (
-              <div className="text-center max-w-md mx-auto">
-                <Sparkles className="w-6 h-6 text-primary mx-auto mb-3" />
-                <p className="text-muted-foreground">
-                  No letters yet - yours could be the first. Write one above and,
-                  once we've read it, it'll appear here.
+              <div>
+                <p className="text-center text-muted-foreground max-w-md mx-auto mb-8">
+                  Real letters from families will appear here once shared. Here are
+                  a few examples to spark ideas - yours could be next.
                 </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {EXAMPLE_LETTERS.map((l, i) => (
+                    <figure key={i} className="magical-card flex flex-col">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                          {l.quality}
+                        </span>
+                        <span className="inline-block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+                          Example
+                        </span>
+                      </div>
+                      <blockquote className="text-foreground/80 leading-relaxed flex-1">
+                        &ldquo;{l.body}&rdquo;
+                      </blockquote>
+                      <figcaption className="text-sm text-muted-foreground italic mt-3">— {l.name}</figcaption>
+                    </figure>
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="grid sm:grid-cols-2 gap-4">
