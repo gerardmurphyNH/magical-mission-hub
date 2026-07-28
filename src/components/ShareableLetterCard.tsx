@@ -1,17 +1,23 @@
 import { useRef, useState } from "react";
 import { Download, Copy, Check } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { YOUTUBE_VIDEO_URL } from "@/lib/config";
+import type { LetterType } from "@/lib/letters";
 
 interface ShareableLetterCardProps {
+  letterType: LetterType;
   quality: string;
-  letterBody: string;
+  /** TO: "because ___". FROM: unused. */
+  reason?: string;
+  /** TO: "please use it to help ___". FROM: "she used it to help ___". */
+  helpText: string;
   childFirstName?: string;
+  cityState?: string;
 }
 
 const SITE = "wigglytoothworkshop.com";
 const HANDLE = "@wigglytoothworkshop";
-const PAGE_URL = "https://wigglytoothworkshop.com/letters-to-the-tooth-fairy";
-const CAPTION = `Our letter to the Tooth Fairy 💫 What's the quality in your child's tooth? Share yours at ${SITE} ${HANDLE} #ToothFairy #WigglyToothWorkshop #ToothFairyLetter`;
+const CAPTION_TAGS = `${SITE} · ${HANDLE} · watch the film: ${YOUTUBE_VIDEO_URL}`;
 
 const InstagramIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -27,25 +33,33 @@ const FacebookIcon = () => (
 );
 
 /**
- * Renders a square, social-ready "letter to the Tooth Fairy" card and lets the
- * user post it. The site URL + handle are baked into the image itself (the
- * durable "tag", since Instagram strips links/captions from web shares).
+ * Renders a square, social-ready card built from the structured story template
+ * — "My tooth has X in it because Y. Please use it to help Z." — rather than
+ * free-form letter text, so every card reads as a clear, shareable statement.
+ * The site URL + handle are baked into the image itself (the durable "tag",
+ * since Instagram strips links/captions from web shares); the copyable caption
+ * additionally tags the site, the handle, and the film.
  *
  * Sharing reality: on mobile the Web Share API hands the actual image to the
  * native sheet, where Instagram and Facebook appear as targets — the real way
  * to post from the web. Instagram has no web-post API, so on desktop we save
- * the image and tell the user to post it in the app; Facebook on desktop falls
+ * the image and copy the caption with instructions; Facebook on desktop falls
  * back to a link share of this page.
  */
-const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableLetterCardProps) => {
+const ShareableLetterCard = ({ letterType, quality, reason, helpText, childFirstName, cityState }: ShareableLetterCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const name = (childFirstName || "").trim() || "Anonymous";
-  const shown = letterBody.trim().length > 320 ? letterBody.trim().slice(0, 317).trimEnd() + "…" : letterBody.trim();
+  const storyLine =
+    letterType === "to"
+      ? `My tooth has ${quality} in it${reason ? ` because ${reason}` : ""}. Please use it to help ${helpText}.`
+      : `My tooth held ${quality}. The Tooth Fairy used it to help ${helpText} — keeping the good going.`;
+
+  const attribution = [childFirstName, cityState].filter(Boolean).join(" from ");
+  const caption = `${storyLine} 💫 ${CAPTION_TAGS} #ToothFairy #WigglyToothWorkshop #ToothFairyLetter`;
 
   const render = async (): Promise<string | null> => {
     const node = cardRef.current;
@@ -57,13 +71,13 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
 
   const toFile = async (dataUrl: string): Promise<File> => {
     const blob = await (await fetch(dataUrl)).blob();
-    return new File([blob], "letter-to-the-tooth-fairy.png", { type: "image/png" });
+    return new File([blob], "tooth-fairy-story.png", { type: "image/png" });
   };
 
   const download = (dataUrl: string) => {
     const a = document.createElement("a");
     a.href = dataUrl;
-    a.download = "letter-to-the-tooth-fairy.png";
+    a.download = "tooth-fairy-story.png";
     a.click();
   };
 
@@ -79,13 +93,13 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
       if (!dataUrl) return;
       const file = await toFile(dataUrl);
       if (canShareFiles(file)) {
-        await (navigator as Navigator).share({ files: [file], text: CAPTION });
-        trackEvent("letter_card_share", { quality, platform: "instagram" });
+        await (navigator as Navigator).share({ files: [file], text: caption });
+        trackEvent("letter_card_share", { quality, letter_type: letterType, platform: "instagram" });
       } else {
         download(dataUrl);
-        await navigator.clipboard?.writeText(CAPTION).catch(() => {});
+        await navigator.clipboard?.writeText(caption).catch(() => {});
         setNote("Image saved and caption copied. Open Instagram, add the image, and paste the caption to post.");
-        trackEvent("letter_card_download", { quality, platform: "instagram" });
+        trackEvent("letter_card_download", { quality, letter_type: letterType, platform: "instagram" });
       }
     } catch {
       /* share cancelled */
@@ -101,12 +115,13 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
       if (!dataUrl) return;
       const file = await toFile(dataUrl);
       if (canShareFiles(file)) {
-        await (navigator as Navigator).share({ files: [file], text: CAPTION });
-        trackEvent("letter_card_share", { quality, platform: "facebook" });
+        await (navigator as Navigator).share({ files: [file], text: caption });
+        trackEvent("letter_card_share", { quality, letter_type: letterType, platform: "facebook" });
       } else {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(PAGE_URL)}`, "_blank", "noopener,noreferrer");
-        setNote("We opened Facebook to share this page. To post your card image, download it and attach it to the post.");
-        trackEvent("letter_card_share", { quality, platform: "facebook_link" });
+        await navigator.clipboard?.writeText(caption).catch(() => {});
+        download(dataUrl);
+        setNote("Image downloaded and caption copied. On Facebook, start a new post, attach the image, and paste the caption.");
+        trackEvent("letter_card_share", { quality, letter_type: letterType, platform: "facebook_manual" });
       }
     } catch {
       /* cancelled */
@@ -121,7 +136,7 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
       const dataUrl = await render();
       if (!dataUrl) return;
       download(dataUrl);
-      trackEvent("letter_card_download", { quality });
+      trackEvent("letter_card_download", { quality, letter_type: letterType });
     } catch {
       setError("Couldn't make the image. Please try again.");
     } finally {
@@ -131,9 +146,9 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
 
   const handleCopyCaption = async () => {
     try {
-      await navigator.clipboard.writeText(CAPTION);
+      await navigator.clipboard.writeText(caption);
       setCopied(true);
-      trackEvent("letter_caption_copy", { quality });
+      trackEvent("letter_caption_copy", { quality, letter_type: letterType });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       setError("Couldn't copy. You can select the caption manually.");
@@ -159,18 +174,20 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
 
         <div style={{ position: "relative", zIndex: 1 }}>
           <p style={{ fontSize: 13, letterSpacing: 2, textTransform: "uppercase", color: "#C9C2F0", margin: 0 }}>
-            A Letter to the Tooth Fairy
+            {letterType === "to" ? "A Letter to the Tooth Fairy" : "A Letter from the Tooth Fairy"}
           </p>
         </div>
 
         <div style={{ position: "relative", zIndex: 1 }}>
-          <p style={{ fontSize: 19, lineHeight: 1.5, margin: "0 0 18px", color: "#F5F3FF" }}>&ldquo;{shown}&rdquo;</p>
+          <p style={{ fontSize: 21, lineHeight: 1.5, margin: "0 0 18px", color: "#F5F3FF" }}>{storyLine}</p>
           <div style={{ display: "inline-block", background: "rgba(251,191,36,0.16)", border: "1px solid rgba(251,191,36,0.5)", borderRadius: 9999, padding: "5px 14px" }}>
             <span style={{ fontSize: 13, color: "#FBBF24", fontFamily: "system-ui, sans-serif", fontWeight: 600 }}>
-              The quality in my tooth: {quality}
+              The quality: {quality}
             </span>
           </div>
-          <p style={{ fontSize: 16, margin: "16px 0 0", color: "#C9C2F0", fontStyle: "italic" }}>— {name}</p>
+          {attribution && (
+            <p style={{ fontSize: 16, margin: "16px 0 0", color: "#C9C2F0", fontStyle: "italic" }}>— {attribution}</p>
+          )}
         </div>
 
         <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "system-ui, sans-serif" }}>
@@ -219,9 +236,11 @@ const ShareableLetterCard = ({ quality, letterBody, childFirstName }: ShareableL
       </div>
       <p className="text-xs text-muted-foreground text-center max-w-sm">
         On a phone, tap Instagram or Facebook to post straight from the share
-        menu. On a computer, download the image and post it in the app. Tag {HANDLE} and we may reshare your letter.
+        menu — that's the real way to post from a website, and where most
+        sharing happens. On a computer, download the image, paste the caption,
+        and post it in the app.
       </p>
-      {note && <p className="text-sm text-foreground">{note}</p>}
+      {note && <p className="text-sm text-foreground text-center max-w-sm">{note}</p>}
       {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
   );

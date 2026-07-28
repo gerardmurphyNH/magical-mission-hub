@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import PageSeo from "@/components/PageSeo";
 import { YOUTUBE_CHANNEL_URL } from "@/lib/config";
-import { trackCTAClick } from "@/lib/analytics";
+import { trackCTAClick, trackEvent } from "@/lib/analytics";
 
 const faqs = [
   {
@@ -40,11 +40,19 @@ const FilmCTA = () => (
       Watch <em>The Tooth Fairy's Secret Workshop</em> — a short film about what the Tooth Fairy
       really does with the teeth she collects.
     </p>
-    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+    <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
       <Button variant="magical" size="sm" asChild>
         <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
           Watch the Short Film
         </a>
+      </Button>
+      <Button variant="hero" size="sm" asChild>
+        <Link
+          to="/letters-to-the-tooth-fairy"
+          onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "how_much_tf_leaves" })}
+        >
+          Write a Letter
+        </Link>
       </Button>
       <Button variant="workshop" size="sm" asChild>
         <a href="/#signup" onClick={() => trackCTAClick("seo_page_how_much_tf_leaves")}>
@@ -217,6 +225,19 @@ const HowMuchDoesTheToothFairyLeave = () => {
             and the world needed it. The money is just how she leaves a thank-you a child
             can hold.
           </p>
+          <p className="text-foreground leading-relaxed">
+            It's also not the end of the story. Whatever quality the Tooth Fairy
+            drew from the tooth doesn't stop with the coin - she passes it
+            forward, quietly, to keep the good going. Read more about{" "}
+            <Link to="/why-does-the-tooth-fairy-leave-money" className="text-primary hover:underline">
+              what the money really means
+            </Link>
+            , or{" "}
+            <Link to="/letters-to-the-tooth-fairy" className="text-primary hover:underline">
+              write your own letter to the Tooth Fairy
+            </Link>
+            .
+          </p>
         </div>
 
         <FilmCTA />
@@ -244,6 +265,11 @@ const HowMuchDoesTheToothFairyLeave = () => {
             <li>
               <Link to="/printables" className="text-sm text-primary hover:underline">
                 Free Tooth Fairy printables →
+              </Link>
+            </li>
+            <li>
+              <Link to="/letters-to-the-tooth-fairy" className="text-sm text-primary hover:underline">
+                Write a letter to the Tooth Fairy →
               </Link>
             </li>
           </ul>

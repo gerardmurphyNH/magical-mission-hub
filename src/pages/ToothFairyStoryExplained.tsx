@@ -312,6 +312,11 @@ const ToothFairyStoryExplained = () => {
                     of a character the whole world has been imagining for a very long
                     time.
                   </p>
+                  <p>
+                    <Link to="/what-does-the-tooth-fairy-look-like" className="text-primary font-medium hover:underline">
+                      See what she looks like in our film →
+                    </Link>
+                  </p>
                 </div>
               </div>
 

@@ -25,6 +25,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- What Does the Tooth Fairy Look Like -->
+  <url>
+    <loc>https://wigglytoothworkshop.com/what-does-the-tooth-fairy-look-like</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://wigglytoothworkshop.com/why-does-the-tooth-fairy-leave-money</loc>
     <lastmod>2026-06-26</lastmod>

@@ -197,6 +197,31 @@ export const trackToothFairyGuideDownload = (): void => {
   trackEvent("tooth_fairy_guide_download");
 };
 
+// ============================================
+// LETTERS TO/FROM THE TOOTH FAIRY TRACKING
+// ============================================
+export const trackLetterTypeSelect = (letterType: "to" | "from"): void => {
+  trackEvent("letter_type_select", { letter_type: letterType });
+};
+
+export const trackLetterFormStart = (letterType: "to" | "from"): void => {
+  trackEvent("letter_form_start", { letter_type: letterType });
+};
+
+export const trackLetterSubmitSuccess = (letterType: "to" | "from", quality: string): void => {
+  // Secondary conversion event for the letters flywheel
+  trackEvent("letter_submit_success", { letter_type: letterType, quality });
+};
+
+export const trackLetterSubmitError = (letterType: "to" | "from", errorType: string): void => {
+  trackEvent("letter_submit_error", { letter_type: letterType, error_type: errorType });
+};
+
+export const trackWorkshopJoinFromLetter = (): void => {
+  trackSignupSuccess();
+  trackEvent("workshop_join_source", { source: "letters_page" });
+};
+
 // Type declarations
 declare global {
   interface Window {
