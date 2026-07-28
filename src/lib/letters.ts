@@ -48,27 +48,33 @@ export async function fetchApprovedLetters(limit = 60): Promise<PublicLetter[]> 
 }
 
 /**
- * Submit a letter. It lands as `pending` and is invisible until a moderator
- * approves it. RLS also silently rejects the insert if the honeypot is filled
- * or consent is missing.
+ * Submit a letter via the submit-letter Netlify Function, which inserts it
+ * (server-side, using the Supabase service role — no client-side RLS
+ * dependency for writes) and emails the moderator a one-click approve/reject
+ * link. The letter lands as `pending` and is invisible until approved.
  */
 export async function submitLetter(s: LetterSubmission): Promise<void> {
-  if (!supabase) throw new Error("Submissions aren't available right now. Please try again later.");
-  const { error } = await supabase.from("letters").insert({
-    letter_type: s.letterType,
-    letter_body: s.letterBody.trim(),
-    quality: s.quality.trim(),
-    reason: s.reason?.trim() || null,
-    help_cause: s.helpCause?.trim() || null,
-    fairy_action: s.fairyAction?.trim() || null,
-    child_first_name: s.childFirstName.trim() || null,
-    city_state: s.cityState.trim() || null,
-    parent_email: s.parentEmail.trim() || null,
-    parent_consent: s.parentConsent,
-    wall_opt_in: s.wallOptIn,
-    social_feature_consent: s.socialFeatureConsent,
-    honeypot: s.honeypot,
-    status: "pending",
+  const res = await fetch("/.netlify/functions/submit-letter", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      letterType: s.letterType,
+      letterBody: s.letterBody.trim(),
+      quality: s.quality.trim(),
+      reason: s.reason?.trim() || undefined,
+      helpCause: s.helpCause?.trim() || undefined,
+      fairyAction: s.fairyAction?.trim() || undefined,
+      childFirstName: s.childFirstName.trim() || undefined,
+      cityState: s.cityState.trim() || undefined,
+      parentEmail: s.parentEmail.trim() || undefined,
+      parentConsent: s.parentConsent,
+      wallOptIn: s.wallOptIn,
+      socialFeatureConsent: s.socialFeatureConsent,
+      honeypot: s.honeypot,
+    }),
   });
-  if (error) throw error;
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || "Something went wrong submitting your letter.");
+  }
 }
