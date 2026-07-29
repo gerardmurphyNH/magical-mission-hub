@@ -5,6 +5,15 @@
 [functions]
   directory = "netlify/functions"
 
+# Collapse http://www -> https://apex to a single hop. Without this, Netlify's
+# automatic HTTPS-enforce and www-alias-to-primary-domain redirects stack (one
+# hop each), which Google Search Console flagged as a redirect-chain issue.
+[[redirects]]
+  from = "http://www.wigglytoothworkshop.com/*"
+  to = "https://wigglytoothworkshop.com/:splat"
+  status = 301
+  force = true
+
 # Coloring page files were renamed to keyword-rich filenames — 301 the old URLs.
 [[redirects]]
   from = "/downloads/coloring-page.pdf"
