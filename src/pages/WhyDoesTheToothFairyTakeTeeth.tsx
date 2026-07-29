@@ -79,6 +79,18 @@ const WhyDoesTheToothFairyTakeTeeth = () => {
                 name: "Wiggly Tooth Workshop",
                 url: "https://wigglytoothworkshop.com/",
               },
+              // Ties this page to the film entity — the short film shows exactly
+              // why she collects teeth and what she does with them.
+              mentions: {
+                "@type": "Movie",
+                name: "The Tooth Fairy's Secret Workshop",
+                url: "https://wigglytoothworkshop.com/watch",
+                sameAs: [
+                  "https://www.wikidata.org/wiki/Q140607725",
+                  "https://www.imdb.com/title/tt43689600/",
+                  "https://www.themoviedb.org/movie/1733539-the-tooth-fairy-s-secret-workshop",
+                ],
+              },
             },
             {
               "@type": "FAQPage",

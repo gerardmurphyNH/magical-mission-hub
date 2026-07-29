@@ -37,6 +37,21 @@ const faqs = [
     answer:
       "A curious boy named Arlo sets out to discover what the Tooth Fairy actually does with lost teeth. He learns that every tooth holds a quality a child grew - courage, kindness, patience, creativity - and the Tooth Fairy uses those qualities to quietly help the world.",
   },
+  {
+    question: "Does the film show what the Tooth Fairy looks like?",
+    answer:
+      "Yes. The film shows her in full: CeCe, a small, winged tinkerer with a tool belt, at work in her cloud-top Workshop. If you've ever wondered what the Tooth Fairy looks like, this is the clearest answer we can give - watch her fly, collect a tooth, and get to work.",
+  },
+  {
+    question: "Does this film answer whether the Tooth Fairy is real?",
+    answer:
+      "Yes - and the answer is yes. The film shows exactly what she does with every tooth she collects: drawing out the quality a child grew and quietly putting it back into the world. That's the honest case for her being real, told in a few minutes instead of a few paragraphs.",
+  },
+  {
+    question: "Does the film explain why the Tooth Fairy takes teeth?",
+    answer:
+      "Yes. Watching Arlo's journey through the Workshop is the fastest way to understand why she collects teeth at all - not because they're valuable, but because of the courage, kindness, and creativity each one quietly holds.",
+  },
 ];
 
 const Watch = () => {
