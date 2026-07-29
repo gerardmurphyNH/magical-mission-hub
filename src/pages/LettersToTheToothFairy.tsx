@@ -14,7 +14,7 @@ import PageSeo from "@/components/PageSeo";
 import LetterheadGenerator from "@/components/LetterheadGenerator";
 import ShareableLetterCard from "@/components/ShareableLetterCard";
 import { submitLetter, fetchApprovedLetters, type PublicLetter, type LetterType } from "@/lib/letters";
-import { GOOGLE_SHEETS_ENDPOINT } from "@/lib/config";
+import { joinWorkshop } from "@/lib/workshop";
 import {
   trackEvent,
   trackCTAClick,
@@ -211,14 +211,10 @@ const LettersToTheToothFairy = () => {
         honeypot,
       });
 
-      // Optional: join the existing Workshop mailing list (separate from the Supabase submission)
+      // Optional: join the Workshop mailing list (separate from the letter submission)
       if (email && joinMailingList) {
         try {
-          const params = new URLSearchParams({
-            email, firstName: firstName || "", virtue: resolvedQuality,
-            source: "letters_page", timestamp: new Date().toISOString(),
-          });
-          await fetch(`${GOOGLE_SHEETS_ENDPOINT}?${params.toString()}`, { method: "GET", mode: "no-cors" });
+          await joinWorkshop({ email, firstName, virtue: resolvedQuality, source: "letters_page" });
           trackWorkshopJoinFromLetter();
         } catch {
           /* non-fatal — the letter itself still submitted successfully */

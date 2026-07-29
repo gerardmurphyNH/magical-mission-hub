@@ -36,7 +36,8 @@ import {
   trackTeacherSignupSubmit,
   trackTeacherResourcesPageClick,
 } from "@/lib/analytics";
-import { GOOGLE_SHEETS_ENDPOINT, CONTACT_EMAIL } from "@/lib/config";
+import { CONTACT_EMAIL } from "@/lib/config";
+import { joinWorkshop } from "@/lib/workshop";
 
 // Pre-computed star positions — avoids Math.random in render
 const stars = Array.from({ length: 12 }, (_, i) => ({
@@ -191,9 +192,6 @@ const TeacherSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const isEndpointConfigured =
-    GOOGLE_SHEETS_ENDPOINT !== "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -202,24 +200,9 @@ const TeacherSignup = () => {
       setError("Please enter a valid email address.");
       return;
     }
-    if (!isEndpointConfigured) {
-      setError(`Form not configured yet. Email us at ${CONTACT_EMAIL} to stay in touch.`);
-      return;
-    }
     setIsLoading(true);
     try {
-      await fetch(GOOGLE_SHEETS_ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          firstName: firstName || "",
-          virtue: "",
-          source: "teacher_resources",
-          timestamp: new Date().toISOString(),
-        }),
-      });
+      await joinWorkshop({ email, firstName, source: "teacher_resources", honeypot });
       setIsSubmitted(true);
       trackTeacherSignupSubmit();
     } catch {

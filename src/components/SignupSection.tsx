@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sparkles, Check, AlertCircle } from "lucide-react";
 import { useVirtue } from "@/context/VirtueContext";
-import { GOOGLE_SHEETS_ENDPOINT, CONTACT_EMAIL } from "@/lib/config";
+import { CONTACT_EMAIL } from "@/lib/config";
+import { joinWorkshop } from "@/lib/workshop";
 import { trackSignupSuccess, trackFormStart, trackFormError } from "@/lib/analytics";
 
 // Pre-computed star positions to avoid Math.random in render
@@ -19,6 +20,7 @@ const SignupSection = () => {
   const [firstName, setFirstName] = useState("");
   const [honeypot, setHoneypot] = useState(""); // Bot trap
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [wasAlreadyMember, setWasAlreadyMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasStartedForm, setHasStartedForm] = useState(false);
@@ -30,9 +32,6 @@ const SignupSection = () => {
       trackFormStart();
     }
   };
-
-  const isEndpointConfigured =
-    GOOGLE_SHEETS_ENDPOINT !== "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -62,33 +61,11 @@ const SignupSection = () => {
       return;
     }
 
-    // If endpoint not configured, show mailto fallback
-    if (!isEndpointConfigured) {
-      setError(
-        `Form not configured yet. Please email us at ${CONTACT_EMAIL} to join the workshop.`
-      );
-      return;
-    }
-
     setIsLoading(true);
 
     try {
-      // Use GET with URL params — Apps Script POST triggers a cross-origin redirect
-      // that no-cors mode can't follow reliably. GET avoids this entirely.
-      const params = new URLSearchParams({
-        email,
-        firstName: firstName || "",
-        virtue: virtue || "",
-        source: "wigglytoothworkshop.com",
-        timestamp: new Date().toISOString(),
-      });
-
-      await fetch(`${GOOGLE_SHEETS_ENDPOINT}?${params.toString()}`, {
-        method: "GET",
-        mode: "no-cors",
-      });
-
-      // no-cors always returns an opaque response; treat fetch completing as success
+      const { isNew } = await joinWorkshop({ email, firstName, virtue: virtue || undefined, source: "homepage", honeypot });
+      setWasAlreadyMember(!isNew);
       setIsSubmitted(true);
       trackSignupSuccess(virtue || undefined);
     } catch (err) {
@@ -150,7 +127,7 @@ const SignupSection = () => {
                 <Check className="w-6 h-6 text-primary-foreground" />
               </div>
               <h3 className="font-display text-xl font-semibold text-starlight mb-2">
-                You're in the Workshop.
+                {wasAlreadyMember ? "You're already in the Workshop." : "You're in the Workshop."}
               </h3>
               <p className="text-starlight/70 text-sm">
                 We'll write when there's something worth sharing.
@@ -221,18 +198,6 @@ const SignupSection = () => {
                   </>
                 )}
               </Button>
-
-              {!isEndpointConfigured && (
-                <p className="mt-4 text-xs text-starlight/70">
-                  Or email us directly at{" "}
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}?subject=Join the Workshop`}
-                    className="underline hover:text-primary"
-                  >
-                    {CONTACT_EMAIL}
-                  </a>
-                </p>
-              )}
             </form>
           )}
 

@@ -31,7 +31,8 @@ import {
   trackFAQOpen,
   trackEvent,
 } from "@/lib/analytics";
-import { GOOGLE_SHEETS_ENDPOINT, CONTACT_EMAIL } from "@/lib/config";
+import { CONTACT_EMAIL } from "@/lib/config";
+import { joinWorkshop } from "@/lib/workshop";
 
 // Pre-computed star positions
 const stars = Array.from({ length: 12 }, (_, i) => ({
@@ -228,9 +229,6 @@ const LetterSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const isEndpointConfigured =
-    GOOGLE_SHEETS_ENDPOINT !== "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -239,23 +237,9 @@ const LetterSignup = () => {
       setError("Please enter a valid email address.");
       return;
     }
-    if (!isEndpointConfigured) {
-      setError(`Form not configured yet. Email us at ${CONTACT_EMAIL} to stay in touch.`);
-      return;
-    }
     setIsLoading(true);
     try {
-      const url = new URL(GOOGLE_SHEETS_ENDPOINT);
-      url.searchParams.set("email", email);
-      url.searchParams.set("firstName", firstName || "");
-      url.searchParams.set("virtue", "");
-      url.searchParams.set("source", "tooth_fairy_letter");
-      url.searchParams.set("timestamp", new Date().toISOString());
-
-      await fetch(url.toString(), {
-        method: "GET",
-        mode: "no-cors",
-      });
+      await joinWorkshop({ email, firstName, source: "tooth_fairy_letter", honeypot });
       setIsSubmitted(true);
     } catch {
       setError(`Something went wrong. Please try again or email ${CONTACT_EMAIL}.`);
