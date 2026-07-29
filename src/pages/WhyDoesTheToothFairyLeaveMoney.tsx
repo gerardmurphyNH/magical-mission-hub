@@ -12,12 +12,14 @@ import Footer from "@/components/Footer";
 import PageSeo from "@/components/PageSeo";
 import { YOUTUBE_VIDEO_URL } from "@/lib/config";
 import { trackCTAClick, trackEvent } from "@/lib/analytics";
+import LiteYouTube from "@/components/LiteYouTube";
 
 const PAGE_URL = "https://wigglytoothworkshop.com/why-does-the-tooth-fairy-leave-money";
 const SITE_URL = "https://wigglytoothworkshop.com/";
 const MACHINE_IMG_ABS = "https://wigglytoothworkshop.com/images/tooth-fairy-quality-machine.jpg";
 const MACHINE_IMG_ALT =
   "The Tooth Fairy's quality-extraction machine, drawing creativity from a collected tooth and turning it into money to leave behind, from The Tooth Fairy's Secret Workshop";
+const SHORT_VIDEO_ID = "7GeEfKaACQg";
 
 const faqs = [
   {
@@ -90,6 +92,20 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
               copyrightNotice: "© 2026 Wiggly Tooth Workshop. Illustrations by Peter H. Reynolds.",
               license: PAGE_URL,
               acquireLicensePage: "https://wigglytoothworkshop.com/terms",
+            },
+            {
+              // A short (not the main film) whose entire content is this page's
+              // exact question - a clean 1:1 watch-page pairing, unlike the main
+              // film which intentionally has VideoObject only on /watch.
+              "@type": "VideoObject",
+              name: "Why Does the Tooth Fairy Leave Money?",
+              description:
+                "A short answer: the money the Tooth Fairy leaves isn't a payment for the tooth - it's a thank-you for the quality a child grew inside it.",
+              thumbnailUrl: [`https://i.ytimg.com/vi/${SHORT_VIDEO_ID}/maxresdefault.jpg`],
+              uploadDate: "2026-07-01",
+              contentUrl: `https://youtube.com/shorts/${SHORT_VIDEO_ID}`,
+              embedUrl: `https://www.youtube.com/embed/${SHORT_VIDEO_ID}`,
+              publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
             },
             {
               "@type": "FAQPage",
@@ -196,6 +212,17 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
             inside their tooth doesn't disappear with it. It's already off
             helping someone, somewhere.
           </p>
+
+          <div className="my-8">
+            <p className="text-sm font-semibold uppercase tracking-wide text-primary mb-3 text-center">
+              Watch: Why Does the Tooth Fairy Leave Money?
+            </p>
+            <LiteYouTube
+              videoId={SHORT_VIDEO_ID}
+              title="Why Does the Tooth Fairy Leave Money? - Wiggly Tooth Workshop"
+              onActivate={() => trackEvent("video_play", { location: "why_leave_money_short", video_id: SHORT_VIDEO_ID })}
+            />
+          </div>
 
           <h2 className="font-display text-2xl font-bold text-foreground">
             Coins, bills, and what actually lands

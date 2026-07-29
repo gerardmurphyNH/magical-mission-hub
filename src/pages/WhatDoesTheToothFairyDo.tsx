@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import PageSeo from "@/components/PageSeo";
-import FilmEmbed from "@/components/FilmEmbed";
-import { YOUTUBE_CHANNEL_URL } from "@/lib/config";
-import { trackCTAClick } from "@/lib/analytics";
+import LiteYouTube from "@/components/LiteYouTube";
+import { YOUTUBE_CHANNEL_URL, YOUTUBE_VIDEO_URL } from "@/lib/config";
+import { trackCTAClick, trackEvent } from "@/lib/analytics";
+
+const SITE_URL = "https://wigglytoothworkshop.com/";
+const SHORT_VIDEO_ID = "EKcMHucpQcU";
 
 const faqs = [
   {
@@ -96,6 +99,20 @@ const WhatDoesTheToothFairyDo = () => {
               },
             },
             {
+              // A short (not the main film) whose entire content is this page's
+              // exact question - a clean 1:1 watch-page pairing, unlike the main
+              // film which intentionally has VideoObject only on /watch.
+              "@type": "VideoObject",
+              name: "What Does the Tooth Fairy Actually Do With the Teeth?",
+              description:
+                "A short answer: she draws out the quality that grew inside each tooth - courage, kindness, creativity, patience - and weaves it back into the world.",
+              thumbnailUrl: [`https://i.ytimg.com/vi/${SHORT_VIDEO_ID}/maxresdefault.jpg`],
+              uploadDate: "2026-07-01",
+              contentUrl: `https://youtube.com/shorts/${SHORT_VIDEO_ID}`,
+              embedUrl: `https://www.youtube.com/embed/${SHORT_VIDEO_ID}`,
+              publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
+            },
+            {
               "@type": "FAQPage",
               mainEntity: faqs.map((faq) => ({
                 "@type": "Question",
@@ -132,11 +149,28 @@ const WhatDoesTheToothFairyDo = () => {
           she does with it is more meaningful than most people realize.
         </p>
 
-        <FilmEmbed
-          location="what_does_tf_do"
-          heading="See what she really does"
-          blurb="The short film follows a boy who discovers exactly what the Tooth Fairy does with the teeth she collects."
-        />
+        <div className="my-8">
+          <p className="text-sm font-semibold uppercase tracking-wide text-primary mb-3 text-center">
+            Watch: What Does the Tooth Fairy Actually Do With the Teeth?
+          </p>
+          <LiteYouTube
+            videoId={SHORT_VIDEO_ID}
+            title="What Does the Tooth Fairy Actually Do With the Teeth? - Wiggly Tooth Workshop"
+            onActivate={() => trackEvent("video_play", { location: "what_does_tf_do_short", video_id: SHORT_VIDEO_ID })}
+          />
+          <p className="text-sm text-muted-foreground text-center mt-3">
+            Want the full story?{" "}
+            <a
+              href={YOUTUBE_VIDEO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+              onClick={() => trackEvent("social_click", { platform: "youtube", location: "what_does_tf_do" })}
+            >
+              Watch the short film
+            </a>
+          </p>
+        </div>
 
         <div className="space-y-6">
           <h2 className="font-display text-2xl font-bold text-foreground">

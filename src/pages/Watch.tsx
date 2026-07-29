@@ -52,6 +52,21 @@ const faqs = [
     answer:
       "Yes. Watching Arlo's journey through the Workshop is the fastest way to understand why she collects teeth at all - not because they're valuable, but because of the courage, kindness, and creativity each one quietly holds.",
   },
+  {
+    question: "Does the film explain why the Tooth Fairy leaves money?",
+    answer:
+      "Yes - you see it happen. The Workshop machine draws the quality out of the collected tooth and turns it into the coin left behind, showing exactly why the money is a thank-you and not a payment.",
+  },
+  {
+    question: "What is the Tooth Fairy's name in this film?",
+    answer:
+      "She's CeCe. The film follows her at work in the Workshop, and shows the small, winged, tool-belted Tooth Fairy behind the tradition many children only ever hear about.",
+  },
+  {
+    question: "Is this a Tooth Fairy story, or just a movie about her?",
+    answer:
+      "It's the story itself - Arlo's letter, the night he meets CeCe, and what he learns in her Workshop. If you're looking for the Tooth Fairy's story told properly, this film (and our full written version) is it.",
+  },
 ];
 
 const Watch = () => {
@@ -104,6 +119,7 @@ const Watch = () => {
                 url: "https://www.fablevisionstudios.com/",
                 sameAs: "https://www.wikidata.org/wiki/Q5427921",
               },
+              duration: "PT4M10S",
               publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
               // Entity anchors — ties the film to its authoritative external records
               sameAs: [
@@ -120,6 +136,7 @@ const Watch = () => {
                 "An animated short film about a curious boy named Arlo who sets out to discover what the Tooth Fairy really does with the teeth she collects - and learns that every lost tooth carries something worth keeping. Created in collaboration with Peter H. Reynolds and FableVision Studios.",
               thumbnailUrl: [`https://i.ytimg.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`],
               uploadDate: "2026-06-07",
+              duration: "PT4M10S",
               contentUrl: YOUTUBE_VIDEO_URL,
               embedUrl: `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`,
               publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },

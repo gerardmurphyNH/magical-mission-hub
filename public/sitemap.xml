@@ -36,9 +36,18 @@
 
   <url>
     <loc>https://wigglytoothworkshop.com/why-does-the-tooth-fairy-leave-money</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/7GeEfKaACQg/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Why Does the Tooth Fairy Leave Money?</video:title>
+      <video:description>A short answer: the money the Tooth Fairy leaves isn't a payment for the tooth - it's a thank-you for the quality a child grew inside it.</video:description>
+      <video:player_loc allow_embed="yes">https://www.youtube.com/embed/7GeEfKaACQg</video:player_loc>
+      <video:publication_date>2026-07-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
   </url>
   <url>
     <loc>https://wigglytoothworkshop.com/watch</loc>
@@ -50,6 +59,7 @@
       <video:title>The Tooth Fairy's Secret Workshop</video:title>
       <video:description>An animated short film about a curious boy named Arlo who sets out to discover what the Tooth Fairy really does with the teeth she collects - what she looks like, why she takes them, and whether she's real.</video:description>
       <video:player_loc allow_embed="yes">https://www.youtube.com/embed/9d0wilzzhnw</video:player_loc>
+      <video:duration>250</video:duration>
       <video:publication_date>2026-06-07T00:00:00+00:00</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
@@ -79,9 +89,18 @@
   </url>
   <url>
     <loc>https://wigglytoothworkshop.com/what-does-the-tooth-fairy-do-with-teeth</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/EKcMHucpQcU/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>What Does the Tooth Fairy Actually Do With the Teeth?</video:title>
+      <video:description>A short answer: she draws out the quality that grew inside each tooth - courage, kindness, creativity, patience - and weaves it back into the world.</video:description>
+      <video:player_loc allow_embed="yes">https://www.youtube.com/embed/EKcMHucpQcU</video:player_loc>
+      <video:publication_date>2026-07-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
   </url>
   <url>
     <loc>https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave</loc>
