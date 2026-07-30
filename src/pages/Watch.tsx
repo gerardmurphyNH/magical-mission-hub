@@ -20,7 +20,7 @@ const TOTAL_DURATION_SECONDS = 250; // 4:10
 // Mirrors the YouTube chapter timestamps in the video description — keep the
 // two in sync if chapters change. startOffset/endOffset are in seconds.
 const CHAPTERS = [
-  { name: "The Tooth Fairy's Secret Workshop", start: 0 },
+  { name: "Arlo Loses a Tooth", start: 0 },
   { name: "Arlo's Letter to the Tooth Fairy", start: 16 },
   { name: "What Does the Tooth Fairy Look Like?", start: 37 },
   { name: "How Many Teeth Does She Collect in a Night?", start: 69 },
