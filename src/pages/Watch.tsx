@@ -15,6 +15,22 @@ import { trackCTAClick, trackEvent } from "@/lib/analytics";
 
 const PAGE_URL = "https://wigglytoothworkshop.com/watch";
 const SITE_URL = "https://wigglytoothworkshop.com/";
+const TOTAL_DURATION_SECONDS = 250; // 4:10
+
+// Mirrors the YouTube chapter timestamps in the video description — keep the
+// two in sync if chapters change. startOffset/endOffset are in seconds.
+const CHAPTERS = [
+  { name: "The Tooth Fairy's Secret Workshop", start: 0 },
+  { name: "Arlo's Letter to the Tooth Fairy", start: 16 },
+  { name: "What Does the Tooth Fairy Look Like?", start: 37 },
+  { name: "How Many Teeth Does She Collect in a Night?", start: 69 },
+  { name: "Why Does the Tooth Fairy Collect Teeth?", start: 80 },
+  { name: "What Does the Tooth Fairy Do With the Teeth?", start: 94 },
+  { name: "Inside the Tooth Fairy's Workshop", start: 122 },
+  { name: "Why Does the Tooth Fairy Leave Money?", start: 150 },
+  { name: "The ToothSafe: A Treasure Chest for Teeth", start: 165 },
+  { name: "Credits", start: 234 },
+];
 
 const faqs = [
   {
@@ -148,6 +164,15 @@ const Watch = () => {
                 "https://www.imdb.com/title/tt43689600/",
                 "https://www.fablevisionstudios.com/portfolio/the-tooth-fairys-secret-workshop",
               ],
+              // Mirrors the YouTube chapters — lets Google's Key Moments jump
+              // straight to the segment that answers a given search.
+              hasPart: CHAPTERS.map((chapter, i) => ({
+                "@type": "Clip",
+                name: chapter.name,
+                startOffset: chapter.start,
+                endOffset: CHAPTERS[i + 1]?.start ?? TOTAL_DURATION_SECONDS,
+                url: `${YOUTUBE_VIDEO_URL}&t=${chapter.start}s`,
+              })),
             },
             {
               "@type": "FAQPage",
