@@ -98,20 +98,12 @@ const WhatDoesTheToothFairyDo = () => {
                 url: "https://wigglytoothworkshop.com/",
               },
             },
-            {
-              // A short (not the main film) whose entire content is this page's
-              // exact question - a clean 1:1 watch-page pairing, unlike the main
-              // film which intentionally has VideoObject only on /watch.
-              "@type": "VideoObject",
-              name: "What Does the Tooth Fairy Actually Do With the Teeth?",
-              description:
-                "A short answer: she draws out the quality that grew inside each tooth - courage, kindness, creativity, patience - and weaves it back into the world.",
-              thumbnailUrl: [`https://i.ytimg.com/vi/${SHORT_VIDEO_ID}/maxresdefault.jpg`],
-              uploadDate: "2026-07-01",
-              contentUrl: `https://youtube.com/shorts/${SHORT_VIDEO_ID}`,
-              embedUrl: `https://www.youtube.com/embed/${SHORT_VIDEO_ID}`,
-              publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
-            },
+            // No VideoObject here for the embedded short — GSC flagged it as
+            // "video isn't on a watch page" (2026-07-31). This is a text-first
+            // article page, not a video-first watch page like /watch, so Google
+            // doesn't recognize it as the short's home even though the short's
+            // topic matches this page 1:1. The embed itself stays (good for
+            // engagement); only the schema claim is removed.
             {
               "@type": "FAQPage",
               mainEntity: faqs.map((faq) => ({

@@ -93,20 +93,12 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
               license: PAGE_URL,
               acquireLicensePage: "https://wigglytoothworkshop.com/terms",
             },
-            {
-              // A short (not the main film) whose entire content is this page's
-              // exact question - a clean 1:1 watch-page pairing, unlike the main
-              // film which intentionally has VideoObject only on /watch.
-              "@type": "VideoObject",
-              name: "Why Does the Tooth Fairy Leave Money?",
-              description:
-                "A short answer: the money the Tooth Fairy leaves isn't a payment for the tooth - it's a thank-you for the quality a child grew inside it.",
-              thumbnailUrl: [`https://i.ytimg.com/vi/${SHORT_VIDEO_ID}/maxresdefault.jpg`],
-              uploadDate: "2026-07-01",
-              contentUrl: `https://youtube.com/shorts/${SHORT_VIDEO_ID}`,
-              embedUrl: `https://www.youtube.com/embed/${SHORT_VIDEO_ID}`,
-              publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
-            },
+            // No VideoObject here for the embedded short — GSC flagged the same
+            // pattern on the do-with-teeth page as "video isn't on a watch page"
+            // (2026-07-31). This is a text-first article page, not a video-first
+            // watch page like /watch, so removing the schema claim proactively
+            // rather than waiting for the identical flag here. The embed itself
+            // stays (good for engagement); only the schema claim is removed.
             {
               "@type": "FAQPage",
               mainEntity: faqs.map((f) => ({
