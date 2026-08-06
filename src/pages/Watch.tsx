@@ -156,8 +156,9 @@ const Watch = () => {
               contentUrl: YOUTUBE_VIDEO_URL,
               embedUrl: `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`,
               publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
-              // The video records the same work as the Movie entity above
-              mainEntity: { "@id": `${PAGE_URL}#film` },
+              // Tied to the Movie entity above via the shared sameAs links below,
+              // not via `mainEntity` (that property points the wrong direction on
+              // a VideoObject and may be confusing Google's video classifier).
               sameAs: [
                 "https://www.wikidata.org/wiki/Q140607725",
                 "https://www.themoviedb.org/movie/1733539-the-tooth-fairy-s-secret-workshop",
