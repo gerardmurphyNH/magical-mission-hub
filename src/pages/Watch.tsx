@@ -112,7 +112,7 @@ const Watch = () => {
                 "An animated short film about a curious boy named Arlo who sets out to discover what the Tooth Fairy really does with the teeth she collects - and learns that every lost tooth carries something worth keeping. Created in collaboration with Peter H. Reynolds and FableVision Studios.",
               image: `https://i.ytimg.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`,
               url: PAGE_URL,
-              datePublished: "2026-06-07",
+              datePublished: "2026-06-07T00:00:00+00:00",
               genre: ["Children's film", "Animation", "Fantasy"],
               inLanguage: "en",
               countryOfOrigin: { "@type": "Country", name: "United States" },
@@ -151,7 +151,7 @@ const Watch = () => {
               description:
                 "An animated short film about a curious boy named Arlo who sets out to discover what the Tooth Fairy really does with the teeth she collects - and learns that every lost tooth carries something worth keeping. Created in collaboration with Peter H. Reynolds and FableVision Studios.",
               thumbnailUrl: [`https://i.ytimg.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`],
-              uploadDate: "2026-06-07",
+              uploadDate: "2026-06-07T00:00:00+00:00",
               duration: "PT4M10S",
               contentUrl: YOUTUBE_VIDEO_URL,
               embedUrl: `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`,
