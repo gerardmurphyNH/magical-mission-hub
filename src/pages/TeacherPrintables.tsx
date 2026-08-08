@@ -10,6 +10,7 @@ import {
   Palette,
   Sparkles,
   Check,
+  Copy,
   GraduationCap,
   RefreshCw,
   Mail,
@@ -35,6 +36,7 @@ import {
   trackTeacherBundleDownload,
   trackTeacherSignupSubmit,
   trackTeacherResourcesPageClick,
+  trackTeacherParentNoteCopy,
 } from "@/lib/analytics";
 import { CONTACT_EMAIL } from "@/lib/config";
 import { joinWorkshop } from "@/lib/workshop";
@@ -49,6 +51,12 @@ const stars = Array.from({ length: 12 }, (_, i) => ({
 
 // Internal links — strengthen topical authority
 const relatedLinks = [
+  {
+    question: "Classroom Activities & Discussion Guide for Teachers",
+    teaser:
+      "Kindergarten-friendly activities, bulletin board ideas, book pairings, and discussion questions to go with these printables.",
+    to: "/for-teachers",
+  },
   {
     question: "Free Printable Tooth Fairy Letter Template",
     teaser:
@@ -90,6 +98,21 @@ const faqs = [
     question: "What grade level is this for?",
     answer:
       "These printables are designed for first and second grade students — the age when most children are actively losing teeth and when SEL concepts like self-reflection and naming positive qualities are developmentally right. Kindergarten and third grade teachers often find them useful too, depending on the class.",
+  },
+  {
+    question: "What about kindergarten students who can't write yet?",
+    answer:
+      "The worksheet works best once children can write a few words independently, which is usually first grade. For kindergarten, use the spoken version instead — see the Kindergarten Tooth Talk activity on our classroom activities page — and save this worksheet for when they're ready to write.",
+  },
+  {
+    question: "Is this good for back-to-school season?",
+    answer:
+      "Yes — the start of the school year is often exactly when kindergarten and first-grade students begin losing teeth, which makes this a natural, low-prep way to build classroom community in the first weeks of school.",
+  },
+  {
+    question: "Is there a note I can send home to parents?",
+    answer:
+      "Yes — see the free parent note template below. It explains the classroom tradition in a few sentences so families can continue it at home when their child loses a tooth outside of school.",
   },
   {
     question: "Are these Tooth Fairy printables free?",
@@ -274,12 +297,50 @@ const TeacherSignup = () => {
   );
 };
 
+const PARENT_NOTE_TEXT = `Dear families,
+
+Your child lost a tooth today! In our classroom, we like to make this moment mean a little more than just a trip under the pillow.
+
+We talked about how every lost tooth holds something your child has been growing - like bravery, kindness, creativity, or patience. Today, your child named theirs as: _______________
+
+If you'd like to continue the tradition at home, ask your child what quality they think was in their tooth, and why. There's no wrong answer - the goal is just noticing something good about who they're becoming.
+
+Thank you for being part of our classroom community.`;
+
+// Copy-to-clipboard parent note template
+const ParentNoteTemplate = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(PARENT_NOTE_TEXT);
+      setCopied(true);
+      trackTeacherParentNoteCopy();
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard unavailable — the text is still selectable on the page */
+    }
+  };
+
+  return (
+    <div className="magical-card max-w-xl mx-auto">
+      <pre className="whitespace-pre-wrap font-body text-sm text-foreground leading-relaxed mb-5">
+        {PARENT_NOTE_TEXT}
+      </pre>
+      <Button variant="magical" size="sm" onClick={handleCopy}>
+        {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+        {copied ? "Copied!" : "Copy note text"}
+      </Button>
+    </div>
+  );
+};
+
 const TeacherPrintables = () => {
   return (
     <>
       <PageSeo
         title="Tooth Fairy Printables & Worksheets for Classrooms | Wiggly Tooth Workshop"
-        description="Free Tooth Fairy printables and classroom activities for grades 1-2: an SEL worksheet, coloring page, and low-prep teacher guide. No sign-up required."
+        description="Free back-to-school Tooth Fairy printables for grades 1-2: an SEL worksheet, coloring page, teacher guide, and parent note. No sign-up required."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-printables"
         image="https://wigglytoothworkshop.com/images/tooth-fairy-worksheet-preview.jpg"
         jsonLd={{
@@ -312,6 +373,9 @@ const TeacherPrintables = () => {
                 "tooth fairy printables",
                 "tooth fairy worksheet",
                 "tooth fairy classroom activities",
+                "back to school classroom activity",
+                "kindergarten tooth fairy activity",
+                "tooth fairy note to parents",
               ],
               image:
                 "https://wigglytoothworkshop.com/images/tooth-fairy-worksheet-preview.jpg",
@@ -840,6 +904,23 @@ const TeacherPrintables = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── Parent note home template ─────────────────────────── */}
+        <section className="py-16 md:py-20 bg-background">
+          <div className="container px-6">
+            <div className="text-center mb-10">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
+                A Note to Send Home to Parents
+              </h2>
+              <p className="text-muted-foreground max-w-lg mx-auto">
+                A short note explaining the classroom tradition, so families can continue it at
+                home when a tooth is lost outside of school. Copy it into your own newsletter,
+                email, or handout.
+              </p>
+            </div>
+            <ParentNoteTemplate />
           </div>
         </section>
 

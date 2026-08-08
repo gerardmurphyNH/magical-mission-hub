@@ -174,6 +174,10 @@ export const trackTeacherResourcesPageClick = (location: string): void => {
   trackEvent("teacher_resources_click", { click_location: location });
 };
 
+export const trackTeacherParentNoteCopy = (): void => {
+  trackEvent("teacher_parent_note_copy");
+};
+
 // ============================================
 // TOOTH FAIRY LETTER TRACKING
 // ============================================
