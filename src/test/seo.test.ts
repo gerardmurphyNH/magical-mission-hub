@@ -131,9 +131,11 @@ describe("per-page SEO", () => {
   });
 
   it("meta descriptions stay within SERP-friendly length (50-165 chars)", () => {
+    // No TITLE_EXEMPT skip here (unlike the title test): the homepage sets no
+    // per-page title by design, but it still sets a description and must not
+    // be exempt from this check just because it's exempt from that one.
     const offenders: string[] = [];
     for (const [p, comp] of indexableRoutes) {
-      if (TITLE_EXEMPT.has(comp)) continue;
       const src = read(path.join(PAGES_DIR, `${comp}.tsx`));
       const block = pageSeoBlock(src);
       const desc = block && resolveAttr(block, src, "description");

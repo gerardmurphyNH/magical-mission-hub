@@ -116,7 +116,7 @@ const FirstToothTradition = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="First Tooth Tradition: Printable Tooth Fairy Certificate | Wiggly Tooth Workshop"
+        title="First Tooth Tradition | Wiggly Tooth Workshop"
         description="Create a warm, magical first tooth tradition with a free printable Tooth Fairy certificate that celebrates the special quality your child has been growing."
         canonical={PAGE_URL}
         image={CERT_ABS}

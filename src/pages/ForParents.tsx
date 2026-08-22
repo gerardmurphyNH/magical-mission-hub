@@ -76,7 +76,7 @@ const ForParents = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="For Parents: How to Answer Questions About the Tooth Fairy | Wiggly Tooth Workshop"
+        title="For Parents | Wiggly Tooth Workshop"
         description="Gentle guidance for parents on how to answer when your child asks about the Tooth Fairy, plus meaningful Tooth Fairy ideas to make each lost tooth matter."
         canonical={PAGE_URL}
         jsonLd={forParentsJsonLd}

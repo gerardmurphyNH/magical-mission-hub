@@ -64,7 +64,7 @@ const ToothFairyStoryExplained = () => {
   return (
     <>
       <PageSeo
-        title="The Tooth Fairy Story Explained: Origins and Real Meaning | Wiggly Tooth Workshop"
+        title="The Tooth Fairy Story, Explained | Wiggly Tooth Workshop"
         description="The Tooth Fairy story goes back further - and means more - than most people realize. See the real story (and the modern twist) in our free short film."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-story-explained"
         jsonLd={{

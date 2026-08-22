@@ -339,7 +339,7 @@ const TeacherPrintables = () => {
   return (
     <>
       <PageSeo
-        title="Tooth Fairy Printables & Worksheets for Classrooms | Wiggly Tooth Workshop"
+        title="Tooth Fairy Printables for Teachers | Wiggly Tooth Workshop"
         description="Free back-to-school Tooth Fairy printables for grades 1-2: an SEL worksheet, coloring page, teacher guide, and parent note. No sign-up required."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-printables"
         image="https://wigglytoothworkshop.com/images/tooth-fairy-worksheet-preview.jpg"

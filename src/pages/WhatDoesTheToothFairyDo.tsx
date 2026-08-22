@@ -62,7 +62,7 @@ const WhatDoesTheToothFairyDo = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="What Does the Tooth Fairy Do With Teeth? Where Baby Teeth Go | Wiggly Tooth Workshop"
+        title="What Does the Tooth Fairy Do With Teeth? | Wiggly Tooth Workshop"
         description="What does the Tooth Fairy do with teeth? Find out what really happens to baby teeth after she collects them, and the quiet reason she gathers every single one."
         canonical="https://wigglytoothworkshop.com/what-does-the-tooth-fairy-do-with-teeth"
         jsonLd={{

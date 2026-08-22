@@ -43,7 +43,7 @@ const ToothFairyStory = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="The Tooth Fairy Story: A Tale for Kids | Wiggly Tooth Workshop"
+        title="The Tooth Fairy Story | Wiggly Tooth Workshop"
         description="Read the Tooth Fairy story - a curious boy discovers what the Tooth Fairy really does with lost teeth. A warm, magical tale for kids, free to read."
         canonical={PAGE_URL}
         image="https://wigglytoothworkshop.com/og-image.png"

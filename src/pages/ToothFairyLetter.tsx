@@ -376,7 +376,7 @@ const ToothFairyLetter = () => {
   return (
     <>
       <PageSeo
-        title="Free Printable Tooth Fairy Letter (PDF Template) | Wiggly Tooth Workshop"
+        title="Free Printable Tooth Fairy Letter | Wiggly Tooth Workshop"
         description="Free printable Tooth Fairy letter your child will treasure. Download the PDF template, fill in the blanks in seconds, and print at home. No email, no cost."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-letter"
         image="https://wigglytoothworkshop.com/downloads/tooth-fairy-letter-template.jpg"

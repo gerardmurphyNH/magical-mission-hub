@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles } from "lucide-react";
-import toothsafeBox from "@/assets/toothsafe-box.png";
+import toothsafeBox from "@/assets/toothsafe-box.webp";
 import { trackCTAClick } from "@/lib/analytics";
 
 const benefits = [

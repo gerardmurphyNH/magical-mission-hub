@@ -16,7 +16,10 @@ const Index = () => {
     <main className="min-h-screen">
       {/* VideoObject lives on the dedicated /watch page (a proper "watch page"
           for Google) rather than here, where the homepage isn't video-first. */}
-      <PageSeo canonical="https://wigglytoothworkshop.com/" />
+      <PageSeo
+        canonical="https://wigglytoothworkshop.com/"
+        description="An animated short film about what the Tooth Fairy really does with the teeth she collects. Free to watch, with a book and ToothSafe coming soon."
+      />
       <NavBar />
       <HeroSection />
       <WorldIntroSection />

@@ -89,7 +89,7 @@ const Watch = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Watch The Tooth Fairy's Secret Workshop - Animated Short Film | Wiggly Tooth Workshop"
+        title="Watch The Tooth Fairy's Secret Workshop | Wiggly Tooth Workshop"
         description="Watch The Tooth Fairy's Secret Workshop, a new animated tooth fairy short film for kids - free to watch. See what the Tooth Fairy really does with lost teeth."
         canonical={PAGE_URL}
         image={`https://i.ytimg.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`}

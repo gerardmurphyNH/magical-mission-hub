@@ -67,7 +67,7 @@ const HowMuchDoesTheToothFairyLeave = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="How Much Money Does the Tooth Fairy Leave? Going Rate Per Tooth | Wiggly Tooth Workshop"
+        title="How Much Does the Tooth Fairy Leave? | Wiggly Tooth Workshop"
         description="How much money does the Tooth Fairy leave? The going rate is about $3-$6 per tooth, often more for the first. See typical amounts by age and why she leaves money."
         canonical="https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave"
         jsonLd={{

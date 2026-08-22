@@ -71,7 +71,7 @@ const FirstToothWhatToDo = () => {
   return (
     <>
       <PageSeo
-         title="First Loose Tooth: What to Do When It Falls Out | Wiggly Tooth Workshop"
+         title="Your Child's First Lost Tooth | Wiggly Tooth Workshop"
         description="Your child lost their first baby tooth. Here is what to do right now, how to keep the tooth safe for the Tooth Fairy, and how to answer the questions that follow."
         canonical="https://wigglytoothworkshop.com/first-tooth-what-to-do"
         jsonLd={{
