@@ -143,8 +143,8 @@ const ForTeachers = () => {
         <div className="mb-10">
           <FilmEmbed
             location="for_teachers"
-            heading="Start with the short film"
-            blurb="Watch The Tooth Fairy's Secret Workshop as a class, then use the discussion prompts below."
+            heading="Watch the short film (optional)"
+            blurb="Add The Tooth Fairy's Secret Workshop (about 4 minutes) to your lesson flow before the discussion prompts or activities below - a nice way to bring the idea to life, but not required if you're short on time."
           />
         </div>
 
