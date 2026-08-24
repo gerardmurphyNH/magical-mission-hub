@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import filmScene1 from "@/assets/film-scene-1.png";
-import filmScene2 from "@/assets/film-scene-2.png";
-import filmScene3 from "@/assets/film-scene-3.png";
+import filmScene1 from "@/assets/film-scene-1.webp";
+import filmScene2 from "@/assets/film-scene-2.webp";
+import filmScene3 from "@/assets/film-scene-3.webp";
 import workshopScene from "@/assets/workshop-scene.webp";
 import { YOUTUBE_CHANNEL_URL } from "@/lib/config";
 import { trackEvent } from "@/lib/analytics";
