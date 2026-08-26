@@ -176,7 +176,7 @@ const ToothFairyFAQ = () => {
   return (
     <>
       <PageSeo
-        title="Tooth Fairy FAQ | Wiggly Tooth Workshop"
+        title="Tooth Fairy FAQ: Every Question Answered | Wiggly Tooth Workshop"
         description="The Tooth Fairy FAQ: every question children and parents ask, answered honestly and with the magic intact. Why she takes teeth, what she does with them, and more."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-faq"
         jsonLd={{

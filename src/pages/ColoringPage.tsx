@@ -63,7 +63,7 @@ const ColoringPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Free Tooth Fairy Coloring Page | Wiggly Tooth Workshop"
+        title="Free Printable Tooth Fairy Coloring Page | Wiggly Tooth Workshop"
         description="Download a free printable Tooth Fairy coloring page for kids - the Tooth Fairy flying through a starry night sky. PDF or JPG, free for home and classroom."
         canonical={PAGE_URL}
         image={CERT_ABS}

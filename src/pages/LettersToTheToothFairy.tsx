@@ -253,7 +253,7 @@ const LettersToTheToothFairy = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Letters to the Tooth Fairy | Wiggly Tooth Workshop"
+        title="Letters to the Tooth Fairy: Write One Free | Wiggly Tooth Workshop"
         description="Fill in a few blanks and get a beautiful keepsake letter to or from the Tooth Fairy - free to print, save, or share. The real way to contact her."
         canonical={PAGE_URL}
         jsonLd={{

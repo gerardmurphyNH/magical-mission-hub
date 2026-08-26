@@ -15,7 +15,7 @@ const Premiere = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Tooth Fairy Film Premiere | Wiggly Tooth Workshop"
+        title="Tooth Fairy Film Premiere Recap | Wiggly Tooth Workshop"
         description="Recap of the world premiere of The Tooth Fairy's Secret Workshop at TLC Studios in Dedham, MA, with a live FaceTime visit from Peter H. Reynolds."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-film-premiere"
         image="https://wigglytoothworkshop.com/og-image.png"

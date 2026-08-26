@@ -53,7 +53,7 @@ const ForTeachers = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Tooth Fairy Classroom Activities | Wiggly Tooth Workshop"
+        title="Tooth Fairy Classroom Activities & Lesson Plan | Wiggly Tooth Workshop"
         description="Free back-to-school Tooth Fairy classroom activities, bulletin board ideas, and discussion questions for grades K-5, including a kindergarten-friendly option."
         canonical="https://wigglytoothworkshop.com/for-teachers"
         jsonLd={{
