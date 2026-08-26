@@ -141,7 +141,7 @@ const HowMuchDoesTheToothFairyLeave = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="How Much Does the Tooth Fairy Leave? | Wiggly Tooth Workshop"
+        title="How Much Does the Tooth Fairy Leave? Free Calculator | Wiggly Tooth Workshop"
         description="Curious how much the Tooth Fairy leaves? Use our free calculator (by currency and first tooth) to see the going rate, then share what you left."
         canonical="https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave"
         jsonLd={{
