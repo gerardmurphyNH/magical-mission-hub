@@ -13,7 +13,8 @@ import {
 import {
   CURRENCIES,
   type Currency,
-  calculateGoingRate,
+  getRecommendedRange,
+  deltaDentalReferenceRate,
   formatAmount,
   fetchToothFairyStats,
   submitToothFairyAmount,
@@ -39,7 +40,12 @@ const ToothFairyCalculator = () => {
   const [honeypot, setHoneypot] = useState("");
   const [stats, setStats] = useState<SurveyStats | null>(null);
 
-  const goingRate = isFirstTooth === null ? null : calculateGoingRate(currency, isFirstTooth);
+  const parsedAge = childAge.trim() ? parseInt(childAge, 10) : undefined;
+  const range =
+    isFirstTooth === null
+      ? null
+      : getRecommendedRange(currency, Number.isFinite(parsedAge) ? parsedAge : undefined, isFirstTooth);
+  const referenceRate = isFirstTooth === null ? null : deltaDentalReferenceRate(currency, isFirstTooth);
 
   const handleCalculate = () => {
     if (isFirstTooth === null) return;
@@ -179,21 +185,30 @@ const ToothFairyCalculator = () => {
         </div>
       )}
 
-      {phase === "result" && goingRate !== null && isFirstTooth !== null && (
+      {phase === "result" && range !== null && referenceRate !== null && isFirstTooth !== null && (
         <div className="space-y-6">
           <div className="text-center p-6 rounded-2xl bg-primary/10 border border-primary/20">
             <p className="text-sm text-muted-foreground mb-1">
-              {isFirstTooth ? "For a first tooth" : "For a later tooth"}
-              {childAge.trim() ? ` at age ${childAge.trim()}` : ""}, the going rate is about
+              Our take{isFirstTooth ? " for a first tooth" : ""}
+              {childAge.trim() ? ` at age ${childAge.trim()}` : ""}: a reasonable amount is
             </p>
             <p className="font-display text-4xl md:text-5xl font-bold text-primary my-2">
-              {formatAmount(currency, goingRate)}
+              {range.low === range.high
+                ? formatAmount(currency, range.low)
+                : `${formatAmount(currency, range.low)}–${formatAmount(currency, range.high)}`}
             </p>
-            <p className="text-xs text-muted-foreground mt-2">
-              Based on Delta Dental's 2026 Original Tooth Fairy Poll — the national average
-              {isFirstTooth ? ", with about a 23% premium for first teeth" : ""}.
+            <p className="text-xs text-muted-foreground mt-2 max-w-sm mx-auto">
+              We factor in a round number families actually hand over, whether it's a first
+              tooth, and that older kids get more (a dollar means less at 12 than at 5) — not
+              just a raw survey average.
             </p>
           </div>
+
+          <p className="text-center text-xs text-muted-foreground -mt-2">
+            For reference, Delta Dental's 2026 national poll put the precise average at{" "}
+            <span className="font-medium text-foreground">{formatAmount(currency, referenceRate)}</span>
+            {isFirstTooth ? " for a first tooth" : ""}.
+          </p>
 
           {sharePhase === "idle" && (
             <div className="border-t border-border pt-6">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowLeft } from "lucide-react";
+import { Sparkles, ArrowLeft, Film, Heart, MessageCircle, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -30,6 +30,79 @@ const faqs = [
       "Less than you'd think. A small note, a few coins with some heft and jingle, or a tiny certificate often lands better than a larger bill left in silence. The ritual is what children remember.",
   },
 ];
+
+const TRADITION_STEPS = [
+  {
+    icon: Film,
+    title: "Watch the film",
+    text: "A free 4-minute short, together as a family.",
+  },
+  {
+    icon: Heart,
+    title: "Find their virtue",
+    text: "Take the 2-question quiz to name the quality growing inside this tooth.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Reflect together",
+    text: "Ask: how do you think the Tooth Fairy will use what she found?",
+  },
+];
+
+const MakeItATraditionSection = () => (
+  <div className="my-10 p-6 md:p-8 rounded-2xl bg-secondary/50 border border-border">
+    <div className="text-center mb-6">
+      <Sparkles className="w-6 h-6 text-primary mx-auto mb-3" />
+      <h2 className="font-display text-xl md:text-2xl font-bold text-foreground mb-2">
+        It's More Than the Money
+      </h2>
+      <p className="text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
+        Kids love finding money under the pillow — that part isn't going anywhere. But in{" "}
+        <em>The Tooth Fairy's Secret Workshop</em>, the coin is a thank-you, not the point.
+        What she's really collecting is the quality growing inside that tooth: the bravery,
+        the kindness, the patience your child built while it was theirs.
+      </p>
+    </div>
+
+    <div className="grid sm:grid-cols-3 gap-4 mb-6">
+      {TRADITION_STEPS.map((step, i) => (
+        <div key={step.title} className="text-center p-4">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 relative">
+            <step.icon className="w-5 h-5 text-primary" />
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
+              {i + 1}
+            </span>
+          </div>
+          <p className="font-display font-semibold text-sm text-foreground mb-1">{step.title}</p>
+          <p className="text-xs text-muted-foreground leading-relaxed">{step.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap mb-4">
+      <Button variant="hero" size="sm" asChild>
+        <Link to="/watch" onClick={() => trackEvent("explore_click", { page: "/watch", source: "how_much_tf_leaves" })}>
+          Watch the Film
+        </Link>
+      </Button>
+      <Button variant="magical" size="sm" asChild>
+        <a href="/#quiz" onClick={() => trackEvent("explore_click", { page: "/#quiz", source: "how_much_tf_leaves" })}>
+          Find Their Virtue
+        </a>
+      </Button>
+    </div>
+    <div className="text-center">
+      <Link
+        to="/first-tooth-tradition"
+        onClick={() => trackEvent("explore_click", { page: "/first-tooth-tradition", source: "how_much_tf_leaves" })}
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
+      >
+        <Award className="w-4 h-4" />
+        Turn it into a keepsake — get the free printable certificate
+      </Link>
+    </div>
+  </div>
+);
 
 const FilmCTA = () => (
   <div className="my-8 p-6 rounded-2xl bg-secondary/50 border border-border text-center">
@@ -146,7 +219,7 @@ const HowMuchDoesTheToothFairyLeave = () => {
           <ToothFairyCalculator />
         </div>
 
-        <FilmCTA />
+        <MakeItATraditionSection />
 
         <div className="space-y-6">
           <h2 className="font-display text-2xl font-bold text-foreground">
@@ -198,9 +271,12 @@ const HowMuchDoesTheToothFairyLeave = () => {
           </h2>
           <p className="text-foreground leading-relaxed">
             Some families write a small note from the Tooth Fairy. Some leave glitter
-            footprints. Some include a tiny certificate. None of these require large
-            sums — a well-executed note often lands better than a $20 bill left in
-            silence.
+            footprints. Some include a{" "}
+            <Link to="/first-tooth-tradition" className="text-primary hover:underline">
+              free printable certificate
+            </Link>
+            . None of these require large sums — a well-executed note often lands better than a
+            $20 bill left in silence.
           </p>
           <p className="text-foreground leading-relaxed">
             If you're looking for something tangible, the ToothSafe from Wiggly Tooth
