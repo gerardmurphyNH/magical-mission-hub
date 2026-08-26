@@ -24,10 +24,15 @@ import {
   trackCalculatorCalculate,
   trackCalculatorSurveySubmit,
   trackCalculatorSurveyError,
+  trackWorkshopJoinFromCalculator,
 } from "@/lib/analytics";
+import { joinWorkshop } from "@/lib/workshop";
 
 type Phase = "form" | "result";
 type SharePhase = "idle" | "submitting" | "done" | "skipped" | "error";
+type JoinPhase = "idle" | "loading" | "done" | "error";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ToothFairyCalculator = () => {
   const [phase, setPhase] = useState<Phase>("form");
@@ -39,6 +44,10 @@ const ToothFairyCalculator = () => {
   const [sharedAmount, setSharedAmount] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [stats, setStats] = useState<SurveyStats | null>(null);
+
+  const [joinPhase, setJoinPhase] = useState<JoinPhase>("idle");
+  const [joinEmail, setJoinEmail] = useState("");
+  const [joinHoneypot, setJoinHoneypot] = useState("");
 
   const parsedAge = childAge.trim() ? parseInt(childAge, 10) : undefined;
   const range =
@@ -58,6 +67,8 @@ const ToothFairyCalculator = () => {
     setSharePhase("idle");
     setSharedAmount("");
     setStats(null);
+    setJoinPhase("idle");
+    setJoinEmail("");
   };
 
   const loadStats = async () => {
@@ -100,6 +111,21 @@ const ToothFairyCalculator = () => {
   const handleSkip = async () => {
     setSharePhase("skipped");
     await loadStats();
+  };
+
+  const handleJoin = async () => {
+    if (!EMAIL_RE.test(joinEmail.trim())) {
+      setJoinPhase("error");
+      return;
+    }
+    setJoinPhase("loading");
+    try {
+      await joinWorkshop({ email: joinEmail, source: "how_much_calculator", honeypot: joinHoneypot });
+      trackWorkshopJoinFromCalculator();
+      setJoinPhase("done");
+    } catch {
+      setJoinPhase("error");
+    }
   };
 
   return (
@@ -314,6 +340,54 @@ const ToothFairyCalculator = () => {
                   Not enough answers for this exact combination yet — check back soon, or be one
                   of the first to help build the average!
                 </p>
+              )}
+            </div>
+          )}
+
+          {sharePhase === "done" && (
+            <div className="border-t border-border pt-6">
+              {joinPhase === "done" ? (
+                <p className="text-sm text-primary font-medium">
+                  ✨ You're in! Check your inbox for a welcome note.
+                </p>
+              ) : (
+                <>
+                  <h3 className="font-display font-semibold text-foreground mb-1.5">
+                    Want more free tools like this?
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Join the Workshop for new printables, activities, and updates — no spam,
+                    unsubscribe anytime.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      type="email"
+                      placeholder="you@example.com"
+                      value={joinEmail}
+                      onChange={(e) => setJoinEmail(e.target.value)}
+                      className="flex-1"
+                    />
+                    <Button variant="magical" onClick={handleJoin} disabled={joinPhase === "loading"}>
+                      {joinPhase === "loading" ? "Joining…" : "Join the Workshop"}
+                    </Button>
+                  </div>
+                  {joinPhase === "error" && (
+                    <p className="text-xs text-destructive mt-2">
+                      That didn't go through — mind entering a valid email and trying again?
+                    </p>
+                  )}
+                  {/* Honeypot - hidden from real visitors, bots tend to fill every field */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={joinHoneypot}
+                    onChange={(e) => setJoinHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0 }}
+                  />
+                </>
               )}
             </div>
           )}

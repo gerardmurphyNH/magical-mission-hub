@@ -241,6 +241,11 @@ export const trackCalculatorSurveyError = (errorType: string): void => {
   trackEvent("calculator_survey_error", { error_type: errorType });
 };
 
+export const trackWorkshopJoinFromCalculator = (): void => {
+  trackSignupSuccess();
+  trackEvent("workshop_join_source", { source: "how_much_calculator" });
+};
+
 // Type declarations
 declare global {
   interface Window {
