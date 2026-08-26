@@ -226,6 +226,21 @@ export const trackWorkshopJoinFromLetter = (): void => {
   trackEvent("workshop_join_source", { source: "letters_page" });
 };
 
+// ============================================
+// TOOTH FAIRY AMOUNT CALCULATOR TRACKING
+// ============================================
+export const trackCalculatorCalculate = (currency: string, isFirstTooth: boolean): void => {
+  trackEvent("calculator_calculate", { currency, is_first_tooth: isFirstTooth });
+};
+
+export const trackCalculatorSurveySubmit = (currency: string, isFirstTooth: boolean): void => {
+  trackEvent("calculator_survey_submit", { currency, is_first_tooth: isFirstTooth });
+};
+
+export const trackCalculatorSurveyError = (errorType: string): void => {
+  trackEvent("calculator_survey_error", { error_type: errorType });
+};
+
 // Type declarations
 declare global {
   interface Window {

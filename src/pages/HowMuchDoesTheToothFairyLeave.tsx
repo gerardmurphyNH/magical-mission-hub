@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import PageSeo from "@/components/PageSeo";
+import ToothFairyCalculator from "@/components/ToothFairyCalculator";
 import { YOUTUBE_CHANNEL_URL } from "@/lib/config";
 import { trackCTAClick, trackEvent } from "@/lib/analytics";
 
@@ -68,7 +69,7 @@ const HowMuchDoesTheToothFairyLeave = () => {
     <div className="min-h-screen bg-background">
       <PageSeo
         title="How Much Does the Tooth Fairy Leave? | Wiggly Tooth Workshop"
-        description="How much money does the Tooth Fairy leave? The going rate is about $3-$6 per tooth, often more for the first. See typical amounts by age and why she leaves money."
+        description="Curious how much the Tooth Fairy leaves? Use our free calculator (by currency and first tooth) to see the going rate, then share what you left."
         canonical="https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave"
         jsonLd={{
           "@context": "https://schema.org",
@@ -140,6 +141,10 @@ const HowMuchDoesTheToothFairyLeave = () => {
           been officially standardized. But there are useful patterns, reasonable
           ranges, and a few things worth knowing before you set the amount.
         </p>
+
+        <div className="mb-10">
+          <ToothFairyCalculator />
+        </div>
 
         <FilmCTA />
 
