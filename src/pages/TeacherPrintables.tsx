@@ -499,7 +499,7 @@ const TeacherPrintables = () => {
               <Button
                 variant="outline"
                 size="xl"
-                className="border-starlight/60 text-starlight hover:bg-starlight/10"
+                className="border-starlight/60 bg-transparent text-starlight hover:bg-starlight/10"
                 onClick={() => {
                   trackTeacherResourcesPageClick("hero_view_resources");
                   document.getElementById("resources")?.scrollIntoView({ behavior: "smooth" });
@@ -1046,7 +1046,7 @@ const TeacherPrintables = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-starlight/60 text-starlight hover:bg-starlight/10"
+                className="border-starlight/60 bg-transparent text-starlight hover:bg-starlight/10"
                 asChild
               >
                 <Link

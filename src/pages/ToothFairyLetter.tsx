@@ -458,7 +458,7 @@ const ToothFairyLetter = () => {
               <Button
                 variant="outline"
                 size="xl"
-                className="border-starlight/60 text-starlight hover:bg-starlight/10"
+                className="border-starlight/60 bg-transparent text-starlight hover:bg-starlight/10"
                 asChild
               >
                 <a
@@ -1110,7 +1110,7 @@ const ToothFairyLetter = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-starlight/60 text-starlight hover:bg-starlight/10"
+                className="border-starlight/60 bg-transparent text-starlight hover:bg-starlight/10"
                 asChild
               >
                 <Link to="/tooth-fairy-printables">
