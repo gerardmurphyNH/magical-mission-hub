@@ -97,26 +97,10 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/why-does-the-tooth-fairy-take-teeth"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Why does the Tooth Fairy take teeth?
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/tooth-fairy-story"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   The Tooth Fairy story
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/tooth-fairy-story-explained"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  The Tooth Fairy story, explained
                 </Link>
               </li>
             </ul>
@@ -158,14 +142,6 @@ const Footer = () => {
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   Tooth Fairy letter template
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/tooth-fairy-faq"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Tooth Fairy FAQ
                 </Link>
               </li>
               <li>

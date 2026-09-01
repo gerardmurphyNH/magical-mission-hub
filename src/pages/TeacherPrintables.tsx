@@ -73,7 +73,7 @@ const relatedLinks = [
     question: "Why does the Tooth Fairy take teeth?",
     teaser:
       "Because every tooth holds something the child grew while it was there. Those qualities don't disappear when the tooth falls out.",
-    to: "/why-does-the-tooth-fairy-take-teeth",
+    to: "/what-does-the-tooth-fairy-do-with-teeth",
   },
   {
     question: "Your child's first lost tooth",
@@ -957,7 +957,7 @@ const TeacherPrintables = () => {
             </div>
             <p className="text-center mt-8">
               <Link
-                to="/tooth-fairy-faq"
+                to="/is-the-tooth-fairy-real"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors underline underline-offset-4"
               >
                 See all Tooth Fairy questions →

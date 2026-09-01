@@ -393,7 +393,7 @@ const WhatToSayToothFairy = () => {
                   { to: "/tooth-fairy-letter", label: "Free Tooth Fairy Letter Template", desc: "A printable letter from the Tooth Fairy for your child" },
                   { to: "/tooth-fairy-printables", label: "Tooth Fairy Printables", desc: "Free activities and worksheets for kids" },
                   { to: "/coloring-page", label: "Free Coloring Page", desc: "A magical scene to color and keep" },
-                  { to: "/tooth-fairy-story-explained", label: "The Tooth Fairy story, explained", desc: "Where the tradition comes from and why it matters" },
+                  { to: "/is-the-tooth-fairy-real", label: "The Tooth Fairy story, explained", desc: "Where the tradition comes from and why it matters" },
                 ].map((link) => (
                   <Link
                     key={link.to}

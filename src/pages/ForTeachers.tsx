@@ -273,7 +273,7 @@ const ForTeachers = () => {
             <em>Throw Your Tooth on the Roof</em> by Selby Beeler is a well-known nonfiction
             picture book about how children around the world celebrate a lost tooth - a nice
             companion to our own page on{" "}
-            <Link to="/tooth-fairy-story-explained" className="text-primary hover:underline">
+            <Link to="/is-the-tooth-fairy-real" className="text-primary hover:underline">
               tooth fairy traditions around the world
             </Link>
             .

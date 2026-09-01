@@ -25,11 +25,8 @@ const ForParents = lazy(() => import("./pages/ForParents"));
 const News = lazy(() => import("./pages/News"));
 const Premiere = lazy(() => import("./pages/Premiere"));
 const ColoringPage = lazy(() => import("./pages/ColoringPage"));
-const WhyDoesTheToothFairyTakeTeeth = lazy(() => import("./pages/WhyDoesTheToothFairyTakeTeeth"));
-const ToothFairyStoryExplained = lazy(() => import("./pages/ToothFairyStoryExplained"));
 const ToothFairyStory = lazy(() => import("./pages/ToothFairyStory"));
 const FirstToothWhatToDo = lazy(() => import("./pages/FirstToothWhatToDo"));
-const ToothFairyFAQ = lazy(() => import("./pages/ToothFairyFAQ"));
 const TeacherPrintables = lazy(() => import("./pages/TeacherPrintables"));
 const ToothFairyLetter = lazy(() => import("./pages/ToothFairyLetter"));
 const WhatToSayToothFairy = lazy(() => import("./pages/WhatToSayToothFairy"));
@@ -63,11 +60,8 @@ const App = () => (
             <Route path="/news" element={<News />} />
             <Route path="/tooth-fairy-film-premiere" element={<Premiere />} />
             <Route path="/coloring-page" element={<ColoringPage />} />
-            <Route path="/why-does-the-tooth-fairy-take-teeth" element={<WhyDoesTheToothFairyTakeTeeth />} />
-            <Route path="/tooth-fairy-story-explained" element={<ToothFairyStoryExplained />} />
             <Route path="/tooth-fairy-story" element={<ToothFairyStory />} />
             <Route path="/first-tooth-what-to-do" element={<FirstToothWhatToDo />} />
-            <Route path="/tooth-fairy-faq" element={<ToothFairyFAQ />} />
             <Route path="/tooth-fairy-printables" element={<TeacherPrintables />} />
             <Route path="/tooth-fairy-letter" element={<ToothFairyLetter />} />
             <Route path="/what-to-say-when-child-asks-if-tooth-fairy-is-real" element={<WhatToSayToothFairy />} />

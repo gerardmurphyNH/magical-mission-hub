@@ -309,8 +309,7 @@ const ToothFairyStory = () => {
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
-                { to: "/tooth-fairy-story-explained", label: "The real story of the Tooth Fairy", desc: "Where the tradition comes from, and its history around the world." },
-                { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy real?", desc: "The honest, magical answer." },
+                { to: "/is-the-tooth-fairy-real", label: "The real story of the Tooth Fairy", desc: "Where the tradition comes from, and its history around the world." },
                 { to: "/what-does-the-tooth-fairy-do-with-teeth", label: "What does she do with teeth?", desc: "Inside the Tooth Fairy's workshop." },
                 { to: "/tooth-fairy-letter", label: "Tooth Fairy letter template", desc: "A free printable letter from the Tooth Fairy." },
               ].map((link) => (

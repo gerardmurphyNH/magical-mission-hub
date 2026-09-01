@@ -232,8 +232,8 @@ const FirstToothWhatToDo = () => {
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/why-does-the-tooth-fairy-take-teeth">
-                    Why does she take them?
+                  <Link to="/is-the-tooth-fairy-real">
+                    Is she real?
                   </Link>
                 </Button>
               </div>

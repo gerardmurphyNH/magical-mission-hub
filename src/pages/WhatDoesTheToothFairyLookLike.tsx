@@ -251,9 +251,8 @@ const WhatDoesTheToothFairyLookLike = () => {
             </div>
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {[
-                { to: "/tooth-fairy-story-explained", label: "The Tooth Fairy Story, Explained", desc: "Where the legend comes from, around the world." },
+                { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy Real?", desc: "Where the legend comes from, around the world." },
                 { to: "/tooth-fairy-story", label: "Read the Tooth Fairy Story", desc: "The tale of Arlo, CeCe, and the workshop above the clouds." },
-                { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy Real?", desc: "The honest, magical answer." },
                 { to: "/letters-to-the-tooth-fairy", label: "Write a Letter to the Tooth Fairy", desc: "Share the quality in your child's tooth." },
               ].map((link) => (
                 <Link key={link.to} to={link.to} onClick={() => trackEvent("explore_click", { page: link.to, source: "look_like" })}

@@ -317,7 +317,7 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
               </Link>
             </li>
             <li>
-              <Link to="/why-does-the-tooth-fairy-take-teeth" className="text-sm text-primary hover:underline">
+              <Link to="/what-does-the-tooth-fairy-do-with-teeth" className="text-sm text-primary hover:underline">
                 Why does the Tooth Fairy take teeth? →
               </Link>
             </li>

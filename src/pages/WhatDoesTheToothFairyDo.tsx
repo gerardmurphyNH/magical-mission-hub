@@ -18,6 +18,16 @@ const faqs = [
       "She draws out the quality that grew inside each tooth - courage, kindness, creativity, patience - and weaves it back into the world in small, quiet ways. The tooth is just the container; the quality is what she's really after.",
   },
   {
+    question: "Why does the Tooth Fairy want teeth and not something else?",
+    answer:
+      "Because teeth are the only part of you that falls off on its own, at just the right time, carrying everything you've grown so far. Hair grows too fast. Fingernails don't hold memories the same way. A tooth that's been growing for years holds years.",
+  },
+  {
+    question: "Does the Tooth Fairy take adult teeth too?",
+    answer:
+      "No. Adult teeth are permanent; they're not meant to be collected. The baby teeth are the special ones: they fall away naturally at exactly the moment when a child is ready for something bigger. That timing isn't an accident.",
+  },
+  {
     question: "What happens to baby teeth after the Tooth Fairy takes them?",
     answer:
       "Each baby tooth is carried back to her workshop, where its quality is gently drawn out, logged, and catalogued by virtue and by year. Particularly rare teeth are kept in the archive; the rest are returned to the earth once their quality has been used. Nothing is wasted.",
@@ -28,9 +38,19 @@ const faqs = [
       "Because every tooth holds a record of a real moment a child grew through. Sorting them by virtue lets her find exactly the right quality when some corner of the world is running low on it.",
   },
   {
+    question: "What if I want to keep my tooth?",
+    answer:
+      "The Tooth Fairy understands. Some families keep teeth as keepsakes, and she respects that. If there's no tooth under the pillow, she simply moves on. The qualities in a kept tooth stay with the family.",
+  },
+  {
     question: "Why does she leave money behind?",
     answer:
       "The coin or bill is a thank-you and an acknowledgment - the work you did while growing that tooth was real, it mattered, and it's going to help somebody.",
+  },
+  {
+    question: "Is the exchange fair?",
+    answer:
+      "That depends on how you think about it. You give her something that took years to grow, packed with memories and qualities. She gives you some money in return. But the money isn't the point. The point is that what was in your tooth is now out in the world, doing something good. Most people would say that's more than fair.",
   },
 ];
 
@@ -63,7 +83,7 @@ const WhatDoesTheToothFairyDo = () => {
     <div className="min-h-screen bg-background">
       <PageSeo
         title="What Does the Tooth Fairy Do With Teeth? | Wiggly Tooth Workshop"
-        description="What does the Tooth Fairy do with teeth? Find out what really happens to baby teeth after she collects them, and the quiet reason she gathers every single one."
+        description="What does the Tooth Fairy do with teeth, and why does she want them? Find out what really happens after she collects them - and the quiet reason why."
         canonical="https://wigglytoothworkshop.com/what-does-the-tooth-fairy-do-with-teeth"
         jsonLd={{
           "@context": "https://schema.org",
@@ -89,13 +109,25 @@ const WhatDoesTheToothFairyDo = () => {
               "@type": "Article",
               headline: "What Does the Tooth Fairy Do With Teeth?",
               description:
-                "Inside the Tooth Fairy's workshop: how baby teeth are collected, the qualities inside them drawn out, and what happens to the teeth afterward.",
+                "Inside the Tooth Fairy's workshop: why she wants teeth specifically, how baby teeth are collected, the qualities inside them drawn out, and what happens to the teeth afterward.",
               mainEntityOfPage:
                 "https://wigglytoothworkshop.com/what-does-the-tooth-fairy-do-with-teeth",
               publisher: {
                 "@type": "Organization",
                 name: "Wiggly Tooth Workshop",
                 url: "https://wigglytoothworkshop.com/",
+              },
+              // Ties this page to the film entity — the short film shows exactly
+              // why she collects teeth and what she does with them.
+              mentions: {
+                "@type": "Movie",
+                name: "The Tooth Fairy's Secret Workshop",
+                url: "https://wigglytoothworkshop.com/watch",
+                sameAs: [
+                  "https://www.wikidata.org/wiki/Q140607725",
+                  "https://www.imdb.com/title/tt43689600/",
+                  "https://www.themoviedb.org/movie/1733539-the-tooth-fairy-s-secret-workshop",
+                ],
               },
             },
             // No VideoObject here for the embedded short — GSC flagged it as
@@ -165,6 +197,24 @@ const WhatDoesTheToothFairyDo = () => {
         </div>
 
         <div className="space-y-6">
+          <h2 className="font-display text-2xl font-bold text-foreground">
+            Why teeth, specifically?
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            You might wonder why she doesn't collect something else: your drawings, your
+            favorite toys, the notes you passed in class. But teeth are different. A tooth
+            grows slowly, over years, inside your jaw. It's there during your first day of
+            school and your first time staying at a friend's house. It's there when you try
+            something scary for the first time, and when you're kind to someone who was
+            having a bad day. It absorbs all of that — not in a way you can see, but in a
+            way the Tooth Fairy can sense.
+          </p>
+          <p className="text-foreground leading-relaxed">
+            And then, at just the right moment, it falls out. That timing isn't a
+            coincidence. The tooth falls when it's ready, when it has grown alongside you
+            long enough to hold something real.
+          </p>
+
           <h2 className="font-display text-2xl font-bold text-foreground">
             The tooth is just the container
           </h2>
@@ -242,6 +292,20 @@ const WhatDoesTheToothFairyDo = () => {
             earth. So the honest answer to "what happens to baby teeth" is this: the
             quality inside them is set loose to help someone, and the teeth themselves
             are looked after with more care than most people would guess.
+          </p>
+
+          <h2 className="font-display text-2xl font-bold text-foreground">
+            Why it only works with children's teeth
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            Adult teeth stay in. They're not meant to fall. And in a way, that makes sense;
+            adults have already grown their qualities. The Tooth Fairy's work happens in
+            childhood, when everything is new, and when the best qualities are grown.
+          </p>
+          <p className="text-foreground leading-relaxed">
+            That's why the Tooth Fairy visits children specifically, and why she comes
+            every time — because every tooth matters. Every lost tooth holds something the
+            world can use.
           </p>
         </div>
 

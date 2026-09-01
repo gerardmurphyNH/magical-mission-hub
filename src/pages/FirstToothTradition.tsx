@@ -473,7 +473,6 @@ const FirstToothTradition = () => {
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy real?", desc: "A thoughtful answer for when the question comes." },
-                { to: "/why-does-the-tooth-fairy-take-teeth", label: "Why does the Tooth Fairy take teeth?", desc: "The reason behind the tradition." },
                 { to: "/what-does-the-tooth-fairy-do-with-teeth", label: "What does she do with the teeth?", desc: "Inside the Tooth Fairy's workshop." },
                 { to: "/why-does-the-tooth-fairy-leave-money", label: "Why the Tooth Fairy leaves money", desc: "What the gift really means." },
                 { to: "/tooth-fairy-letter", label: "Tooth Fairy letter template", desc: "A free printable letter to go with the certificate." },

@@ -18,63 +18,155 @@ import { trackCTAClick, trackEvent } from "@/lib/analytics";
 const PAGE_URL = "https://wigglytoothworkshop.com/is-the-tooth-fairy-real";
 const SITE_URL = "https://wigglytoothworkshop.com/";
 
-const faqs = [
+const faqCategories = [
   {
-    question: "Is the Tooth Fairy real?",
-    answer:
-      "Yes. The Tooth Fairy is real - she just works in ways most people never see. She visits at night, takes the tooth a child has lost, and draws out the quality that grew inside it while it was theirs: courage, kindness, patience, creativity. Those qualities are real, and so is what she does with them. You may never catch sight of her, but the evidence is left behind every time.",
+    title: "Is She Real?",
+    faqs: [
+      {
+        question: "Is the Tooth Fairy real?",
+        answer:
+          "Yes. The Tooth Fairy is real - she just works in ways most people never see. She visits at night, takes the tooth a child has lost, and draws out the quality that grew inside it while it was theirs: courage, kindness, patience, creativity. Those qualities are real, and so is what she does with them. You may never catch sight of her, but the evidence is left behind every time.",
+      },
+      {
+        question: "Are tooth fairies real?",
+        answer:
+          "Yes - and there's more than one. Tooth fairies work all over the world, each looking after the children in their own corner of it. Some are girls, some are boys, each with their own name. The one at the heart of our story is CeCe, but she is only one of many. So when you ask if tooth fairies are real, the honest answer is yes, plural.",
+      },
+      {
+        question: "Is there proof the Tooth Fairy is real?",
+        answer:
+          "The proof is what she leaves behind. The tooth is gone by morning and something waits in its place - and the qualities that tooth carried, the courage and kindness and patience a child grew, are real and don't disappear. Like courage or kindness themselves, the Tooth Fairy is known by what she does, not by being caught in the act.",
+      },
+      {
+        question: "Is the Tooth Fairy real, or is it your parents?",
+        answer:
+          "It's the question every child eventually asks - and the honest answer is: both can be true. Parents help. They always have, slipping the coin under the pillow on the nights the Tooth Fairy can't make it. But the part that isn't pretend is what the tradition is really about: the courage, kindness, and wonder a child grows are real, and they really do matter. Parents are the Tooth Fairy's helpers, not her replacement. The magic is in what your child is becoming.",
+      },
+      {
+        question: "What do I tell my child when they ask if the Tooth Fairy is real?",
+        answer:
+          "You don't have to settle it in a single sentence. A gentle answer is to ask what they think, then lean into what's true underneath the story: the courage, kindness, and creativity the Tooth Fairy looks for are real qualities your child really is growing. The wonder and the honesty can both stay. If you want a longer guide to this conversation, see what to say when a child asks if the Tooth Fairy is real.",
+      },
+    ],
   },
   {
-    question: "Are tooth fairies real?",
-    answer:
-      "Yes - and there's more than one. Tooth fairies work all over the world, each looking after the children in their own corner of it. Some are girls, some are boys, each with their own name. The one at the heart of our story is CeCe, but she is only one of many. So when you ask if tooth fairies are real, the honest answer is yes, plural.",
+    title: "Where the Tradition Comes From",
+    faqs: [
+      {
+        question: "How old is the Tooth Fairy tradition?",
+        answer:
+          "Customs around lost teeth date back thousands of years. Norse and Northern European traditions from the 10th century mention a tooth fee, a small payment for a child's first lost tooth. The figure of the Tooth Fairy as we know her in the English-speaking world became more widespread in the early 20th century.",
+      },
+      {
+        question: "Is the Tooth Fairy the same in every country?",
+        answer:
+          "No - the tradition exists almost everywhere, but it takes different forms. In France and Belgium it's La Petite Souris, a small mouse. In Spain and Latin America it's Ratoncito Pérez. In parts of Asia, children throw teeth onto the roof or bury them in the ground. The Tooth Fairy's workshop, in our telling, has teeth from all of these traditions.",
+      },
+      {
+        question: "What is Ratoncito Pérez?",
+        answer:
+          "Ratoncito Pérez - also called El Ratón de los Dientes, 'the tooth mouse' - is the Spanish and Latin American version of the Tooth Fairy. Instead of a winged fairy, a small mouse collects the tooth left under the pillow and leaves a coin or little gift behind.",
+      },
+      {
+        question: "Who created Ratoncito Pérez?",
+        answer:
+          "The Spanish priest and author Luis Coloma created Ratoncito Pérez in 1894, in a story written to comfort the young King Alfonso XIII of Spain, who had just lost a milk tooth. The little tooth mouse went on to become the Spanish and Latin American counterpart of the Tooth Fairy.",
+      },
+      {
+        question: "When did the Tooth Fairy get her name?",
+        answer:
+          "She appears in print as early as a 1908 Chicago Daily Tribune column, but the name was cemented in 1927, when children's playwright Esther Watkins Arnold published a short playlet called The Tooth Fairy. No single person invented her - she grew out of much older customs around lost teeth.",
+      },
+    ],
   },
   {
-    question: "Is there proof the Tooth Fairy is real?",
-    answer:
-      "The proof is what she leaves behind. The tooth is gone by morning and something waits in its place - and the qualities that tooth carried, the courage and kindness and patience a child grew, are real and don't disappear. Like courage or kindness themselves, the Tooth Fairy is known by what she does, not by being caught in the act.",
+    title: "Who She Is",
+    faqs: [
+      {
+        question: "Is the Tooth Fairy a girl or a boy?",
+        answer:
+          "Either - and both. There isn't just one Tooth Fairy; there are many, all over the world, working quietly to keep things in balance. Some are girls, some are boys. The one at the heart of our story is named CeCe, but she's only one of many. So there's no single right answer: the Tooth Fairy who visits your house might be a she, a he, or simply the idea of someone who notices the good a child is growing.",
+      },
+      {
+        question: "What is the Tooth Fairy's name?",
+        answer:
+          "The Tooth Fairy in our story is named CeCe. But she's one of many tooth fairies who help keep the world in balance - each with their own name, their own corner of the world, and their own children whose teeth they look after. CeCe is simply the one whose story we get to follow.",
+      },
+      {
+        question: "Who are Arlo and CeCe?",
+        answer:
+          "Arlo and CeCe are the two characters at the heart of The Tooth Fairy's Secret Workshop. Arlo is a curious boy who sets out to learn what the Tooth Fairy really does with his lost tooth; CeCe is the Tooth Fairy he meets on a late-night adventure - a small, clever tinkerer with goggles and a tool belt, whose workshop and whose secret the story follows.",
+      },
+      {
+        question: "Why does the Tooth Fairy take teeth?",
+        answer:
+          "Not because the teeth themselves are valuable, but because of what's inside them - the courage, kindness, and patience a child grew while it was theirs. For the full answer, including what she does with them afterward, see what the Tooth Fairy does with the teeth she collects.",
+      },
+    ],
   },
   {
-    question: "Does the Tooth Fairy really exist?",
-    answer:
-      "Yes. She exists the way the most important quiet things exist - not as something you can catch on camera, but as something real by its effects. A tooth vanishes, a small gift appears, and the good a child is growing keeps rippling outward. That's the Tooth Fairy, doing exactly what she has always done.",
+    title: "How She Works",
+    faqs: [
+      {
+        question: "Why does the Tooth Fairy come at night?",
+        answer:
+          "Fairies work best in the quiet hours, when dreams are deep and imaginations are wide open. There's also something about starlight that helps her fly faster. She visits thousands of children each night, and timing is everything.",
+      },
+      {
+        question: "How does the Tooth Fairy get into your house?",
+        answer:
+          "Fairies are very small, about the size of your hand, and they can slip through the tiniest spaces: a crack in a window, a gap under a door, even the space between moonbeams. Your house is never as sealed as you think.",
+      },
+      {
+        question: "How does she know whose tooth is whose?",
+        answer:
+          "Teeth carry a kind of fingerprint, not a visible one, but something the Tooth Fairy can sense. Every tooth knows where it came from.",
+      },
+      {
+        question: "How does she carry so many teeth in one night?",
+        answer:
+          "Her bag is much bigger on the inside than on the outside - a well-known property of fairy equipment. She also doesn't visit every child on the same night. She works efficiently, and she's been doing this for a very long time.",
+      },
+      {
+        question: "What if I stay up to try to catch her?",
+        answer:
+          "She knows, and she waits. The Tooth Fairy is patient; she has been doing this for centuries. She'll come when the time is right, and not a moment before. Most children who try to wait up fall asleep eventually. She counts on it.",
+      },
+      {
+        question: "Why doesn't the Tooth Fairy let anyone see her?",
+        answer:
+          "Partly because she works better unseen, and partly because the mystery is part of how the tradition works. A visitor who leaves something in the night is wondrous; a visitor you can watch is just a person. Most important things - courage, kindness, the wind - work quietly. The Tooth Fairy fits right in.",
+      },
+    ],
   },
   {
-    question: "Is the Tooth Fairy real for grown-ups too?",
-    answer:
-      "In a way, yes. Grown-ups stop expecting to see her, but the thing the tradition points at stays true: children really do grow courage, kindness, and wonder, and those qualities really do make the world better. Believing in the Tooth Fairy, for an adult, is mostly believing that what children become matters. It does.",
-  },
-  {
-    question: "Why does the Tooth Fairy take teeth?",
-    answer:
-      "Not because the teeth themselves are valuable, but because of what's inside them. Every tooth quietly absorbs the qualities a child grows - bravery from facing something scary, kindness from helping, patience from waiting. The Tooth Fairy collects those qualities and uses them to gently help keep the world in balance.",
-  },
-  {
-    question: "Why doesn't the Tooth Fairy let anyone see her?",
-    answer:
-      "Partly because she works better unseen, and partly because the mystery is part of how the tradition works. A visitor who leaves something in the night is wondrous; a visitor you can watch is just a person. Most important things - courage, kindness, the wind - work quietly. The Tooth Fairy fits right in.",
-  },
-  {
-    question: "Is the Tooth Fairy a girl or a boy?",
-    answer:
-      "Either - and both. There isn't just one Tooth Fairy; there are many, all over the world, working quietly to keep things in balance. Some are girls, some are boys. The one at the heart of our story is named CeCe, but she's only one of many. So there's no single right answer: the Tooth Fairy who visits your house might be a she, a he, or simply the idea of someone who notices the good a child is growing.",
-  },
-  {
-    question: "What is the Tooth Fairy's name?",
-    answer:
-      "The Tooth Fairy in our story is named CeCe. But she's one of many tooth fairies who help keep the world in balance - each with their own name, their own corner of the world, and their own children whose teeth they look after. CeCe is simply the one whose story we get to follow.",
-  },
-  {
-    question: "Is the Tooth Fairy real, or is it your parents?",
-    answer:
-      "It's the question every child eventually asks - and the honest answer is: both can be true. Parents help. They always have, slipping the coin under the pillow on the nights the Tooth Fairy can't make it. But the part that isn't pretend is what the tradition is really about: the courage, kindness, and wonder a child grows are real, and they really do matter. Parents are the Tooth Fairy's helpers, not her replacement. The magic is in what your child is becoming.",
-  },
-  {
-    question: "What do I tell my child when they ask if the Tooth Fairy is real?",
-    answer:
-      "You don't have to settle it in a single sentence. A gentle answer is to ask what they think, then lean into what's true underneath the story: the courage, kindness, and creativity the Tooth Fairy looks for are real qualities your child really is growing. The wonder and the honesty can both stay.",
+    title: "Common Situations",
+    faqs: [
+      {
+        question: "What if I swallow my tooth by accident?",
+        answer:
+          "Don't worry - it happens. Just leave a note under your pillow explaining what happened. The Tooth Fairy has been doing this long enough to have encountered every possible situation, and she appreciates the honesty.",
+      },
+      {
+        question: "What if the Tooth Fairy doesn't come the first night?",
+        answer:
+          "She visits millions of children, so sometimes she runs a little behind schedule. If the tooth is still there in the morning, leave it one more night. She always finds a way.",
+      },
+      {
+        question: "What if I want to keep my tooth?",
+        answer:
+          "The Tooth Fairy understands. Some families keep teeth as keepsakes, and she respects that. If there's no tooth under the pillow, she simply moves on. The qualities in a kept tooth stay with the family.",
+      },
+      {
+        question: "What if my tooth has a cavity?",
+        answer:
+          "The quality is in the tooth itself, not in its condition. A tooth with a cavity still holds something real. The Tooth Fairy doesn't judge - she just collects.",
+      },
+    ],
   },
 ];
+
+const faqs = faqCategories.flatMap((c) => c.faqs);
 
 const exploreLinks = [
   {
@@ -83,19 +175,19 @@ const exploreLinks = [
     desc: "Inside the workshop, and what happens after she visits.",
   },
   {
-    to: "/why-does-the-tooth-fairy-take-teeth",
-    label: "Why Does the Tooth Fairy Take Teeth?",
-    desc: "The reason behind a tradition older than anyone remembers.",
-  },
-  {
     to: "/tooth-fairy-story",
     label: "Read the Tooth Fairy Story",
     desc: "The tale of Arlo, CeCe, and the workshop above the clouds.",
   },
   {
-    to: "/tooth-fairy-faq",
-    label: "Tooth Fairy Questions, Answered",
-    desc: "Every question children (and parents) ask.",
+    to: "/what-to-say-when-child-asks-if-tooth-fairy-is-real",
+    label: "What to Say When a Child Asks",
+    desc: "A guide for the conversation, when it comes.",
+  },
+  {
+    to: "/why-does-the-tooth-fairy-leave-money",
+    label: "Why Does the Tooth Fairy Leave Money?",
+    desc: "The real meaning behind the coin under the pillow.",
   },
 ];
 
@@ -120,7 +212,15 @@ const IsToothFairyReal = () => {
               "@type": "Article",
               headline: "Is the Tooth Fairy Real?",
               description:
-                "Yes, the Tooth Fairy is real - she just works in ways most people never see. What she really does with children's lost teeth, and why it matters.",
+                "Yes, the Tooth Fairy is real - she just works in ways most people never see. What she really does with children's lost teeth, where the tradition comes from, and why it matters.",
+              about: [
+                "is the tooth fairy real",
+                "tooth fairy history",
+                "tooth fairy origin",
+                "tooth fairy traditions around the world",
+                "Ratoncito Pérez",
+                "tooth fairy FAQ",
+              ],
               url: PAGE_URL,
               mainEntityOfPage: { "@type": "WebPage", "@id": PAGE_URL },
               publisher: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: SITE_URL },
@@ -400,6 +500,105 @@ const IsToothFairyReal = () => {
           </div>
         </section>
 
+        {/* ── Where the tradition really comes from ── */}
+        <section className="py-20 md:py-28 bg-background">
+          <div className="container px-6 max-w-2xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary/80 mb-4 text-center">
+              The Story Behind the Story
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight text-center">
+              Where the Tradition
+              <br className="hidden sm:block" /> Really Comes From
+            </h2>
+
+            <div className="space-y-6 text-foreground/80 text-lg leading-relaxed mb-10">
+              <p>
+                That's our answer to why she is real. But the question of where the
+                Tooth Fairy tradition itself comes from has a real, documented history
+                too - and it's older and stranger than most people realize.
+              </p>
+            </div>
+
+            <div className="space-y-10">
+              <div>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-3">
+                  A Very Old Question
+                </h3>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    For as long as there have been children, there have been lost
+                    teeth, and people trying to explain where they go. Norse and
+                    Northern European traditions from the 10th century record a
+                    "tooth fee," a small payment given to a child for their first
+                    lost tooth - Vikings were said to wear children's teeth as good
+                    luck in battle. In parts of Asia, children throw the tooth
+                    instead: a lower tooth onto the roof so the new one grows
+                    upward, an upper tooth buried in the ground so the new one
+                    grows downward. Different logic, same instinct - a lost tooth
+                    is significant, and it deserves a ritual.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-3">
+                  How She Got Her Name
+                </h3>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    The Tooth Fairy as we know her in the English-speaking world
+                    took shape in the early 20th century. One of the earliest
+                    printed references appeared in the <em>Chicago Daily Tribune</em>{" "}
+                    on September 27, 1908 - a household-hints column suggesting
+                    parents use a "tooth fairy" who leaves a small gift to coax
+                    children through losing a tooth. The name was cemented in 1927,
+                    when children's playwright Esther Watkins Arnold published an
+                    eight-page playlet called <em>The Tooth Fairy</em>. No single
+                    author invented her - she grew out of the same instinct that
+                    gave us Santa Claus and the Easter Bunny: explaining an ordinary
+                    event with an extraordinary character.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-3">
+                  Different Names, Same Idea
+                </h3>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    In Spain and much of Latin America, a small mouse named{" "}
+                    <em>Ratoncito Pérez</em> slips in to collect the tooth. He has a
+                    surprisingly precise origin: the priest and author Luis Coloma
+                    invented him in 1894, in a story written to comfort the
+                    boy-king Alfonso XIII of Spain after he lost a milk tooth.
+                    France and Belgium have their own mouse, <em>La Petite Souris</em>.
+                    In Japan, children throw a lower tooth straight up and an upper
+                    tooth down, so each new tooth grows in straight. In Korea, teeth
+                    go onto the roof with a little song to a magpie. In parts of the
+                    Middle East, teeth are thrown toward the sun, and in Mali, a
+                    lost tooth goes into a chicken coop. Different characters,
+                    different rituals - the same instinct underneath, everywhere: a
+                    lost tooth matters, and the moment deserves to be marked.
+                  </p>
+                  <p>
+                    There's no single, official picture of her either. In a
+                    well-known 1984 study, researcher Rosemary Wells found that
+                    about 74% of people imagined the Tooth Fairy as female, while
+                    the rest pictured her as either gender or as neither.{" "}
+                    <Link
+                      to="/what-does-the-tooth-fairy-look-like"
+                      className="text-primary font-medium hover:underline"
+                    >
+                      See what she looks like in our film →
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Hidden work ── */}
         <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
           {/* Subtle star accents */}
@@ -564,26 +763,33 @@ const IsToothFairyReal = () => {
 
         {/* ── FAQ ── */}
         <section className="py-16 md:py-20 bg-secondary/30">
-          <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
-              Common questions
+          <div className="container px-6 max-w-2xl mx-auto space-y-12">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center">
+              Every Question, Answered
             </h2>
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, i) => (
-                <AccordionItem
-                  key={i}
-                  value={`item-${i}`}
-                  className="magical-card border-0 data-[state=open]:shadow-magical transition-shadow"
-                >
-                  <AccordionTrigger className="text-left font-display font-semibold text-foreground hover:text-primary transition-colors hover:no-underline px-0">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            {faqCategories.map((category) => (
+              <div key={category.title}>
+                <h3 className="font-display text-lg font-bold text-foreground mb-4 pb-2 border-b border-border">
+                  {category.title}
+                </h3>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {category.faqs.map((faq, i) => (
+                    <AccordionItem
+                      key={i}
+                      value={`${category.title}-${i}`}
+                      className="magical-card border-0 data-[state=open]:shadow-magical transition-shadow"
+                    >
+                      <AccordionTrigger className="text-left font-display font-semibold text-foreground hover:text-primary transition-colors hover:no-underline px-0">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            ))}
           </div>
         </section>
 

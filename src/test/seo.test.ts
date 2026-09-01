@@ -163,8 +163,8 @@ describe("per-page SEO", () => {
   it("answer/content pages include FAQPage structured data", () => {
     // Pages whose whole purpose is answering a question should expose FAQPage.
     const mustHaveFaq = [
-      "ToothFairyFAQ",
       "IsToothFairyReal",
+      "WhatDoesTheToothFairyDo",
       "WhyDoesTheToothFairyLeaveMoney",
       "FirstToothTradition",
     ];

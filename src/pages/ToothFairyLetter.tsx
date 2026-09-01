@@ -173,7 +173,7 @@ const internalLinks = [
     label: "The Tooth Fairy Story, Explained",
     teaser:
       "Where the tradition comes from, why it exists in almost every culture, and what it's really about.",
-    to: "/tooth-fairy-story-explained",
+    to: "/is-the-tooth-fairy-real",
   },
 ];
 

@@ -18,6 +18,29 @@
   status = 301
   force = true
 
+# Content consolidation (2026-09-01) — 3 thin/overlapping pages merged into 2
+# deeper pillar pages. Each redirect target is topically identical to the
+# source (not a generic catch-all), and the unique content from each retired
+# page was merged into its destination rather than discarded, so these carry
+# real relevance signal instead of just forwarding traffic.
+[[redirects]]
+  from = "/tooth-fairy-story-explained"
+  to = "/is-the-tooth-fairy-real"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tooth-fairy-faq"
+  to = "/is-the-tooth-fairy-real"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/why-does-the-tooth-fairy-take-teeth"
+  to = "/what-does-the-tooth-fairy-do-with-teeth"
+  status = 301
+  force = true
+
 # SPA redirect — send all routes to index.html so React Router handles them.
 # Without this, direct links to /news, /is-the-tooth-fairy-real etc. return 404.
 [[redirects]]
