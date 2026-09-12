@@ -4,9 +4,16 @@
 -- source of truth for the schema (re-run it after every change described here).
 --
 -- Safety model:
---   * Anonymous visitors may INSERT a pending, parent-consented letter — nothing else.
---   * Anonymous visitors CANNOT SELECT the base table (protects parent_email,
---     child_first_name, and any pending/rejected letters).
+--   * Anonymous visitors may INSERT a pending, parent-consented letter.
+--   * Anonymous visitors' only SELECT access to the base table is column- and
+--     row-restricted (approved + wall_opt_in rows only — see the grant/policy
+--     by public_letters below) so the view can run with security_invoker
+--     instead of bypassing RLS. parent_email, child_first_name, honeypot,
+--     social_feature_consent, and any pending/rejected letters are never
+--     reachable by anon. (status and wall_opt_in are column-grantable too,
+--     since the view's WHERE clause needs to read them — but their value is
+--     never informative on its own: every row anon can reach already has
+--     status = 'approved' and wall_opt_in = true.)
 --   * Only APPROVED + wall_opt_in letters, and only anonymous-safe columns
 --     (never a name), are exposed — via the public_letters view.
 --   * child_first_name + city_state are usable for the PARENT'S OWN print/PDF/
@@ -94,13 +101,38 @@ create policy "anon can submit letters"
 
 -- Approved + wall-opted-in letters, anonymous-safe columns only. This is what
 -- the public "Wall of Stories" reads — no name is ever included.
+--
+-- security_invoker: a plain view runs with the OWNER's permissions when
+-- checking RLS, not the querying role's — Supabase's advisor flags this as
+-- "Security Definer View" (critical) because it silently bypasses RLS on the
+-- underlying table. With security_invoker on, the view's WHERE clause and
+-- the RLS policy below both run as the actual querying role (anon), so anon
+-- needs column-level SELECT on every column either one *references* — not
+-- just the ones the view outputs. That means status and wall_opt_in must be
+-- grantable too (their value is never returned by the view or otherwise
+-- informative on its own: every row anon can reach already has status =
+-- 'approved' and wall_opt_in = true, that's the whole point of the filter).
+-- parent_email / child_first_name / honeypot / social_feature_consent /
+-- reason / help_cause / fairy_action stay fully ungranted either way.
 drop view if exists public.public_letters;
-create view public.public_letters as
+create view public.public_letters
+  with (security_invoker = true, security_barrier = true) as
   select id, created_at, letter_type, quality, letter_body, city_state, approved_at
   from public.letters
   where status = 'approved' and wall_opt_in = true;
 
 grant select on public.public_letters to anon;
+
+revoke select on public.letters from anon;
+grant select (
+  id, created_at, letter_type, quality, letter_body, city_state, approved_at,
+  status, wall_opt_in
+) on public.letters to anon;
+
+drop policy if exists "anon can select approved wall-opted-in letters" on public.letters;
+create policy "anon can select approved wall-opted-in letters"
+  on public.letters for select to anon
+  using (status = 'approved' and wall_opt_in = true);
 
 create index if not exists letters_status_created_idx
   on public.letters (status, created_at desc);
