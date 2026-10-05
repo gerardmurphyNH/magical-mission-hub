@@ -83,6 +83,15 @@ npm run build
 npm run preview  # Preview production build
 ```
 
+### Prerendering (build pipeline)
+
+`npm run build` = SEO tests -> `vite build` (client) -> `vite build --ssr src/entry-server.tsx --outDir dist-ssr` -> `scripts/prerender.mjs`. The script renders every route from `App.tsx` (plus `/`) to full HTML, injects it into `#root`, bakes each page's `<PageSeo>` title/description/canonical into `<head>`, and writes a flat `dist/<route>.html`. `src/main.tsx` hydrates that markup. Non-JS crawlers (AI crawlers, social unfurlers) therefore see real content and JSON-LD.
+
+- `dist/app-shell.html` is the generic empty shell; the Netlify `/*` fallback in `netlify.toml` serves it for unknown URLs. It must NOT be `index.html`, which now contains the rendered homepage.
+- Keep each route in `App.tsx` as a one-line `Route` with a literal path and a bare `element` (no wrapper props) - prerender and `seo.test.ts` parse them with a regex.
+- Any render failure fails the build (a failed Netlify build leaves the previous deploy live).
+- `npm run preview` falls back to `index.html` (the prerendered homepage) for every route, so non-home routes show hydration warnings there. To test locally, serve `dist/` the way Netlify does (exact file, else `<path>.html`, else `app-shell.html`).
+
 ### Type Checking & Linting
 
 ```bash
