@@ -173,6 +173,18 @@ describe("per-page SEO", () => {
       expect(src.includes("FAQPage"), `${comp} should include FAQPage structured data`).toBe(true);
     }
   });
+
+  it("every Article schema has datePublished, dateModified, and an author", () => {
+    const offenders: string[] = [];
+    for (const file of fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith(".tsx"))) {
+      const src = read(path.join(PAGES_DIR, file));
+      if (!src.includes('"@type": "Article"')) continue;
+      for (const field of ["datePublished", "dateModified", "author"]) {
+        if (!new RegExp(`\\b${field}\\b`).test(src)) offenders.push(`${file} is missing ${field}`);
+      }
+    }
+    expect(offenders, offenders.join("\n")).toEqual([]);
+  });
 });
 
 describe("internal links", () => {

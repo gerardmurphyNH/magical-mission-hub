@@ -7,17 +7,50 @@ import PageSeo from "@/components/PageSeo";
 import ToothFairyCalculator from "@/components/ToothFairyCalculator";
 import { YOUTUBE_CHANNEL_URL } from "@/lib/config";
 import { trackCTAClick, trackEvent } from "@/lib/analytics";
+import { CURRENCIES, getRecommendedRange, type Currency } from "@/lib/toothFairySurvey";
+
+const DELTA_DENTAL_URL = "https://www.deltadental.com/about-us/press-center/2026-press-releases/the-tooth-fairy-gives-kids-a-raise/";
+const LAST_UPDATED = "October 5, 2026";
+
+function wholeAmount(currency: Currency, amount: number): string {
+  return `${CURRENCIES[currency].symbol}${amount.toLocaleString("en-US")}`;
+}
+
+function rangeText(currency: Currency, age: number | undefined, isFirstTooth: boolean): string {
+  const { low, high } = getRecommendedRange(currency, age, isFirstTooth);
+  return low === high ? wholeAmount(currency, low) : `${wholeAmount(currency, low)}–${wholeAmount(currency, high)}`;
+}
+
+const AGE_ROWS = [
+  { label: "6 and under", age: 5 },
+  { label: "7 to 9", age: 8 },
+  { label: "10 and up", age: 11 },
+];
+
+const CURRENCY_ORDER: Currency[] = ["USD", "CAD", "GBP", "EUR", "JPY"];
 
 const faqs = [
   {
     question: "How much does the Tooth Fairy usually leave per tooth?",
     answer:
-      "Recent American surveys put the average somewhere between $3 and $6 per tooth, with first teeth often getting a premium. Some families give $10 or $20 for a first tooth; some give less. All of these are fine - consistency matters more than the exact amount.",
+      "Delta Dental's 2026 Original Tooth Fairy Poll put the average US payout at $5.84 per tooth, up 17% from $5.01 in 2025. Many families round to a whole-dollar amount rather than paying $5.84 exactly, and give more for a first tooth or an older child. All of these are fine - consistency matters more than the exact amount.",
+  },
+  {
+    question: "How much does the Tooth Fairy leave for a first tooth?",
+    answer:
+      "Delta Dental's 2026 poll found a first tooth averaged $7.17, about 23% more than the average lost tooth. Our calculator suggests " +
+      `${rangeText("USD", 8, true)} for a first tooth at ages 7 to 9 (${rangeText("USD", 5, true)} at 6 and under), rounded to amounts you can actually hand over.`,
   },
   {
     question: "Should the first tooth get more than the rest?",
     answer:
       "Many parents give more for the first tooth - it's a milestone and it takes courage. In the Wiggly Tooth Workshop telling, first teeth hold the most concentrated quality, which is why the Tooth Fairy values them most highly.",
+  },
+  {
+    question: "How much should the Tooth Fairy leave in Canada, the UK, Europe, or Japan?",
+    answer:
+      "Delta Dental's figures are for the United States. For other currencies we suggest the same age-and-first-tooth pattern in local money, for a typical tooth at ages 7 to 9: " +
+      `${rangeText("CAD", 8, false)} in Canada, ${rangeText("GBP", 8, false)} in the UK, ${rangeText("EUR", 8, false)} in Europe, and ${rangeText("JPY", 8, false)} in Japan (a first tooth is one step higher).`,
   },
   {
     question: "Why does the Tooth Fairy leave money?",
@@ -166,12 +199,33 @@ const HowMuchDoesTheToothFairyLeave = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-10-05",
+              author: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: "https://wigglytoothworkshop.com/" },
               headline: "How Much Does the Tooth Fairy Leave?",
               description:
-                "Typical Tooth Fairy amounts per tooth, the first-tooth question, and why the Tooth Fairy leaves money at all.",
+                "The 2026 average Tooth Fairy payout, how much to leave for a first tooth, suggested amounts by age and currency, and why the Tooth Fairy leaves money at all.",
               mainEntityOfPage:
                 "https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave",
               publisher: {
+                "@type": "Organization",
+                name: "Wiggly Tooth Workshop",
+                url: "https://wigglytoothworkshop.com/",
+              },
+              citation: DELTA_DENTAL_URL,
+            },
+            {
+              "@type": "WebApplication",
+              name: "Tooth Fairy Payout Calculator",
+              url: "https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave",
+              description:
+                "A free calculator that suggests how much the Tooth Fairy should leave, based on currency, the child's age, and whether it's the first tooth.",
+              applicationCategory: "LifestyleApplication",
+              operatingSystem: "Any",
+              browserRequirements: "Requires JavaScript",
+              isAccessibleForFree: true,
+              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              creator: {
                 "@type": "Organization",
                 name: "Wiggly Tooth Workshop",
                 url: "https://wigglytoothworkshop.com/",
@@ -215,8 +269,92 @@ const HowMuchDoesTheToothFairyLeave = () => {
           ranges, and a few things worth knowing before you set the amount.
         </p>
 
+        <div className="mb-8 p-5 rounded-2xl bg-primary/5 border border-primary/20">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-2">
+            The short answer
+          </p>
+          <p className="text-foreground leading-relaxed">
+            The average US Tooth Fairy payout in 2026 is <strong>$5.84 per tooth</strong>, and{" "}
+            <strong>$7.17 for a first tooth</strong>, according to{" "}
+            <a
+              href={DELTA_DENTAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Delta Dental's 2026 Original Tooth Fairy Poll
+            </a>
+            {" "}— up 17% from $5.01 in 2025. Most families round to a whole-dollar amount, and our
+            calculator below suggests a range by currency, age, and first tooth.
+          </p>
+          <p className="text-xs text-muted-foreground mt-3">Last updated {LAST_UPDATED}</p>
+        </div>
+
         <div className="mb-10">
           <ToothFairyCalculator />
+        </div>
+
+        <div className="space-y-6 mb-10">
+          <h2 className="font-display text-2xl font-bold text-foreground">
+            How much should the Tooth Fairy leave by age?
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            Younger children are just as delighted by a smaller amount, while older children
+            (losing molars around 10 and up) expect more. Our suggested US amounts, rounded
+            to what you can actually hand over:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-border rounded-lg overflow-hidden">
+              <caption className="sr-only">Suggested Tooth Fairy amounts in US dollars by child's age</caption>
+              <thead className="bg-secondary/50">
+                <tr>
+                  <th scope="col" className="text-left p-3 font-semibold text-foreground">Child's age</th>
+                  <th scope="col" className="text-left p-3 font-semibold text-foreground">Regular tooth</th>
+                  <th scope="col" className="text-left p-3 font-semibold text-foreground">First tooth</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AGE_ROWS.map((row) => (
+                  <tr key={row.label} className="border-t border-border">
+                    <th scope="row" className="text-left p-3 font-medium text-foreground">{row.label}</th>
+                    <td className="p-3 text-foreground">{rangeText("USD", row.age, false)}</td>
+                    <td className="p-3 text-foreground">{rangeText("USD", row.age, true)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2 className="font-display text-2xl font-bold text-foreground">
+            How much does the Tooth Fairy leave in Canada, the UK, Europe, and Japan?
+          </h2>
+          <p className="text-foreground leading-relaxed">
+            Delta Dental's figures are for the United States. For other countries we suggest
+            the same age-and-first-tooth pattern in local currency, again rounded to
+            denominations families actually have on hand. These are suggested amounts for a
+            child aged 7 to 9, not surveyed averages:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-border rounded-lg overflow-hidden">
+              <caption className="sr-only">Suggested Tooth Fairy amounts by currency for a child aged 7 to 9</caption>
+              <thead className="bg-secondary/50">
+                <tr>
+                  <th scope="col" className="text-left p-3 font-semibold text-foreground">Currency</th>
+                  <th scope="col" className="text-left p-3 font-semibold text-foreground">Regular tooth</th>
+                  <th scope="col" className="text-left p-3 font-semibold text-foreground">First tooth</th>
+                </tr>
+              </thead>
+              <tbody>
+                {CURRENCY_ORDER.map((currency) => (
+                  <tr key={currency} className="border-t border-border">
+                    <th scope="row" className="text-left p-3 font-medium text-foreground">{CURRENCIES[currency].label}</th>
+                    <td className="p-3 text-foreground">{rangeText(currency, 8, false)}</td>
+                    <td className="p-3 text-foreground">{rangeText(currency, 8, true)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <MakeItATraditionSection />
@@ -226,10 +364,11 @@ const HowMuchDoesTheToothFairyLeave = () => {
             What surveys say
           </h2>
           <p className="text-foreground leading-relaxed">
-            In recent years, American surveys have put the average Tooth Fairy payment
-            somewhere between $3 and $6 per tooth, with first teeth often getting a
-            premium. Some families go higher — $10 or $20 for a first tooth is not
-            unheard of. Some families are more modest. All of these are fine.
+            Delta Dental's 2026 Original Tooth Fairy Poll found the national average payout
+            was $5.84 per tooth, a 17% jump from $5.01 in 2025. A first tooth averaged $7.17,
+            about 23% more than the average lost tooth (up from $6.24 the year before). Some
+            families go higher — $10 or $20 for a first tooth is not unheard of — and some
+            are more modest. All of these are fine.
           </p>
           <p className="text-foreground leading-relaxed">
             The national average has generally trended upward over time, tracking
