@@ -90,6 +90,8 @@ const WhatDoesTheToothFairyLookLike = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-07-27",
+              dateModified: "2026-07-29",
               headline: "What Does the Tooth Fairy Look Like?",
               description:
                 "There's no single official picture of the Tooth Fairy. See CeCe, the small, winged Tooth Fairy from The Tooth Fairy's Secret Workshop, and how she's imagined around the world.",
