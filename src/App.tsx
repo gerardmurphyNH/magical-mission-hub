@@ -38,15 +38,20 @@ const WhatDoesTheToothFairyLookLike = lazy(() => import("./pages/WhatDoesTheToot
 
 const queryClient = new QueryClient();
 
-const App = () => (
+// Router-agnostic app tree: the browser wraps it in <BrowserRouter> (App below)
+// and scripts/prerender.mjs wraps it in <StaticRouter> to render each route to
+// HTML at build time (src/entry-server.tsx). Keep every route as a one-line
+// Route with a literal path and a bare element (no wrapper props) - prerender
+// and seo.test.ts both parse them with a regex.
+export const AppShell = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <VirtueProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<div className="min-h-screen bg-background" />}>
+        <ScrollToTop />
+        {/* data-prerender-fallback lets the build detect a route that was still suspended when rendered */}
+        <Suspense fallback={<div data-prerender-fallback className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/privacy" element={<Privacy />} />
@@ -73,11 +78,16 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          </Suspense>
-        </BrowserRouter>
+        </Suspense>
       </VirtueProvider>
     </TooltipProvider>
   </QueryClientProvider>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppShell />
+  </BrowserRouter>
 );
 
 export default App;
