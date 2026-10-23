@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "vitest run src/test/seo.test.ts",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr",
     "postbuild": "node scripts/prerender.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",

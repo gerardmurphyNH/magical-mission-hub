@@ -41,9 +41,12 @@
   status = 301
   force = true
 
-# SPA redirect — send all routes to index.html so React Router handles them.
-# Without this, direct links to /news, /is-the-tooth-fairy-real etc. return 404.
+# SPA fallback — URLs without a prerendered file get the generic app shell
+# (an empty #root) so React Router can handle them. Every real route has its own
+# prerendered <route>.html and the homepage's index.html now contains the
+# rendered homepage, so the fallback must NOT be index.html (unknown URLs would
+# serve homepage content). See scripts/prerender.mjs.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/app-shell.html"
   status = 200
