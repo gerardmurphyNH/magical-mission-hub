@@ -96,6 +96,8 @@ const FirstToothWhatToDo = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-08-26",
               headline: "Your Child's First Lost Tooth: What Happens Next",
               url: "https://wigglytoothworkshop.com/first-tooth-what-to-do",
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop" },

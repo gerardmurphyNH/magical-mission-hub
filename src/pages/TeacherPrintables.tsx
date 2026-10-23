@@ -365,6 +365,8 @@ const TeacherPrintables = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-08-26",
               headline:
                 "Free Tooth Fairy Worksheets, Printables & Classroom Activities",
               description:

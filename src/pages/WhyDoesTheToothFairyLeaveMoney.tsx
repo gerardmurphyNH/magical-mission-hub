@@ -74,6 +74,8 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-26",
+              dateModified: "2026-08-22",
               headline: "Why Does the Tooth Fairy Leave Money?",
               description:
                 "The money the Tooth Fairy leaves isn't a payment - it's a thank-you for the quality a child grew inside their tooth.",

@@ -107,6 +107,9 @@ const WhatDoesTheToothFairyDo = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-09-01",
+              author: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: "https://wigglytoothworkshop.com/" },
               headline: "What Does the Tooth Fairy Do With Teeth?",
               description:
                 "Inside the Tooth Fairy's workshop: why she wants teeth specifically, how baby teeth are collected, the qualities inside them drawn out, and what happens to the teeth afterward.",

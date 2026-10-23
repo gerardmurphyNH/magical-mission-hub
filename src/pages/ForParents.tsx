@@ -45,6 +45,8 @@ const forParentsJsonLd = {
     },
     {
       "@type": "Article",
+      datePublished: "2026-06-01",
+      dateModified: "2026-08-26",
       headline: "How to Answer When Your Child Asks About the Tooth Fairy",
       description:
         "Warm, practical guidance for parents on how to answer when a child asks about the Tooth Fairy - including how to handle the moment doubt begins, while keeping the wonder.",

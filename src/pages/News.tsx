@@ -83,6 +83,8 @@ const News = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-07-10",
               headline: "News from the Workshop",
               description:
                 "Updates, behind-the-scenes stories, and community events from the world of CeCe, Arlo, and the Wiggly Tooth Workshop.",

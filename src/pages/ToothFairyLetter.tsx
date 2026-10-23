@@ -338,6 +338,8 @@ const structuredData = {
     },
     {
       "@type": "Article",
+      datePublished: "2026-06-01",
+      dateModified: "2026-08-26",
       headline: "Free Printable Tooth Fairy Letter Template",
       description:
         "A free printable Tooth Fairy letter template with fill-in blanks for a child's name and the special quality found inside their lost tooth. Available as a PDF for printing or an image to save and share.",

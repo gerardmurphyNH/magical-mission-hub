@@ -59,6 +59,8 @@ const ToothFairyStory = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-07-10",
+              dateModified: "2026-08-22",
               headline: "The Tooth Fairy Story",
               description:
                 "A warm, magical Tooth Fairy story for kids: a curious boy named Arlo discovers what the Tooth Fairy really does with the teeth she collects.",

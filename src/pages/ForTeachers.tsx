@@ -78,6 +78,8 @@ const ForTeachers = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-08-26",
               headline: "Tooth Fairy Classroom Activities & Lesson Plan",
               description:
                 "Free Tooth Fairy classroom activities, a lesson plan, and discussion questions for grades K-5, built around the short film The Tooth Fairy's Secret Workshop.",

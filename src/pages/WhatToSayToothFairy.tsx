@@ -69,6 +69,8 @@ const WhatToSayToothFairy = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-07-10",
               headline: "What to Say When Your Child Asks If the Tooth Fairy Is Real",
               url: "https://wigglytoothworkshop.com/what-to-say-when-child-asks-if-tooth-fairy-is-real",
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop" },

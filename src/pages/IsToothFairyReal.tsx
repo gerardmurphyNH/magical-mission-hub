@@ -210,6 +210,8 @@ const IsToothFairyReal = () => {
             },
             {
               "@type": "Article",
+              datePublished: "2026-06-01",
+              dateModified: "2026-09-01",
               headline: "Is the Tooth Fairy Real?",
               description:
                 "Yes, the Tooth Fairy is real - she just works in ways most people never see. What she really does with children's lost teeth, where the tradition comes from, and why it matters.",
