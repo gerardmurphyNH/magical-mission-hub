@@ -10,7 +10,7 @@ import { trackCTAClick, trackEvent } from "@/lib/analytics";
 import { CURRENCIES, getRecommendedRange, type Currency } from "@/lib/toothFairySurvey";
 
 const DELTA_DENTAL_URL = "https://www.deltadental.com/about-us/press-center/2026-press-releases/the-tooth-fairy-gives-kids-a-raise/";
-const LAST_UPDATED = "October 5, 2026";
+const LAST_UPDATED = "October 23, 2026";
 
 function wholeAmount(currency: Currency, amount: number): string {
   return `${CURRENCIES[currency].symbol}${amount.toLocaleString("en-US")}`;
@@ -200,7 +200,7 @@ const HowMuchDoesTheToothFairyLeave = () => {
             {
               "@type": "Article",
               datePublished: "2026-06-01",
-              dateModified: "2026-10-05",
+              dateModified: "2026-10-23",
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: "https://wigglytoothworkshop.com/" },
               headline: "How Much Does the Tooth Fairy Leave?",
               description:
