@@ -97,7 +97,7 @@ const FirstToothWhatToDo = () => {
             {
               "@type": "Article",
               datePublished: "2026-06-01",
-              dateModified: "2026-08-26",
+              dateModified: "2026-10-23",
               headline: "Your Child's First Lost Tooth: What Happens Next",
               url: "https://wigglytoothworkshop.com/first-tooth-what-to-do",
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop" },
@@ -313,19 +313,24 @@ const FirstToothWhatToDo = () => {
             <div className="container px-6 max-w-2xl mx-auto text-center relative z-10">
               <Sparkles className="w-8 h-8 text-primary mx-auto mb-4" />
               <h2 className="font-display text-2xl md:text-3xl font-bold text-starlight mb-4">
-                The full story is coming
+                Watch the full story
               </h2>
               <p className="text-starlight/70 mb-8 leading-relaxed">
-                <em>The Tooth Fairy's Secret Workshop</em> is an animated short film and children's
-                book that answers every question your child will ever ask about the Tooth Fairy,
-                in the most magical way possible. Coming Summer 2026.
+                <em>The Tooth Fairy's Secret Workshop</em> is a free animated short film that answers
+                the questions your child will ask about the Tooth Fairy, in the most magical way
+                possible. A children's book is on the way.
               </p>
-              <Button variant="hero" size="lg" asChild>
-                <a href="/#signup">
-                  <Sparkles className="w-4 h-4" />
-                  Join the Workshop for updates
-                </a>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button variant="hero" size="lg" asChild>
+                  <Link to="/watch">
+                    <Sparkles className="w-4 h-4" />
+                    Watch the short film
+                  </Link>
+                </Button>
+                <Button variant="magical" size="lg" asChild>
+                  <a href="/#signup">Join the Workshop for updates</a>
+                </Button>
+              </div>
               <p className="mt-4 text-xs text-starlight/70">
                 Free · No spam · Unsubscribe anytime
               </p>

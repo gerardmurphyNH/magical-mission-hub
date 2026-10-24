@@ -201,7 +201,7 @@ And in footer:
 
 ### Key Dates
 
-- Film release: "Summer 2026"
+- Film: released June 2026 (world premiere June 7, 2026); free to watch on YouTube
 - Book & ToothSafe: "Coming soon" (no specific date)
 
 ## Troubleshooting

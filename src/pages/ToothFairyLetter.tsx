@@ -339,7 +339,7 @@ const structuredData = {
     {
       "@type": "Article",
       datePublished: "2026-06-01",
-      dateModified: "2026-08-26",
+      dateModified: "2026-10-23",
       headline: "Free Printable Tooth Fairy Letter Template",
       description:
         "A free printable Tooth Fairy letter template with fill-in blanks for a child's name and the special quality found inside their lost tooth. Available as a PDF for printing or an image to save and share.",
@@ -1123,7 +1123,7 @@ const ToothFairyLetter = () => {
             </div>
             <p className="mt-6 text-xs text-starlight/60">
               Part of the world being built at Wiggly Tooth Workshop — animated short film,
-              children's book, and ToothSafe. Coming Summer 2026.
+              children's book, and ToothSafe. The film is out now; the book and ToothSafe are coming soon.
             </p>
           </div>
         </section>

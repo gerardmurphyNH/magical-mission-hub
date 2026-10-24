@@ -85,28 +85,6 @@ const MeetCharactersSection = () => {
             </Link>
           </p>
         </div>
-
-        {/* World Premiere recap callout */}
-        <div className="max-w-xl mx-auto mt-10">
-          <Link
-            to="/tooth-fairy-film-premiere"
-            className="group flex flex-col sm:flex-row items-center gap-4 p-5 rounded-2xl bg-[hsl(244_45%_15%)] border border-primary/25 hover:border-primary/50 transition-all hover:shadow-magical"
-            onClick={() => trackEvent("premiere_click", { location: "characters_section" })}
-          >
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-lg">
-              🎬
-            </div>
-            <div className="text-center sm:text-left flex-1">
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-0.5">
-                Event Recap · Dedham, MA
-              </p>
-              <p className="text-sm text-starlight/80 group-hover:text-starlight transition-colors">
-                Over 100 people joined our world premiere at TLC Studios. See how it went.
-              </p>
-            </div>
-            <span className="text-primary text-sm font-medium flex-shrink-0">Read →</span>
-          </Link>
-        </div>
       </div>
     </section>
   );

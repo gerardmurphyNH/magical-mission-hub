@@ -170,14 +170,6 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/tooth-fairy-film-premiere"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  World Premiere — June 7
-                </Link>
-              </li>
-              <li>
                 <a
                   href="https://www.reynoldstlc.org/blog/elevating-the-tooth-fairy-story-to-a-sense-of-mission"
                   target="_blank"
