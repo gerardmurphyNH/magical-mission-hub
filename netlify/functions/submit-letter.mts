@@ -37,7 +37,7 @@ function validate(body: Partial<LetterPayload>): string | null {
 const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-function moderationEmailHtml(row: { id: string; letter_type: string; quality: string; letter_body: string; child_first_name: string | null; city_state: string | null; parent_email: string | null }): string {
+function moderationEmailHtml(row: { id: string; letter_type: string; quality: string; letter_body: string; child_first_name: string | null; city_state: string | null; parent_email: string | null; wall_opt_in: boolean }): string {
   const approveUrl = moderationLink(row.id, "approve");
   const rejectUrl = moderationLink(row.id, "reject");
   const typeLabel = row.letter_type === "to" ? "TO the Tooth Fairy" : "FROM the Tooth Fairy";
@@ -48,6 +48,7 @@ function moderationEmailHtml(row: { id: string; letter_type: string; quality: st
       ${row.child_first_name ? `<p style="font-size: 14px;"><strong>Child's first name:</strong> ${escapeHtml(row.child_first_name)}</p>` : ""}
       ${row.city_state ? `<p style="font-size: 14px;"><strong>City/state:</strong> ${escapeHtml(row.city_state)}</p>` : ""}
       ${row.parent_email ? `<p style="font-size: 14px;"><strong>Parent email:</strong> ${escapeHtml(row.parent_email)}</p>` : ""}
+      <p style="font-size: 14px;"><strong>Wall of Stories:</strong> ${row.wall_opt_in ? "family opted in (shown anonymously once approved)" : "family opted OUT (stays private even if approved)"}</p>
       <blockquote style="border-left: 3px solid #C9A227; padding-left: 12px; margin: 16px 0; font-size: 15px; line-height: 1.6;">
         ${escapeHtml(row.letter_body)}
       </blockquote>
@@ -55,7 +56,7 @@ function moderationEmailHtml(row: { id: string; letter_type: string; quality: st
         <a href="${approveUrl}" style="display: inline-block; background: #16a34a; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 999px; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; margin-right: 10px;">Approve</a>
         <a href="${rejectUrl}" style="display: inline-block; background: #dc2626; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 999px; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600;">Reject</a>
       </div>
-      <p style="font-size: 11px; color: #8B6F1A; font-family: system-ui, sans-serif;">One tap, no login needed. Submission ID: ${row.id}</p>
+      <p style="font-size: 11px; color: #8B6F1A; font-family: system-ui, sans-serif;">Each button opens a quick confirmation page, no login needed. Submission ID: ${row.id}</p>
     </div>`;
 }
 
@@ -97,7 +98,7 @@ export default async (req: Request): Promise<Response> => {
       social_feature_consent: body.socialFeatureConsent === true,
       status: "pending",
     })
-    .select("id, letter_type, quality, letter_body, child_first_name, city_state, parent_email")
+    .select("id, letter_type, quality, letter_body, child_first_name, city_state, parent_email, wall_opt_in")
     .single();
 
   if (error || !row) {

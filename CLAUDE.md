@@ -96,7 +96,10 @@ npm run preview  # Preview production build
 
 ```bash
 npm run lint
+npx tsc --noEmit -p tsconfig.app.json   # the real type-check
 ```
+
+Plain `npx tsc --noEmit` checks nothing here: the root tsconfig has `"files": []` and only project references, so always pass `-p tsconfig.app.json`. Three pre-existing errors are known (placeholder-ID comparisons in `HeroSection.tsx` and `src/lib/analytics.ts`, and a `YT.Player` type in `LiteYouTube.tsx`).
 
 ## Configuration
 
