@@ -76,7 +76,7 @@ by searching the name — confirm the description matches before selecting
 | production company (P272) | FableVision **[verify]** | search "FableVision" |
 | distributed by (P750) | YouTube | |
 | official website (P856) | https://wigglytoothworkshop.com/watch | point at the watch page (the film's canonical page) |
-| YouTube video ID (P1651) | 9d0wilzzhnw | this is the key video anchor |
+| YouTube video ID (P1651) | m9y5-U8o_pk | this is the key video anchor |
 | TMDb movie ID (P4947) | [from step 1] | add once the TMDB entry exists |
 | IMDb ID (P345) | [when FableVision creates it] | add later |
 
@@ -107,7 +107,7 @@ and add:
 
 Sources to rotate between:
 1. `https://www.reynoldstlc.org/blog/elevating-the-tooth-fairy-story-to-a-sense-of-mission` — the Reynolds Center feature (best independent-ish source; use it on P31, P272, P3174, P577)
-2. `https://www.youtube.com/watch?v=9d0wilzzhnw` — the film itself (use on P577, P1651, P725, credits)
+2. `https://www.youtube.com/watch?v=m9y5-U8o_pk` — the film itself (use on P577, P1651, P725, credits)
 3. `https://wigglytoothworkshop.com/watch` — official site (use on P856, P1476)
 4. `https://wigglytoothworkshop.com/tooth-fairy-film-premiere` — premiere recap (use on P577; documents the June 7, 2026 Dedham premiere at TLC Studios)
 
@@ -130,7 +130,7 @@ For your reference / for FableVision's IMDb submission:
 - Presented by: The Wiggly Tooth Workshop and FableVision
 - Tagline: "The magic under your pillow can help change the world."
 - World premiere: June 7, 2026, TLC Studios, Dedham, MA
-- Release: YouTube, free (video ID 9d0wilzzhnw)
+- Release: YouTube, free (video ID m9y5-U8o_pk)
 - Original release title: "The Tooth Fairy's Magical Mission" (retitled after
   YouTube A/B testing)
 

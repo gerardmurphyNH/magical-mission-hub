@@ -204,7 +204,7 @@ And in footer:
 
 ### Key Dates
 
-- Film: released June 2026 (world premiere June 7, 2026); free to watch on YouTube
+- Film: released June 2026 (world premiere June 7, 2026); free to watch on YouTube (hosted on the FableVision channel, video ID m9y5-U8o_pk)
 - Book & ToothSafe: "Coming soon" (no specific date)
 
 ## Troubleshooting
