@@ -174,8 +174,8 @@ const HowMuchDoesTheToothFairyLeave = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="How Much Does the Tooth Fairy Leave? Free Calculator | Wiggly Tooth Workshop"
-        description="Curious how much the Tooth Fairy leaves? Use our free calculator (by currency and first tooth) to see the going rate, then share what you left."
+        title="How Much Does the Tooth Fairy Leave in 2026? Free Calculator | Wiggly Tooth Workshop"
+        description="Free Tooth Fairy calculator: enter your child's age, first tooth and currency to get the 2026 going rate (US average $5.84). Instant, no sign-up."
         canonical="https://wigglytoothworkshop.com/how-much-does-the-tooth-fairy-leave"
         jsonLd={{
           "@context": "https://schema.org",
