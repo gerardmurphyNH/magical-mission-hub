@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Download, Copy, Check } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { YOUTUBE_VIDEO_URL } from "@/lib/config";
@@ -48,7 +48,11 @@ const FacebookIcon = () => (
  */
 const ShareableLetterCard = ({ letterType, quality, reason, helpText, childFirstName, cityState }: ShareableLetterCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const storyRef = useRef<HTMLParagraphElement>(null);
   const [busy, setBusy] = useState(false);
+  // The card is a fixed square with overflow hidden; a long answer used to run
+  // off the bottom of the shared image. Shrink the story text until it fits.
+  const [storyFontSize, setStoryFontSize] = useState(21);
   const [copied, setCopied] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -59,6 +63,26 @@ const ShareableLetterCard = ({ letterType, quality, reason, helpText, childFirst
       : `My tooth held ${quality}. The Tooth Fairy used it to help ${helpText} — keeping the good going.`;
 
   const attribution = [childFirstName, cityState].filter(Boolean).join(" from ");
+  // A square image can't hold two full 300-character answers at a readable size,
+  // so the card shows a trimmed teaser; the letterhead and the caption keep it all.
+  const CARD_STORY_MAX = 280;
+  const cardStory =
+    storyLine.length > CARD_STORY_MAX
+      ? `${storyLine.slice(0, CARD_STORY_MAX).replace(/\s+\S*$/, "")}…`
+      : storyLine;
+
+  useLayoutEffect(() => {
+    const card = cardRef.current;
+    const story = storyRef.current;
+    if (!card || !story) return;
+    let size = 21;
+    story.style.fontSize = `${size}px`;
+    while (card.scrollHeight > card.clientHeight + 1 && size > 13) {
+      size -= 1;
+      story.style.fontSize = `${size}px`;
+    }
+    setStoryFontSize(size);
+  }, [cardStory, attribution]);
   const caption = `${storyLine} 💫 ${CAPTION_TAGS} #ToothFairy #WigglyToothWorkshop #ToothFairyLetter`;
 
   const render = async (): Promise<string | null> => {
@@ -179,7 +203,7 @@ const ShareableLetterCard = ({ letterType, quality, reason, helpText, childFirst
         </div>
 
         <div style={{ position: "relative", zIndex: 1 }}>
-          <p style={{ fontSize: 21, lineHeight: 1.5, margin: "0 0 18px", color: "#F5F3FF" }}>{storyLine}</p>
+          <p ref={storyRef} style={{ fontSize: storyFontSize, lineHeight: 1.5, margin: "0 0 18px", color: "#F5F3FF" }}>{cardStory}</p>
           <div style={{ display: "inline-block", background: "rgba(251,191,36,0.16)", border: "1px solid rgba(251,191,36,0.5)", borderRadius: 9999, padding: "5px 14px" }}>
             <span style={{ fontSize: 13, color: "#FBBF24", fontFamily: "system-ui, sans-serif", fontWeight: 600 }}>
               The quality: {quality}

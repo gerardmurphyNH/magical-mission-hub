@@ -951,17 +951,19 @@ const ToothFairyLetter = () => {
                       </a>
                     </Button>
                   </div>
-                  {v.id === "to-the-tooth-fairy" && (
-                    <p className="mt-3 text-sm text-center">
-                      <Link
-                        to="/letters-to-the-tooth-fairy?type=to"
-                        onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "printable_letter_to_tf" })}
-                        className="text-primary font-medium hover:underline"
-                      >
-                        Or type it and we'll design it for you
-                      </Link>
-                    </p>
-                  )}
+                  <p className="mt-3 text-sm text-center">
+                    <Link
+                      to={
+                        v.id === "to-the-tooth-fairy"
+                          ? "/letters-to-the-tooth-fairy?type=to"
+                          : `/letters-to-the-tooth-fairy?type=from&occasion=${v.id}`
+                      }
+                      onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: `printable_personalize:${v.id}` })}
+                      className="text-primary font-medium hover:underline"
+                    >
+                      Or personalize it: we'll fill it in for you, free
+                    </Link>
+                  </p>
                 </article>
               ))}
             </div>
