@@ -15,7 +15,7 @@ This is a **marketing website** for "The Tooth Fairy's Secret Workshop" - an ani
 - **Routing:** React Router DOM v6
 - **State:** React Context (VirtueContext for quiz results)
 - **Build:** Vite with static output to `/dist`
-- **Hosting:** GitHub Pages with custom domain
+- **Hosting:** Netlify (auto-deploys `main` of this repo), plus Netlify Functions in `netlify/functions/` - see Deployment below
 
 ## Project Structure
 
@@ -48,7 +48,7 @@ src/
 └── main.tsx             # Entry point
 
 public/
-├── CNAME                # Custom domain for GitHub Pages
+├── CNAME                # Legacy GitHub Pages file (holds old tooth-safe.com); Netlify ignores it
 ├── favicon.ico          # Site favicon
 ├── robots.txt           # SEO robots file
 ├── sitemap.xml          # SEO sitemap
@@ -56,8 +56,12 @@ public/
 │   └── coloring-page.pdf  # Free download (placeholder)
 └── placeholder.svg      # Fallback image
 
+netlify/functions/       # submit-letter, moderate-letter, join-workshop, etc.
+netlify.toml             # Build, functions dir, redirects, app-shell fallback
+scripts/printables/      # HTML sources for downloadable PDFs/JPGs (regenerate commands inside)
+
 .github/workflows/
-└── deploy.yml           # GitHub Actions for Pages deployment
+└── deploy.yml           # Legacy GitHub Pages deploy - publishes to an unused github.io URL
 ```
 
 ## Development
@@ -136,36 +140,18 @@ export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
 - `quiz_completion` - Virtue quiz completed (includes result)
 - `coloring_page_download` - PDF download clicked
 
-## GitHub Pages Deployment
+## Deployment (Netlify)
 
-### Automatic Deployment
+The live site is the Netlify project `chic-queijadas-c602d3` (site id `6a7c3674-6a36-4b5f-a5b0-1755eb15b34a`), linked to `gerardmurphyNH/magical-mission-hub`, branch `main`. Build command `bun run build`, publish directory `dist`.
 
-Push to `main` triggers `.github/workflows/deploy.yml` which:
-1. Installs dependencies
-2. Builds the site
-3. Deploys `/dist` to GitHub Pages
+- **Merging to `main` publishes.** Netlify builds and deploys automatically; a failed build leaves the previous deploy live.
+- **Check a deploy:** `netlify api listSiteDeploys --data '{"site_id":"6a7c3674-6a36-4b5f-a5b0-1755eb15b34a","per_page":3}'` - look for `state: ready` with `commit_ref` equal to the merge commit. Then confirm live titles with `curl -s https://wigglytoothworkshop.com/<route> | grep -o '<title>[^<]*'`.
+- **Manual deploy (fallback):** `netlify deploy --build --prod` from a clean checkout of `main`. It uses the site's Netlify env vars and bundles `netlify/functions`.
+- **Environment variables** live in Netlify (Site configuration → Environment variables), not in the repo: Supabase (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`), Resend email (`RESEND_API_KEY`, `EMAIL_FROM`, `MODERATOR_EMAIL`), `MODERATION_SECRET`, `SITE_URL`. The letters page, its moderation emails, and Workshop signups (`join-workshop`) depend on them.
+- **If merges stop deploying:** check Netlify credits first. Builds are skipped with "account credit usage exceeded" when the account runs out (this happened in Nov 2026).
+- **DNS** (Squarespace Domains): the apex points at Netlify's load balancer (`75.2.60.5`, `99.83.231.61`) and `www` is a CNAME to `chic-queijadas-c602d3.netlify.app`.
 
-### Manual Setup (First Time)
-
-1. **Enable GitHub Pages:**
-   - Repo Settings → Pages
-   - Source: "GitHub Actions"
-
-2. **Set Custom Domain:**
-   - Add `wigglytoothworkshop.com` in Pages settings
-   - Check "Enforce HTTPS"
-
-3. **DNS Configuration (Squarespace Domains):**
-
-   | Type | Host | Value |
-   |------|------|-------|
-   | A | @ | 185.199.108.153 |
-   | A | @ | 185.199.109.153 |
-   | A | @ | 185.199.110.153 |
-   | A | @ | 185.199.111.153 |
-   | CNAME | www | gerardmurphyNH.github.io |
-
-4. **Wait 24-48 hours** for DNS propagation and HTTPS certificate.
+**Legacy, don't use:** before 2026-11-23 Netlify built from a second repo, `gerardmurphyNH/wiggly-tooth-workshop`, which had to be synced by hand. It's no longer linked. `.github/workflows/deploy.yml` still pushes each merge to GitHub Pages at an unused github.io URL; it is not the live site.
 
 ## Key Features
 
@@ -217,9 +203,9 @@ npm install
 npm run build
 ```
 
-### Router Issues on GitHub Pages
+### Routing on Netlify
 
-The site uses `BrowserRouter`. For SPA routing to work, 404.html must redirect to index.html. GitHub Pages handles this automatically with the current setup.
+The site uses `BrowserRouter`. Every real route is prerendered to `dist/<route>.html`, which Netlify serves directly. Unknown URLs fall through the `/*` rule in `netlify.toml` to `app-shell.html` (not `index.html`, which holds the rendered homepage), and React Router shows the 404 page. Retired URLs are 301'd by `[[redirects]]` entries in `netlify.toml`.
 
 ### Images Not Loading
 
