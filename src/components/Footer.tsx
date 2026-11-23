@@ -73,6 +73,14 @@ const Footer = () => {
               </li>
               <li>
                 <Link
+                  to="/what-to-say-when-child-asks-if-tooth-fairy-is-real"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  What to say when they ask
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/what-does-the-tooth-fairy-do-with-teeth"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
@@ -133,7 +141,7 @@ const Footer = () => {
                   to="/first-tooth-tradition"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  First tooth tradition &amp; certificate
+                  Tooth Fairy certificate (free)
                 </Link>
               </li>
               <li>
@@ -149,7 +157,7 @@ const Footer = () => {
                   to="/for-teachers"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Teacher &amp; classroom resources
+                  Lost tooth classroom activities
                 </Link>
               </li>
             </ul>

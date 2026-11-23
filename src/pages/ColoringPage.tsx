@@ -10,6 +10,7 @@ import {
 import { trackColoringPageDownload } from "@/lib/analytics";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 
 const PAGE_URL = "https://wigglytoothworkshop.com/coloring-page";
@@ -306,6 +307,10 @@ const ColoringPage = () => {
           </div>
         </section>
       </main>
+      <RelatedPages
+        from="/coloring-page"
+        links={["/tooth-fairy-letter", "/first-tooth-tradition", "/for-teachers"]}
+      />
       <Footer />
     </div>
   );

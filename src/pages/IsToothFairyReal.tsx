@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
 import VirtueQuizSection from "@/components/VirtueQuizSection";
@@ -195,7 +196,7 @@ const IsToothFairyReal = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Is the Tooth Fairy Real? | Wiggly Tooth Workshop"
+        title="Is the Tooth Fairy Real? Yes, and Here's Why | Wiggly Tooth Workshop"
         description="Is the Tooth Fairy real? Yes - and the reason will surprise you. Watch how one lost tooth becomes something bigger in our free animated short film."
         canonical={PAGE_URL}
         jsonLd={{
@@ -868,6 +869,10 @@ const IsToothFairyReal = () => {
 
       </main>
 
+      <RelatedPages
+        from="/is-the-tooth-fairy-real"
+        links={["/what-to-say-when-child-asks-if-tooth-fairy-is-real", "/what-does-the-tooth-fairy-do-with-teeth", "/tooth-fairy-letter"]}
+      />
       <Footer />
     </div>
   );

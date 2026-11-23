@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import { YOUTUBE_VIDEO_ID, YOUTUBE_VIDEO_URL } from "@/lib/config";
 import { trackCTAClick, trackEvent } from "@/lib/analytics";
@@ -335,6 +336,10 @@ const Watch = () => {
         </section>
       </main>
 
+      <RelatedPages
+        from="/watch"
+        links={["/tooth-fairy-story", "/what-does-the-tooth-fairy-do-with-teeth", "/is-the-tooth-fairy-real"]}
+      />
       <Footer />
     </div>
   );

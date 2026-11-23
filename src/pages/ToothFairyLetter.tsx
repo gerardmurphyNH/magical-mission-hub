@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import {
   trackToothFairyLetterPdfDownload,
@@ -1128,6 +1129,10 @@ const ToothFairyLetter = () => {
           </div>
         </section>
 
+        <RelatedPages
+          from="/tooth-fairy-letter"
+          links={["/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/what-to-say-when-child-asks-if-tooth-fairy-is-real"]}
+        />
         <Footer />
         </main>
       </div>
