@@ -17,7 +17,7 @@ const Terms = () => {
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to home
+          Back to Wiggly Tooth Workshop
         </Link>
 
         <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8">

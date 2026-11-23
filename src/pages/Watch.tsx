@@ -212,10 +212,10 @@ const Watch = () => {
               className="inline-flex items-center gap-2 text-starlight/70 hover:text-starlight/80 transition-colors text-sm mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
-              Wiggly Tooth Workshop
+              Back to Wiggly Tooth Workshop
             </Link>
 
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-starlight mb-3 text-center">
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-starlight mb-3 text-center leading-tight">
               Watch <span className="text-primary">The Tooth Fairy's Secret Workshop</span>
             </h1>
             <p className="text-starlight/70 text-center mb-8 max-w-xl mx-auto">

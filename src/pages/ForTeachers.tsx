@@ -138,7 +138,7 @@ const ForTeachers = () => {
           Grades K-5 · Free, No Sign-Up
         </span>
 
-        <h1 className="font-display text-4xl font-bold text-foreground mb-4 leading-tight">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
           Lost Tooth Classroom Activities
         </h1>
         <p className="text-muted-foreground text-lg leading-relaxed mb-4">

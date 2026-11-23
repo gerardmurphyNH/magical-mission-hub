@@ -98,8 +98,8 @@ const ForParents = () => {
           For Parents
         </span>
 
-        <h1 className="font-display text-4xl font-bold text-foreground mb-4 leading-tight">
-          Bringing the magic home
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
+          Tooth Fairy Questions, Answered for Parents
         </h1>
         <p className="text-muted-foreground text-lg leading-relaxed mb-12">
           Resources, answers, and ideas for making the tooth-losing tradition

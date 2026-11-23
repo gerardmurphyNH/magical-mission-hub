@@ -17,7 +17,6 @@ import ShareableLetterCard from "@/components/ShareableLetterCard";
 import { submitLetter, fetchApprovedLetters, type PublicLetter, type LetterType } from "@/lib/letters";
 import { joinWorkshop } from "@/lib/workshop";
 import {
-  trackEvent,
   trackCTAClick,
   trackLetterTypeSelect,
   trackLetterFormStart,
@@ -77,7 +76,9 @@ const buildPersonalBody = (
   return `Dear ${who},\n\nThank you for the tooth - I found it safely last night.\n\nWhen I looked closely, I saw the quality growing inside it: ${quality}. That's exactly what the world needs more of, so I used a little of it to help ${helpText} - a small spark, passed along.\n\nI left a little something under your pillow. Not to buy your tooth, but to say thank you, and to help keep the good going.\n\nKeep brushing, keep growing the good inside you, and let's see what good this can do.\n\nWith love,\nThe Tooth Fairy`;
 };
 
-// Example wall entries shown until real, moderated submissions arrive.
+// Example wall entries, shown (labelled "Example") to keep the wall at
+// WALL_MIN_STORIES cards until enough real, moderated stories arrive.
+const WALL_MIN_STORIES = 4;
 const EXAMPLE_LETTERS: { letterType: LetterType; quality: string; cityState?: string; body: string }[] = [
   { letterType: "to", quality: "Bravery", cityState: "Nashua, NH", body: buildAnonymizedBody("to", "bravery", "I lost my tooth at school and wasn't even scared", "someone who feels nervous") },
   { letterType: "to", quality: "Kindness", cityState: "Dedham, MA", body: buildAnonymizedBody("to", "kindness", "I helped my little sister when she was sad", "someone who needs a friend today") },
@@ -109,7 +110,12 @@ const faqs = [
   {
     question: "Will our letter be shared publicly?",
     answer:
-      "Only if you choose to. You can add your story (always anonymously - we never publish a name) to our Wall of Stories, and separately opt in to let us feature your child's first name and city on our own social media. Both are optional and reviewed by a person before anything goes live.",
+      "Only if you choose to. If you add your story to the Wall of Stories, the Wall shows the quality, the good it did, and your city if you entered one - never your child's name or your email, and a person at the Workshop reads every story before it appears. Separately, you can opt in to let us feature your child's first name and city on our own social media. Both are optional.",
+  },
+  {
+    question: "What is the Wall of Stories?",
+    answer:
+      "A public wall of the good that lost teeth are doing, shared anonymously by families: the quality a child grew, and how the Tooth Fairy used it to help someone. Each story is a small reminder that kindness, courage, and patience get passed along. Reading them is free, and adding yours takes the same minute as making your letter.",
   },
   {
     question: "What is the Tooth Fairy's email address or phone number?",
@@ -140,7 +146,7 @@ const LettersToTheToothFairy = () => {
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState<{ personalBody: string; quality: string; reason: string; helpText: string; firstName: string; cityState: string } | null>(null);
+  const [submitted, setSubmitted] = useState<{ personalBody: string; quality: string; reason: string; helpText: string; firstName: string; cityState: string; wallOptIn: boolean } | null>(null);
   const mountedAt = useRef(Date.now());
   const hasStartedForm = useRef(false);
 
@@ -154,7 +160,26 @@ const LettersToTheToothFairy = () => {
       .finally(() => setGalleryLoading(false));
   }, []);
 
+  // Deep link: /letters-to-the-tooth-fairy?type=from (or ?type=to) opens that
+  // form directly - used by the "we'll fill it in for you" CTAs on
+  // /tooth-fairy-letter. Read after mount so the prerendered HTML still matches.
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get("type");
+    if (type === "from" || type === "to") {
+      setLetterType(type);
+      trackLetterTypeSelect(type);
+      setTimeout(() => document.getElementById("write")?.scrollIntoView({ block: "start" }), 100);
+    }
+  }, []);
+
   const resolvedQuality = (useCustom ? customQuality : quality).trim();
+
+  // What would appear on the public Wall, built exactly as on submit - so
+  // parents can see, before sending, that no name is in it.
+  const wallPreview =
+    letterType && resolvedQuality && helpText.trim().length >= 4 && (letterType === "from" || reason.trim().length >= 2)
+      ? buildAnonymizedBody(letterType, resolvedQuality, reason.trim(), helpText.trim())
+      : null;
 
   const chooseType = (type: LetterType) => {
     setLetterType(type);
@@ -226,7 +251,7 @@ const LettersToTheToothFairy = () => {
       setSubmitted({
         personalBody: buildPersonalBody(letterType, firstName.trim(), cityState.trim(), resolvedQuality, reason.trim(), helpText.trim()),
         quality: resolvedQuality, reason: reason.trim(), helpText: helpText.trim(),
-        firstName: firstName.trim(), cityState: cityState.trim(),
+        firstName: firstName.trim(), cityState: cityState.trim(), wallOptIn,
       });
       setStatus("done");
     } catch {
@@ -291,7 +316,7 @@ const LettersToTheToothFairy = () => {
           </div>
           <div className="container px-6 relative z-10 max-w-2xl mx-auto text-center">
             <Link to="/" className="inline-flex items-center gap-2 text-starlight/70 hover:text-starlight transition-colors text-sm mb-10">
-              <ArrowLeft className="w-4 h-4" /> Wiggly Tooth Workshop
+              <ArrowLeft className="w-4 h-4" /> Back to Wiggly Tooth Workshop
             </Link>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-starlight mb-5 leading-tight">
               Turn a Lost Tooth Into a <span className="text-primary">Story Worth Keeping</span>
@@ -307,6 +332,12 @@ const LettersToTheToothFairy = () => {
                   <Sparkles className="w-5 h-5" /> Write your letter
                 </a>
               </Button>
+              <p className="mt-4 text-sm text-starlight/80">
+                or{" "}
+                <a href="#wall" onClick={() => trackCTAClick("letters_hero_wall")} className="underline underline-offset-4 hover:text-starlight">
+                  read the Wall of Stories from other families
+                </a>
+              </p>
             </div>
           </div>
         </section>
@@ -318,7 +349,7 @@ const LettersToTheToothFairy = () => {
               {[
                 { n: "1", t: "Answer a few blanks", d: "The quality in the tooth, and how it should help the world. Takes about a minute." },
                 { n: "2", t: "Get a keepsake letter", d: "A beautifully designed letter, ready to print, save as an image, or keep forever." },
-                { n: "3", t: "Share the story", d: "Post it to social media, or add it - anonymously - to our Wall of Stories." },
+                { n: "3", t: "Keep the good going", d: "Add it, anonymously, to our Wall of Stories so other families can see the good a tooth can do." },
               ].map((s) => (
                 <div key={s.n}>
                   <div className="w-9 h-9 rounded-full bg-primary/10 text-primary font-display font-bold flex items-center justify-center mx-auto mb-3">{s.n}</div>
@@ -338,9 +369,20 @@ const LettersToTheToothFairy = () => {
                 <Sparkles className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">Your letter is ready</h2>
                 <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto mb-10">
-                  A person at the Workshop reviews every story before it appears on
-                  the Wall. In the meantime, here's your printable letter, and a
-                  card you can share.
+                  {submitted.wallOptIn ? (
+                    <>
+                      Thank you for keeping the good going. A person at the Workshop reads
+                      every story before it appears on the{" "}
+                      <a href="#wall" className="text-primary hover:underline">Wall of Stories</a>
+                      , without your child's name. In the meantime, here's your printable
+                      letter, and a card you can share.
+                    </>
+                  ) : (
+                    <>
+                      Your story stays private - it won't appear on the Wall. Here's your
+                      printable letter, and a card you can share.
+                    </>
+                  )}
                 </p>
 
                 <p className="font-display font-semibold text-foreground mb-4">Your keepsake letter</p>
@@ -467,6 +509,7 @@ const LettersToTheToothFairy = () => {
                       <input id="cityState" type="text" value={cityState} onChange={(e) => setCityState(e.target.value)} maxLength={80}
                         placeholder="e.g. Dedham, MA or London, England"
                         className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <p className="text-xs text-muted-foreground mt-1">Shown with your story on the Wall, if you add it there.</p>
                     </div>
                   </div>
 
@@ -498,11 +541,35 @@ const LettersToTheToothFairy = () => {
                         <Link to="/terms" className="text-primary hover:underline">Terms</Link>.
                       </span>
                     </label>
-                    <label className="flex items-start gap-3 text-sm text-foreground/80 leading-relaxed cursor-pointer">
-                      <input type="checkbox" checked={wallOptIn} onChange={(e) => setWallOptIn(e.target.checked)}
-                        className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary" />
-                      <span>Add our story to the public Wall of Stories (shown anonymously - never a name)</span>
-                    </label>
+                    <div className="rounded-xl border border-primary/30 bg-primary/5 p-4">
+                      <label className="flex items-start gap-3 leading-relaxed cursor-pointer">
+                        <input type="checkbox" checked={wallOptIn} onChange={(e) => setWallOptIn(e.target.checked)}
+                          className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary" />
+                        <span>
+                          <span className="block font-display font-semibold text-foreground">
+                            Keep the good going: add our story to the Wall of Stories
+                          </span>
+                          <span className="block text-sm text-foreground/80 mt-1">
+                            Other families see the quality and the good it did
+                            {cityState.trim() ? `, with "${cityState.trim()}"` : ""}. Never your
+                            child's name or your email, and a person at the Workshop reads every
+                            story before it goes up.
+                          </span>
+                        </span>
+                      </label>
+                      {wallOptIn && wallPreview && (
+                        <figure className="mt-4 ml-7 rounded-lg bg-background border border-border p-4">
+                          <figcaption className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                            How it will look on the Wall
+                          </figcaption>
+                          <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-2">
+                            {resolvedQuality}
+                          </span>
+                          <blockquote className="text-sm text-foreground/80 leading-relaxed">&ldquo;{wallPreview}&rdquo;</blockquote>
+                          {cityState.trim() && <p className="text-xs text-muted-foreground italic mt-2">{cityState.trim()}</p>}
+                        </figure>
+                      )}
+                    </div>
                     <label className="flex items-start gap-3 text-sm text-foreground/80 leading-relaxed cursor-pointer">
                       <input type="checkbox" checked={socialFeatureConsent} onChange={(e) => setSocialFeatureConsent(e.target.checked)}
                         className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary" />
@@ -522,34 +589,23 @@ const LettersToTheToothFairy = () => {
         </section>
 
         {/* ── Wall of Stories ── */}
-        <section className="py-16 md:py-24 bg-background">
+        <section id="wall" className="py-16 md:py-24 bg-background scroll-mt-20">
           <div className="container px-6 max-w-4xl mx-auto">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">Wall of Stories</h2>
-            <p className="text-muted-foreground text-center max-w-lg mx-auto mb-10">
-              The good that teeth are doing in the world, shared anonymously by families.
+            <p className="text-muted-foreground text-center max-w-xl mx-auto mb-3">
+              The good that lost teeth are doing in the world, shared by families. Every
+              story is anonymous - no names, ever - and read by a person before it goes up.
             </p>
+            <div className="text-center mb-10">
+              <Button variant="magical" size="sm" asChild>
+                <a href="#write" onClick={() => trackCTAClick("wall_add_yours")}>
+                  <Sparkles className="w-3.5 h-3.5" /> Add your story
+                </a>
+              </Button>
+            </div>
 
             {galleryLoading ? (
               <p className="text-center text-muted-foreground">Gathering stories…</p>
-            ) : letters.length === 0 ? (
-              <div>
-                <p className="text-center text-muted-foreground max-w-md mx-auto mb-8">
-                  Real stories will appear here once shared. Here are a few examples
-                  to spark ideas - yours could be next.
-                </p>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {EXAMPLE_LETTERS.map((l, i) => (
-                    <figure key={i} className="magical-card flex flex-col">
-                      <div className="flex items-center gap-2 mb-3 flex-wrap">
-                        <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">{l.quality}</span>
-                        <span className="inline-block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground bg-muted px-2 py-0.5 rounded-full">Example</span>
-                      </div>
-                      <blockquote className="text-foreground/80 leading-relaxed flex-1">&ldquo;{l.body}&rdquo;</blockquote>
-                      {l.cityState && <figcaption className="text-sm text-muted-foreground italic mt-3">{l.cityState}</figcaption>}
-                    </figure>
-                  ))}
-                </div>
-              </div>
             ) : (
               <div className="grid sm:grid-cols-2 gap-4">
                 {letters.map((l) => (
@@ -559,29 +615,20 @@ const LettersToTheToothFairy = () => {
                     {l.city_state && <figcaption className="text-sm text-muted-foreground italic mt-3">{l.city_state}</figcaption>}
                   </figure>
                 ))}
+                {/* Until the wall has a few real stories, fill it out with clearly
+                    labelled examples so it never looks empty or abandoned. */}
+                {EXAMPLE_LETTERS.slice(0, Math.max(0, WALL_MIN_STORIES - letters.length)).map((l, i) => (
+                  <figure key={`example-${i}`} className="magical-card flex flex-col">
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
+                      <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">{l.quality}</span>
+                      <span className="inline-block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground bg-muted px-2 py-0.5 rounded-full">Example</span>
+                    </div>
+                    <blockquote className="text-foreground/80 leading-relaxed flex-1">&ldquo;{l.body}&rdquo;</blockquote>
+                    {l.cityState && <figcaption className="text-sm text-muted-foreground italic mt-3">{l.cityState}</figcaption>}
+                  </figure>
+                ))}
               </div>
             )}
-          </div>
-        </section>
-
-        {/* ── Cross-links ── */}
-        <section className="py-16 md:py-20 bg-secondary/30">
-          <div className="container px-6 max-w-3xl mx-auto">
-            <h2 className="font-display text-xl font-bold text-foreground mb-6 text-center">More from the Workshop</h2>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { to: "/tooth-fairy-letter", label: "Free Printable Tooth Fairy Letter", desc: "A classic letter template to leave under the pillow." },
-                { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy Real?", desc: "The honest, magical answer." },
-                { to: "/what-does-the-tooth-fairy-do-with-teeth", label: "What Does She Do With Teeth?", desc: "Inside the Tooth Fairy's workshop." },
-                { to: "/watch", label: "Watch the Short Film", desc: "See the Tooth Fairy's world come to life." },
-              ].map((link) => (
-                <Link key={link.to} to={link.to} onClick={() => trackEvent("explore_click", { page: link.to, source: "letters" })}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5">
-                  <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{link.label}</p>
-                  <p className="text-sm text-muted-foreground">{link.desc}</p>
-                </Link>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -603,7 +650,7 @@ const LettersToTheToothFairy = () => {
 
       <RelatedPages
         from="/letters-to-the-tooth-fairy"
-        links={["/tooth-fairy-letter", "/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave"]}
+        links={["/tooth-fairy-letter", "/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/is-the-tooth-fairy-real", "/what-does-the-tooth-fairy-do-with-teeth", "/watch"]}
       />
       <Footer />
     </div>

@@ -168,7 +168,7 @@ const WhatDoesTheToothFairyDo = () => {
           The Big Question
         </span>
 
-        <h1 className="font-display text-4xl font-bold text-foreground mb-6 leading-tight">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
           What Does the Tooth Fairy Do With Teeth?
         </h1>
 

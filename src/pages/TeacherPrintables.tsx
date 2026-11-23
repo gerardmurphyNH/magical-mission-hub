@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowLeft,
-  ArrowRight,
   Download,
   BookOpen,
   FileText,
@@ -51,39 +50,6 @@ const stars = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 // Internal links — strengthen topical authority
-const relatedLinks = [
-  {
-    question: "Classroom Activities & Discussion Guide for Teachers",
-    teaser:
-      "Kindergarten-friendly activities, bulletin board ideas, book pairings, and discussion questions to go with these printables.",
-    to: "/for-teachers",
-  },
-  {
-    question: "Free Printable Tooth Fairy Letter Template",
-    teaser:
-      "A personalised letter from the Tooth Fairy that names the quality growing inside your child's tooth. Free PDF and image download.",
-    to: "/tooth-fairy-letter",
-  },
-  {
-    question: "What does the Tooth Fairy do with teeth?",
-    teaser:
-      "She draws out the good qualities inside (bravery, kindness, creativity, patience) and uses them to fix small problems in the world.",
-    to: "/what-does-the-tooth-fairy-do-with-teeth",
-  },
-  {
-    question: "Why does the Tooth Fairy take teeth?",
-    teaser:
-      "Because every tooth holds something the child grew while it was there. Those qualities don't disappear when the tooth falls out.",
-    to: "/what-does-the-tooth-fairy-do-with-teeth",
-  },
-  {
-    question: "Your child's first lost tooth",
-    teaser:
-      "What to do, what to say, and how to make the moment feel meaningful rather than just routine.",
-    to: "/first-tooth-what-to-do",
-  },
-];
-
 const faqs = [
   {
     question: "What is SEL?",
@@ -289,7 +255,7 @@ const TeacherSignup = () => {
         )}
       </Button>
       {error && (
-        <div className="flex items-center gap-2 text-red-500 text-sm col-span-full">
+        <div className="flex items-center gap-2 text-destructive text-sm col-span-full">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span>{error}</span>
         </div>
@@ -420,15 +386,15 @@ const TeacherPrintables = () => {
             },
             {
               "@type": "ImageObject",
-              name: "Printable Tooth Fairy Coloring Page",
+              name: "What's Inside Your Tooth? Tooth Fairy Coloring Page",
               description:
-                "Printable tooth fairy coloring page showing the Tooth Fairy in her workshop, with a jar for children to label with a quality they are growing.",
+                "What's Inside Your Tooth? free printable Tooth Fairy coloring page showing CeCe the Tooth Fairy in her workshop beside a big jar with a tooth on it and a blank label for children to write the special quality inside their tooth.",
               contentUrl:
-                "https://wigglytoothworkshop.com/images/printable-tooth-fairy-coloring-page.jpg",
-              url: "https://wigglytoothworkshop.com/images/printable-tooth-fairy-coloring-page.jpg",
+                "https://wigglytoothworkshop.com/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.jpg",
+              url: "https://wigglytoothworkshop.com/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.jpg",
               creditText: "Wiggly Tooth Workshop",
               creator: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: "https://wigglytoothworkshop.com/" },
-              copyrightNotice: "© 2026 Wiggly Tooth Workshop. Illustrations by Peter H. Reynolds.",
+              copyrightNotice: "© 2026 Wiggly Tooth Workshop. Based on artwork by Peter H. Reynolds and FableVision Studios, used with permission.",
               license: "https://wigglytoothworkshop.com/tooth-fairy-printables",
               acquireLicensePage: "https://wigglytoothworkshop.com/terms",
             },
@@ -680,17 +646,17 @@ const TeacherPrintables = () => {
                   </h2>
                   <div className="space-y-3 text-muted-foreground leading-relaxed mb-6">
                     <p>
-                      A calming creative extension where students color the Tooth Fairy in her workshop and label a jar with a good thing their tooth has helped grow.
+                      A calming creative extension called "What's Inside Your Tooth?" Students color the Tooth Fairy in her workshop, then write the special quality inside their tooth, like kindness or courage, on the big jar's label.
                     </p>
                     <p>
                       It gives the reflection something physical to hold onto: a picture to take home, a jar to label, a moment to sit with quietly. Works well as a classroom extension activity, a take-home project, or a gentle entry point for younger children who aren't quite ready for the full worksheet.
                     </p>
                     <p className="text-sm italic">
-                      Artwork created in collaboration with Peter H. Reynolds and FableVision Studios.
+                      Based on artwork by Peter H. Reynolds and FableVision Studios, used with permission.
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {["All ages", "10–15 min", "PDF · Single page"].map((d) => (
+                    {["All ages", "10–15 min", "PDF or JPG · Single page"].map((d) => (
                       <span
                         key={d}
                         className="text-xs bg-secondary text-muted-foreground px-2.5 py-1 rounded-full"
@@ -699,24 +665,41 @@ const TeacherPrintables = () => {
                       </span>
                     ))}
                   </div>
-                  <Button variant="magical" asChild>
-                    <a
-                      href="/downloads/tooth-fairy-coloring-page.pdf"
-                      download="printable-tooth-fairy-coloring-page.pdf"
-                      onClick={trackTeacherColoringDownload}
-                    >
-                      <Download className="w-4 h-4" />
-                      Download Coloring Page (PDF)
-                    </a>
-                  </Button>
+                  <div className="flex flex-wrap gap-3">
+                    <Button variant="magical" asChild>
+                      <a
+                        href="/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.pdf"
+                        download="tooth-fairy-coloring-page-whats-inside-your-tooth.pdf"
+                        onClick={trackTeacherColoringDownload}
+                      >
+                        <Download className="w-4 h-4" />
+                        Download Coloring Page (PDF)
+                      </a>
+                    </Button>
+                    <Button variant="outline" asChild>
+                      <a
+                        href="/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.jpg"
+                        download="tooth-fairy-coloring-page-whats-inside-your-tooth.jpg"
+                        onClick={trackTeacherColoringDownload}
+                      >
+                        <Download className="w-4 h-4" />
+                        JPG
+                      </a>
+                    </Button>
+                  </div>
+                  <p className="mt-4 text-sm">
+                    <Link to="/coloring-page" className="text-primary font-medium hover:underline">
+                      See all free Tooth Fairy coloring pages
+                    </Link>
+                  </p>
                 </div>
                 <div className="md:order-2">
                   <PreviewImage
-                    src="/images/printable-tooth-fairy-coloring-page.jpg"
-                    alt="Printable tooth fairy coloring page showing the Tooth Fairy in her workshop, with a jar for children to label with a quality they are growing"
+                    src="/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.jpg"
+                    alt="What's Inside Your Tooth? free printable Tooth Fairy coloring page showing CeCe the Tooth Fairy in her workshop beside a big jar with a tooth on it and a blank label for children to write the special quality inside their tooth"
                     icon={Palette}
                     bg="bg-secondary"
-                    href="/downloads/tooth-fairy-coloring-page.pdf"
+                    href="/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.pdf"
                     onClick={trackTeacherColoringDownload}
                   />
                 </div>
@@ -814,7 +797,7 @@ const TeacherPrintables = () => {
         <section className="py-16 md:py-20 bg-background">
           <div className="container px-6">
             <div className="text-center mb-12">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
                 Why teachers use this
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
@@ -864,7 +847,7 @@ const TeacherPrintables = () => {
         <section className="py-16 md:py-20 bg-secondary/20">
           <div className="container px-6 max-w-2xl mx-auto">
             <div className="text-center mb-10">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
                 How to use it
               </h2>
               <p className="text-muted-foreground">
@@ -924,48 +907,6 @@ const TeacherPrintables = () => {
               </p>
             </div>
             <ParentNoteTemplate />
-          </div>
-        </section>
-
-        {/* ── Internal links — topical authority ───────────────── */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className="container px-6">
-            <div className="text-center mb-10">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
-                Learn more about the Tooth Fairy
-              </h2>
-              <p className="text-muted-foreground max-w-lg mx-auto">
-                These printables are one part of a larger story. Here's where to find the rest of it.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-              {relatedLinks.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5 flex flex-col gap-2"
-                >
-                  <h3 className="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {item.question}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">
-                    {item.teaser}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary mt-1">
-                    Read more
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </span>
-                </Link>
-              ))}
-            </div>
-            <p className="text-center mt-8">
-              <Link
-                to="/is-the-tooth-fairy-real"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors underline underline-offset-4"
-              >
-                See all Tooth Fairy questions →
-              </Link>
-            </p>
           </div>
         </section>
 
@@ -1070,7 +1011,7 @@ const TeacherPrintables = () => {
 
         <RelatedPages
           from="/tooth-fairy-printables"
-          links={["/for-teachers", "/coloring-page", "/tooth-fairy-letter"]}
+          links={["/for-teachers", "/coloring-page", "/tooth-fairy-letter", "/is-the-tooth-fairy-real", "/what-does-the-tooth-fairy-do-with-teeth", "/first-tooth-what-to-do"]}
         />
         <Footer />
         </main>

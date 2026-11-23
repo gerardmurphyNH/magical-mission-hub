@@ -105,12 +105,12 @@ const ToothFairyStory = () => {
               className="inline-flex items-center gap-2 text-starlight/70 hover:text-starlight transition-colors text-sm mb-10"
             >
               <ArrowLeft className="w-4 h-4" />
-              Wiggly Tooth Workshop
+              Back to Wiggly Tooth Workshop
             </Link>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary/90 mb-5">
               A Tooth Fairy Story
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-starlight leading-tight mb-6">
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-starlight leading-tight mb-6">
               The Tooth Fairy Story
             </h1>
             <p className="text-starlight/80 text-lg leading-relaxed max-w-xl mx-auto">
@@ -304,37 +304,11 @@ const ToothFairyStory = () => {
           </div>
         </section>
 
-        {/* Related */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className="container px-6 max-w-3xl mx-auto">
-            <h2 className="font-display text-xl font-bold text-foreground mb-6 text-center">
-              Keep exploring
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { to: "/is-the-tooth-fairy-real", label: "The real story of the Tooth Fairy", desc: "Where the tradition comes from, and its history around the world." },
-                { to: "/what-does-the-tooth-fairy-do-with-teeth", label: "What does she do with teeth?", desc: "Inside the Tooth Fairy's workshop." },
-                { to: "/tooth-fairy-letter", label: "Tooth Fairy letter template", desc: "A free printable letter from the Tooth Fairy." },
-              ].map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                    {link.label}
-                  </p>
-                  <p className="text-sm text-muted-foreground">{link.desc}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
 
       <RelatedPages
         from="/tooth-fairy-story"
-        links={["/watch", "/what-does-the-tooth-fairy-do-with-teeth", "/coloring-page"]}
+        links={["/watch", "/what-does-the-tooth-fairy-do-with-teeth", "/coloring-page", "/is-the-tooth-fairy-real", "/tooth-fairy-letter"]}
       />
       <Footer />
     </div>

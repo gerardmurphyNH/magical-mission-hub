@@ -268,34 +268,6 @@ const FirstToothWhatToDo = () => {
             </div>
           </section>
 
-          {/* Related Pages */}
-          <section className="py-12 md:py-16 bg-background">
-            <div className="container px-6 max-w-2xl mx-auto">
-              <h2 className="font-display text-xl font-bold text-foreground mb-6 text-center">
-                Keep exploring
-              </h2>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {[
-                  { to: "/what-does-the-tooth-fairy-do-with-teeth", label: "What does she do with the teeth?", desc: "The full story from the workshop" },
-                  { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy real?", desc: "A serious answer to a serious question" },
-                  { to: "/tooth-fairy-letter", label: "Free Tooth Fairy letter template", desc: "A printable letter from the Tooth Fairy for your child" },
-                  { to: "/how-much-does-the-tooth-fairy-leave", label: "How much does the Tooth Fairy leave?", desc: "The money, the first tooth, and why it varies" },
-                ].map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                      {link.label}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{link.desc}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
           {/* CTA */}
           <section className="py-16 md:py-20 night-sky-section relative overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
@@ -340,7 +312,7 @@ const FirstToothWhatToDo = () => {
         </main>
         <RelatedPages
           from="/first-tooth-what-to-do"
-          links={["/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/tooth-fairy-letter"]}
+          links={["/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/tooth-fairy-letter", "/what-does-the-tooth-fairy-do-with-teeth", "/is-the-tooth-fairy-real"]}
         />
         <Footer />
       </div>

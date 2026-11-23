@@ -141,9 +141,11 @@ export const trackVideoComplete = (videoId: string): void => {
 // ============================================
 // MISC TRACKING
 // ============================================
-export const trackColoringPageDownload = (): void => {
+export const trackColoringPageDownload = (
+  fileName = "free-tooth-fairy-coloring-page.pdf",
+): void => {
   trackEvent("coloring_page_download", {
-    file_name: "free-tooth-fairy-coloring-page.pdf",
+    file_name: fileName,
   });
 };
 

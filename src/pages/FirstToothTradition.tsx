@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
-  ArrowRight,
   Download,
   FileText,
   Image as ImageIcon,
@@ -180,7 +179,7 @@ const FirstToothTradition = () => {
               className="inline-flex items-center gap-2 text-starlight/70 hover:text-starlight/80 transition-colors text-sm mb-10"
             >
               <ArrowLeft className="w-4 h-4" />
-              Wiggly Tooth Workshop
+              Back to Wiggly Tooth Workshop
             </Link>
 
             <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -226,7 +225,7 @@ const FirstToothTradition = () => {
         {/* What makes a first tooth special */}
         <section className="py-16 md:py-20 bg-background">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
               What Makes a First Tooth Special?
             </h2>
             <div className="space-y-4 text-foreground/80 text-lg leading-relaxed">
@@ -255,7 +254,7 @@ const FirstToothTradition = () => {
         {/* The tradition, step by step */}
         <section className="py-16 md:py-20 bg-secondary/30">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight">
               A New First Tooth Tradition
             </h2>
             <ol className="space-y-5">
@@ -291,7 +290,7 @@ const FirstToothTradition = () => {
                 <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
                   Free Printable
                 </span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-5 leading-tight">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-5 leading-tight">
                   The Free Printable Tooth Fairy Certificate
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
@@ -338,7 +337,7 @@ const FirstToothTradition = () => {
         {/* What should the Tooth Fairy write */}
         <section className="py-16 md:py-20 bg-secondary/30">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
               What Should the Tooth Fairy Write?
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -365,7 +364,7 @@ const FirstToothTradition = () => {
         <section className="py-16 md:py-20 bg-background">
           <div className="container px-6 max-w-3xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
                 Watch the Story Behind the Tradition
               </h2>
               <p className="text-muted-foreground leading-relaxed max-w-xl mx-auto">
@@ -401,7 +400,7 @@ const FirstToothTradition = () => {
         {/* More ideas */}
         <section className="py-16 md:py-20 bg-secondary/30">
           <div className="container px-6 max-w-3xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight text-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight text-center">
               More First Tooth Ideas
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -420,7 +419,7 @@ const FirstToothTradition = () => {
         {/* Why it works */}
         <section className="py-16 md:py-20 bg-background">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
               Why This Tradition Works
             </h2>
             <ul className="space-y-4">
@@ -465,36 +464,6 @@ const FirstToothTradition = () => {
           </div>
         </section>
 
-        {/* Internal links */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className="container px-6 max-w-3xl mx-auto">
-            <h2 className="font-display text-xl font-bold text-foreground mb-6 text-center">
-              Keep exploring the Workshop
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy real?", desc: "A thoughtful answer for when the question comes." },
-                { to: "/what-does-the-tooth-fairy-do-with-teeth", label: "What does she do with the teeth?", desc: "Inside the Tooth Fairy's workshop." },
-                { to: "/why-does-the-tooth-fairy-leave-money", label: "Why the Tooth Fairy leaves money", desc: "What the gift really means." },
-                { to: "/tooth-fairy-letter", label: "Tooth Fairy letter template", desc: "A free printable letter to go with the certificate." },
-                { to: "/coloring-page", label: "Free coloring page", desc: "A printable scene to color and keep." },
-              ].map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1 flex items-center gap-1.5">
-                    {link.label}
-                    <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                  </p>
-                  <p className="text-sm text-muted-foreground">{link.desc}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Join the Workshop */}
         <section className="py-16 bg-secondary/30">
           <div className="container px-6 max-w-xl mx-auto text-center">
@@ -520,7 +489,7 @@ const FirstToothTradition = () => {
 
       <RelatedPages
         from="/first-tooth-tradition"
-        links={["/how-much-does-the-tooth-fairy-leave", "/tooth-fairy-letter", "/first-tooth-what-to-do"]}
+        links={["/how-much-does-the-tooth-fairy-leave", "/tooth-fairy-letter", "/first-tooth-what-to-do", "/is-the-tooth-fairy-real", "/what-does-the-tooth-fairy-do-with-teeth", "/why-does-the-tooth-fairy-leave-money"]}
       />
       <Footer />
     </div>

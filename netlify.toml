@@ -41,6 +41,20 @@
   status = 301
   force = true
 
+# Jar coloring page redrawn (2026-11-23) as "What's Inside Your Tooth?" with a
+# keyword-rich filename. Old URLs may be bookmarked or pinned - 301 them.
+[[redirects]]
+  from = "/images/printable-tooth-fairy-coloring-page.jpg"
+  to = "/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.jpg"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/downloads/tooth-fairy-coloring-page.pdf"
+  to = "/downloads/tooth-fairy-coloring-page-whats-inside-your-tooth.pdf"
+  status = 301
+  force = true
+
 # SPA fallback — URLs without a prerendered file get the generic app shell
 # (an empty #root) so React Router can handle them. Every real route has its own
 # prerendered <route>.html and the homepage's index.html now contains the

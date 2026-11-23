@@ -215,3 +215,233 @@
 .animation-delay-600 {
   animation-delay: 600ms;
 }
+
+/* ── Tooth Fairy letter sheet (src/components/ToothFairyLetterSheet.tsx) ──
+   Design from tooth-fairy-letter-template.html. Also used to render the
+   downloadable PDF/JPG via scripts/printables/. */
+
+  .wtw-letter {
+    --wtw-letter-ink: #28213c;
+    --wtw-letter-lavender: #695681;
+    --wtw-letter-pale-lavender: #c7bad7;
+    --wtw-letter-gold: #a67b53;
+    --wtw-letter-script: "Snell Roundhand", "Apple Chancery", "Segoe Script",
+      "URW Chancery L", "Brush Script MT", cursive;
+
+    box-sizing: border-box;
+    max-inline-size: 8.5in;
+    margin-inline: auto;
+    padding: clamp(1.75rem, 6vw, 3.25rem) clamp(1.25rem, 7vw, 5.05rem) 3rem;
+    background: #fff;
+    color: var(--wtw-letter-ink);
+    font: 1.0625rem / 1.5 Baskerville, Georgia, "Times New Roman", serif;
+    text-align: start;
+  }
+
+  .wtw-letter .wtw-letter__header {
+    margin: 0 0 1.65rem;
+    text-align: center;
+  }
+
+  .wtw-letter .wtw-letter__moonlight {
+    position: relative;
+    inline-size: 4.5rem;
+    block-size: 2.35rem;
+    margin: 0 auto .65rem;
+  }
+
+  .wtw-letter .wtw-letter__moon {
+    position: absolute;
+    inset-block-start: .1rem;
+    inset-inline-start: 1.33rem;
+    inline-size: 1.85rem;
+    block-size: 1.85rem;
+    border-radius: 50%;
+    box-shadow: inset .52rem -.26rem 0 0 var(--wtw-letter-lavender);
+    transform: rotate(-12deg);
+  }
+
+  .wtw-letter .wtw-letter__star {
+    display: inline-block;
+    flex: none;
+    inline-size: .56rem;
+    block-size: .79rem;
+    background: var(--wtw-letter-gold);
+    clip-path: polygon(50% 0, 66% 36%, 100% 50%, 66% 64%, 50% 100%, 34% 64%, 0 50%, 34% 36%);
+  }
+
+  .wtw-letter .wtw-letter__moonlight .wtw-letter__star {
+    position: absolute;
+  }
+
+  .wtw-letter .wtw-letter__star--west {
+    inset-block-start: 1.22rem;
+    inset-inline-start: .28rem;
+    scale: .55;
+  }
+
+  .wtw-letter .wtw-letter__star--north {
+    inset-block-start: .22rem;
+    inset-inline-start: 3.02rem;
+  }
+
+  .wtw-letter .wtw-letter__star--east {
+    inset-block-start: 1.35rem;
+    inset-inline-start: 3.65rem;
+    background: var(--wtw-letter-lavender);
+    scale: .6;
+  }
+
+  .wtw-letter .wtw-letter__title,
+  .wtw-letter .wtw-letter__signature {
+    font-family: var(--wtw-letter-script);
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .wtw-letter .wtw-letter__title {
+    margin: 0;
+    color: inherit;
+    font-size: clamp(2.1rem, 6.4vw, 3rem);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .wtw-letter .wtw-letter__divider,
+  .wtw-letter .wtw-letter__signoff {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+  }
+
+  .wtw-letter .wtw-letter__divider {
+    max-inline-size: 21.5rem;
+    margin: .7rem auto 0;
+  }
+
+  .wtw-letter .wtw-letter__divider::before,
+  .wtw-letter .wtw-letter__divider::after,
+  .wtw-letter .wtw-letter__signoff-rule {
+    content: "";
+    flex: 1;
+    border-block-start: 1px solid var(--wtw-letter-pale-lavender);
+  }
+
+  .wtw-letter .wtw-letter__body p {
+    margin: 0 0 1.1em;
+    color: inherit;
+  }
+
+  .wtw-letter .wtw-letter__prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .3em .36em;
+    break-inside: avoid;
+  }
+
+  .wtw-letter .wtw-letter__prompt--magic {
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: .55em;
+  }
+
+  .wtw-letter .wtw-letter__answer {
+    display: inline-flex;
+    flex: 1 1 13ch;
+    align-items: baseline;
+    gap: .13em;
+    min-inline-size: min(100%, 13ch);
+  }
+
+  .wtw-letter .wtw-letter__prompt--greeting .wtw-letter__answer {
+    flex: 0 1 22ch;
+  }
+
+  .wtw-letter .wtw-letter__prompt--magic .wtw-letter__answer {
+    flex: 0 1 auto;
+    min-inline-size: 0;
+    inline-size: 92%;
+  }
+
+  .wtw-letter .wtw-letter__blank {
+    flex: 1;
+    block-size: 1.05em;
+    border-block-end: 1px solid var(--wtw-letter-lavender);
+  }
+
+  .wtw-letter .wtw-letter__signoff {
+    justify-content: flex-end;
+    gap: .45rem;
+    margin-block-start: .15rem;
+    break-inside: avoid;
+  }
+
+  .wtw-letter .wtw-letter__signoff-rule {
+    flex: 0 1 1.3rem;
+    margin-inline-end: .3rem;
+  }
+
+  .wtw-letter .wtw-letter__signature {
+    margin: 0;
+    color: var(--wtw-letter-lavender);
+    font-size: clamp(1.8rem, 5vw, 2.25rem);
+    line-height: 1.2;
+  }
+
+  .wtw-letter .wtw-letter__footer {
+    margin-block-start: clamp(2rem, 10vw, 5rem);
+    padding-block-start: .66rem;
+    border-block-start: 1px solid var(--wtw-letter-pale-lavender);
+    font: .6875rem / 1.4 Futura, system-ui, sans-serif;
+    text-align: center;
+  }
+
+  .wtw-letter .wtw-letter__footer a {
+    color: var(--wtw-letter-lavender);
+    text-decoration: none;
+  }
+
+  .wtw-letter .wtw-letter__footer a:hover,
+  .wtw-letter .wtw-letter__footer a:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media print {
+    .wtw-letter {
+      max-inline-size: 100%;
+      padding: .24in .37in .18in;
+      font-size: 12.5pt;
+      line-height: 1.43;
+      break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .wtw-letter .wtw-letter__title {
+      font-size: 34pt;
+    }
+
+    .wtw-letter .wtw-letter__signature {
+      font-size: 24pt;
+    }
+
+    .wtw-letter .wtw-letter__body p {
+      margin-block-end: 1.03em;
+    }
+
+    .wtw-letter .wtw-letter__footer {
+      margin-block-start: .62in;
+    }
+  }
+
+  .wtw-letter .wtw-letter__footer span {
+    color: var(--wtw-letter-lavender);
+  }
+
+  /* Filled-in answers (the example letter): written in, no blank line. */
+  .wtw-letter .wtw-letter__filled {
+    color: var(--wtw-letter-lavender);
+    font-style: italic;
+  }

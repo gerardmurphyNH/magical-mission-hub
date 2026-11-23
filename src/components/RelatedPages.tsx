@@ -46,12 +46,12 @@ const PAGES: Record<string, { title: string; blurb: string }> = {
     blurb: "Keeping the tooth safe, the first night, and the questions that follow.",
   },
   "/letters-to-the-tooth-fairy": {
-    title: "Write to the Tooth Fairy",
-    blurb: "Make a keepsake letter to or from her, free to print or share.",
+    title: "Letters and the Wall of Stories",
+    blurb: "Make a keepsake letter to or from her, and read the good other families' teeth have done.",
   },
   "/coloring-page": {
-    title: "Free Tooth Fairy coloring page",
-    blurb: "A printable PDF of the Tooth Fairy flying through a starry sky.",
+    title: "Free Tooth Fairy coloring pages",
+    blurb: "Printable PDF coloring pages with art from the film, free for home or class.",
   },
   "/for-teachers": {
     title: "Lost tooth classroom activities",
@@ -78,7 +78,8 @@ const PAGES: Record<string, { title: string; blurb: string }> = {
 interface RelatedPagesProps {
   /** The page these links appear on, for analytics. */
   from: string;
-  /** Paths to show, in order. Keep it to three. */
+  /** Paths to show, in order: three is ideal, six at most. This is the page's
+   *  only "read next" block - don't add a second hand-made one above it. */
   links: string[];
   heading?: string;
 }
@@ -91,8 +92,8 @@ const RelatedPages = ({ from, links, heading = "More from the Workshop" }: Relat
     >
       {heading}
     </h2>
-    <div className="grid gap-4 sm:grid-cols-3">
-      {links.map((path) => {
+    <div className={`grid gap-4 ${links.length > 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3"}`}>
+      {links.slice(0, 6).map((path) => {
         const page = PAGES[path];
         if (!page) return null;
         return (
