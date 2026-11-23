@@ -9,7 +9,9 @@ export default {
       center: true,
       padding: "1.5rem",
       screens: {
-        "2xl": "1200px",
+        // rem, not px: same 1200px at the default size, but grows with the
+        // larger-screen root scaling in index.css so nothing gets squeezed.
+        "2xl": "75rem",
       },
     },
     extend: {

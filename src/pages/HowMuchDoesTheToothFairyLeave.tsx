@@ -103,7 +103,7 @@ const MakeItATraditionSection = () => (
         <div key={step.title} className="text-center p-4">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 relative">
             <step.icon className="w-5 h-5 text-primary" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[0.625rem] font-bold flex items-center justify-center">
               {i + 1}
             </span>
           </div>

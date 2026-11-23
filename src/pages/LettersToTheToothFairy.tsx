@@ -559,7 +559,7 @@ const LettersToTheToothFairy = () => {
                       </label>
                       {wallOptIn && wallPreview && (
                         <figure className="mt-4 ml-7 rounded-lg bg-background border border-border p-4">
-                          <figcaption className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                          <figcaption className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                             How it will look on the Wall
                           </figcaption>
                           <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-2">
@@ -621,7 +621,7 @@ const LettersToTheToothFairy = () => {
                   <figure key={`example-${i}`} className="magical-card flex flex-col">
                     <div className="flex items-center gap-2 mb-3 flex-wrap">
                       <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">{l.quality}</span>
-                      <span className="inline-block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground bg-muted px-2 py-0.5 rounded-full">Example</span>
+                      <span className="inline-block text-[0.625rem] font-semibold uppercase tracking-wide text-muted-foreground bg-muted px-2 py-0.5 rounded-full">Example</span>
                     </div>
                     <blockquote className="text-foreground/80 leading-relaxed flex-1">&ldquo;{l.body}&rdquo;</blockquote>
                     {l.cityState && <figcaption className="text-sm text-muted-foreground italic mt-3">{l.cityState}</figcaption>}

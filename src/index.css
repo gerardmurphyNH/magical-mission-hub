@@ -123,6 +123,18 @@
     scroll-behavior: smooth;
   }
 
+  /* Larger screens: grow the root size smoothly from 16px at 1280px wide,
+     through 18px at 1920px (the most common desktop in GA), to a 19px cap
+     from ~2240px. Every Tailwind size is in rem, so type, spacing and
+     content widths scale together (like a gentle zoom). Phones and standard
+     laptops are untouched. Expressed in rem, so it still respects a visitor's
+     own browser font-size setting. */
+  @media (min-width: 1280px) {
+    html {
+      font-size: clamp(1rem, 0.75rem + 0.3125vw, 1.1875rem);
+    }
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Nunito', sans-serif;
