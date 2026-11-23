@@ -73,13 +73,13 @@ const NavBar = () => {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden xl:flex items-center gap-6">
           {navLinks.map((link) =>
             link.href.startsWith("#") ? (
               <button
                 key={link.label}
                 onClick={() => handleAnchorClick(link.href)}
-                className="text-sm font-medium text-starlight/70 hover:text-starlight transition-colors"
+                className="whitespace-nowrap text-sm font-medium text-starlight/70 hover:text-starlight transition-colors"
               >
                 {link.label}
               </button>
@@ -87,7 +87,7 @@ const NavBar = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-sm font-medium text-starlight/70 hover:text-starlight transition-colors"
+                className="whitespace-nowrap text-sm font-medium text-starlight/70 hover:text-starlight transition-colors"
               >
                 {link.label}
               </Link>
@@ -106,7 +106,7 @@ const NavBar = () => {
             aria-label="Watch on YouTube"
           >
             <YouTubeIcon />
-            <span className="hidden lg:inline text-xs font-medium">YouTube</span>
+            <span className="hidden xl:inline text-xs font-medium">YouTube</span>
           </a>
           <Button
             variant="magical"
@@ -120,7 +120,7 @@ const NavBar = () => {
 
         {/* Mobile menu toggle */}
         <button
-          className="lg:hidden p-2 text-starlight/80 hover:text-starlight transition-colors"
+          className="xl:hidden p-2 text-starlight/80 hover:text-starlight transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
@@ -130,7 +130,7 @@ const NavBar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-[hsl(244_45%_18%)] border-t border-starlight/10 px-6 py-4 space-y-1">
+        <div className="xl:hidden bg-[hsl(244_45%_18%)] border-t border-starlight/10 px-6 py-4 space-y-1">
           {navLinks.map((link) =>
             link.href.startsWith("#") ? (
               <button
