@@ -172,7 +172,7 @@ const WhatToSayToothFairy = () => {
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Here is one way to answer when your child asks if the Tooth Fairy is real:
               </p>
-              <blockquote className="rounded-2xl border border-primary/20 bg-primary/5 px-8 md:px-10 py-8 space-y-4 text-foreground leading-loose text-[15px]">
+              <blockquote className="rounded-2xl border border-primary/20 bg-primary/5 px-8 md:px-10 py-8 space-y-4 text-foreground leading-loose text-[0.9375rem]">
                 <p>
                   "Maybe part of growing up is starting to notice bigger questions.
                 </p>
@@ -259,7 +259,7 @@ const WhatToSayToothFairy = () => {
                 If your child is younger, tired, emotional, or not really asking for the full
                 truth, you can keep it simpler:
               </p>
-              <blockquote className="rounded-2xl border border-primary/20 bg-primary/5 px-8 md:px-10 py-7 text-foreground leading-loose text-[15px]">
+              <blockquote className="rounded-2xl border border-primary/20 bg-primary/5 px-8 md:px-10 py-7 text-foreground leading-loose text-[0.9375rem]">
                 <p>
                   "The Tooth Fairy is part of how we celebrate something really important: you
                   growing up. Your baby teeth helped tell the story of who you've been becoming.
@@ -286,7 +286,7 @@ const WhatToSayToothFairy = () => {
                   them feel foolish for ever believing it.
                 </p>
               </div>
-              <blockquote className="rounded-2xl border border-primary/20 bg-primary/5 px-8 md:px-10 py-7 text-foreground leading-loose text-[15px] mb-6">
+              <blockquote className="rounded-2xl border border-primary/20 bg-primary/5 px-8 md:px-10 py-7 text-foreground leading-loose text-[0.9375rem] mb-6">
                 <p>
                   "Sometimes growing up means becoming part of the people who help keep a little
                   wonder in the world for someone else."
@@ -318,7 +318,7 @@ const WhatToSayToothFairy = () => {
                   wonder.
                 </p>
               </div>
-              <blockquote className="rounded-2xl border border-primary/20 bg-background px-8 md:px-10 py-7 text-foreground leading-loose text-[15px] mb-6">
+              <blockquote className="rounded-2xl border border-primary/20 bg-background px-8 md:px-10 py-7 text-foreground leading-loose text-[0.9375rem] mb-6">
                 <p>
                   "That's a really good question, and it's a great one to ask at home. Different
                   families believe different things. What I'd love to know is this: if your tooth
