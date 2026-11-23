@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -98,11 +98,6 @@ const faqCategories = [
         answer:
           "Arlo and CeCe are the two characters at the heart of The Tooth Fairy's Secret Workshop. Arlo is a curious boy who sets out to learn what the Tooth Fairy really does with his lost tooth; CeCe is the Tooth Fairy he meets on a late-night adventure - a small, clever tinkerer with goggles and a tool belt, whose workshop and whose secret the story follows.",
       },
-      {
-        question: "Why does the Tooth Fairy take teeth?",
-        answer:
-          "Not because the teeth themselves are valuable, but because of what's inside them - the courage, kindness, and patience a child grew while it was theirs. For the full answer, including what she does with them afterward, see what the Tooth Fairy does with the teeth she collects.",
-      },
     ],
   },
   {
@@ -189,7 +184,7 @@ const IsToothFairyReal = () => {
             {
               "@type": "Article",
               datePublished: "2026-06-01",
-              dateModified: "2026-09-01",
+              dateModified: "2026-11-23",
               headline: "Is the Tooth Fairy Real?",
               description:
                 "Yes, the Tooth Fairy is real - she just works in ways most people never see. What she really does with children's lost teeth, where the tradition comes from, and why it matters.",
@@ -433,49 +428,25 @@ const IsToothFairyReal = () => {
         {/* ── Virtue quiz ── */}
         <VirtueQuizSection />
 
-        {/* ── Why does she collect ── */}
-        <section className="py-20 md:py-28 bg-background">
+        {/* ── Why she collects teeth: the full answer lives on its own page ── */}
+        <section className="py-16 md:py-20 bg-background">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight">
-              Why Does the Tooth Fairy
-              <br className="hidden sm:block" /> Collect Teeth?
-            </h2>
-
-            <div className="space-y-6 text-foreground/80 text-lg leading-relaxed mb-10">
-              <p>
-                The Tooth Fairy doesn't collect teeth because they are rare or
-                valuable.
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
+                The Rest of the Story Is in Her Workshop
+              </h2>
+              <p className="text-foreground/80 text-lg leading-relaxed mb-6">
+                Not because teeth are rare or valuable, but because of what grew inside
+                them. What happens next, in her workshop above the clouds, is the part of
+                the story most people never hear.
               </p>
-              <p>
-                She collects them because what's inside them matters.
-              </p>
-              <p>
-                She works carefully with what children leave behind -
-                drawing out the qualities that grew inside each tooth and
-                finding quiet ways to put them back into the world where
-                they're needed most.
-              </p>
-            </div>
-
-            {/* Pull quote, smaller */}
-            <figure className="my-10 py-6 px-8 rounded-2xl bg-secondary/40 border border-border text-center">
-              <blockquote className="font-display text-xl md:text-2xl font-semibold text-foreground leading-snug italic">
-                "Not as miracles. Not as wishes granted.
-                <br className="hidden md:block" />
-                As small, invisible nudges."
-              </blockquote>
-            </figure>
-
-            <div className="space-y-6 text-foreground/80 text-lg leading-relaxed">
-              <p>
-                A person who finds a little more courage than they expected. A
-                moment of patience that prevents something from falling apart.
-                An unexpected kindness that arrives at exactly the right time.
-              </p>
-              <p>
-                The Tooth Fairy doesn't change the world dramatically. She
-                tends to it - gently, precisely, while it sleeps.
-              </p>
+              <Link
+                to="/what-does-the-tooth-fairy-do-with-teeth"
+                className="inline-flex items-center gap-2 font-display font-semibold text-primary hover:underline underline-offset-4"
+              >
+                What the Tooth Fairy really does with the teeth she collects
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>

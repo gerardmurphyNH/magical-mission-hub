@@ -23,6 +23,7 @@ import {
   trackLetterSubmitSuccess,
   trackLetterSubmitError,
   trackWorkshopJoinFromLetter,
+  trackEvent,
 } from "@/lib/analytics";
 
 const PAGE_URL = "https://wigglytoothworkshop.com/letters-to-the-tooth-fairy";
@@ -63,12 +64,45 @@ const buildAnonymizedBody = (type: LetterType, quality: string, reason: string, 
     ? `I lost a tooth today. I think the quality inside it is ${quality} - because ${reason}. Please use it to help ${helpText}. I hope it does some good in the world.`
     : `Thank you for the tooth - I found it safely. When I looked closely, I saw the quality growing inside it: ${quality}. That's exactly what the world needs more of, so I used a little of it to help ${helpText} - a small spark, passed along. I left a little something behind. Not to buy the tooth, but to say thank you, and to keep the good going.`;
 
+// Occasion variants of the "from" letter, opened from the matching printables on
+// /tooth-fairy-letter via ?type=from&occasion=... Wording mirrors those
+// printables. Affects ONLY the client-side personal letter below - the stored
+// letter and the public wall use buildAnonymizedBody, which is unchanged.
+type Occasion = "first-tooth" | "goodbye" | "late";
+const OCCASIONS: Record<Occasion, { heading: string; intro: string }> = {
+  "first-tooth": {
+    heading: "Write a First Tooth Letter From the Tooth Fairy",
+    intro: "For your child's very first lost tooth. Fill in a few blanks and we'll write it for you.",
+  },
+  goodbye: {
+    heading: "Write a Goodbye Letter From the Tooth Fairy",
+    intro: "For the last baby tooth: a warm send-off. Fill in a few blanks and we'll write it for you.",
+  },
+  late: {
+    heading: "Write a \"Sorry I'm Late\" Letter From the Tooth Fairy",
+    intro: "For the night she didn't make it. Fill in a few blanks and we'll write it for you.",
+  },
+};
+const isOccasion = (v: string | null): v is Occasion => v === "first-tooth" || v === "goodbye" || v === "late";
+
 // Builds the full, personal letter with greeting + signature — used ONLY for the
 // client-side printable letterhead, never stored or shown on the public wall.
+// Occasion bodies are kept no longer than the standard one so they fit the
+// fixed letter-shaped frame in LetterheadGenerator.
 const buildPersonalBody = (
   type: LetterType, name: string, cityState: string, quality: string, reason: string, helpText: string,
+  occasion: Occasion | null = null,
 ): string => {
   const who = name || "a curious kid";
+  if (type === "from" && occasion === "first-tooth") {
+    return `Dear ${who},\n\nYour very first tooth. I have been waiting for this one.\n\nWhen I looked closely, I saw the quality growing inside it: ${quality}. First teeth hold the most, so I used a little of it to help ${helpText} - a small spark, passed along.\n\nYour first tooth now has a tiny label of its own in my workshop, on the shelf where I keep first teeth.\n\nI left a little something under your pillow. Not to buy your tooth, but to say thank you, and to celebrate how much you are growing.\n\nWith love,\nThe Tooth Fairy`;
+  }
+  if (type === "from" && occasion === "goodbye") {
+    return `Dear ${who},\n\nThis was your last baby tooth, and so this is my last visit.\n\nEvery tooth you gave me held something good. In this one I found ${quality}, and I used a little of it to help ${helpText} - one last spark, passed along.\n\nYou won't need me anymore. The good things you grew were never really in your teeth. They were in you all along, and they are yours to keep.\n\nThank you for every tooth.\n\nWith love,\nThe Tooth Fairy`;
+  }
+  if (type === "from" && occasion === "late") {
+    return `Dear ${who},\n\nI'm sorry I'm late. There were more teeth than stars last night, and I wanted to give yours the time it deserved.\n\nWhen I finally looked closely, I saw the quality growing inside it: ${quality}. So I used a little of it to help ${helpText} - a small spark, passed along.\n\nThank you for being so patient. Patience is a quality too, and I noticed yours.\n\nI left a little something as a thank-you, for the tooth and for the wait.\n\nWith love,\nThe Tooth Fairy`;
+  }
   if (type === "to") {
     const from = cityState ? `, and I'm from ${cityState}` : "";
     return `Dear Tooth Fairy,\n\nI lost a tooth today. My name is ${who}${from}.\n\nI think the quality inside my tooth is ${quality} - because ${reason}.\n\nPlease use my tooth to help ${helpText}.\n\nI hope it does some good in the world.\n\nLove,\n${who}`;
@@ -131,6 +165,7 @@ const faqs = [
 
 const LettersToTheToothFairy = () => {
   const [letterType, setLetterType] = useState<LetterType | null>(null);
+  const [occasion, setOccasion] = useState<Occasion | null>(null);
   const [quality, setQuality] = useState("");
   const [customQuality, setCustomQuality] = useState("");
   const [useCustom, setUseCustom] = useState(false);
@@ -164,10 +199,16 @@ const LettersToTheToothFairy = () => {
   // form directly - used by the "we'll fill it in for you" CTAs on
   // /tooth-fairy-letter. Read after mount so the prerendered HTML still matches.
   useEffect(() => {
-    const type = new URLSearchParams(window.location.search).get("type");
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
     if (type === "from" || type === "to") {
       setLetterType(type);
       trackLetterTypeSelect(type);
+      const occ = params.get("occasion");
+      if (type === "from" && isOccasion(occ)) {
+        setOccasion(occ);
+        trackEvent("letter_occasion_select", { occasion: occ });
+      }
       setTimeout(() => document.getElementById("write")?.scrollIntoView({ block: "start" }), 100);
     }
   }, []);
@@ -183,6 +224,7 @@ const LettersToTheToothFairy = () => {
 
   const chooseType = (type: LetterType) => {
     setLetterType(type);
+    setOccasion(null);
     trackLetterTypeSelect(type);
     setTimeout(() => document.getElementById("write")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   };
@@ -196,6 +238,7 @@ const LettersToTheToothFairy = () => {
 
   const resetForm = () => {
     setLetterType(null);
+    setOccasion(null);
     setQuality(""); setCustomQuality(""); setUseCustom(false);
     setReason(""); setHelpText(""); setFirstName(""); setCityState("");
     setEmail(""); setJoinMailingList(true); setConsent(false);
@@ -249,7 +292,7 @@ const LettersToTheToothFairy = () => {
 
       trackLetterSubmitSuccess(letterType, resolvedQuality);
       setSubmitted({
-        personalBody: buildPersonalBody(letterType, firstName.trim(), cityState.trim(), resolvedQuality, reason.trim(), helpText.trim()),
+        personalBody: buildPersonalBody(letterType, firstName.trim(), cityState.trim(), resolvedQuality, reason.trim(), helpText.trim(), letterType === "from" ? occasion : null),
         quality: resolvedQuality, reason: reason.trim(), helpText: helpText.trim(),
         firstName: firstName.trim(), cityState: cityState.trim(), wallOptIn,
       });
@@ -390,6 +433,7 @@ const LettersToTheToothFairy = () => {
                   letterType={letterType!}
                   letterBody={submitted.personalBody}
                   childFirstName={submitted.firstName}
+                  occasion={letterType === "from" ? occasion ?? undefined : undefined}
                 />
 
                 <p className="font-display font-semibold text-foreground mt-12 mb-4">Share the story</p>
@@ -427,18 +471,29 @@ const LettersToTheToothFairy = () => {
               </>
             ) : (
               <>
-                <button type="button" onClick={() => setLetterType(null)} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6">
+                <button type="button" onClick={() => { setLetterType(null); setOccasion(null); }} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6">
                   <ArrowLeft className="w-4 h-4" /> Choose a different letter
                 </button>
                 <div className="text-center mb-10">
                   <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
-                    {letterType === "to" ? "Write TO the Tooth Fairy" : "Write FROM the Tooth Fairy"}
+                    {letterType === "to"
+                      ? "Write TO the Tooth Fairy"
+                      : occasion
+                        ? OCCASIONS[occasion].heading
+                        : "Write FROM the Tooth Fairy"}
                   </h2>
                   <p className="text-muted-foreground max-w-lg mx-auto">
                     {letterType === "to"
                       ? "A parent or guardian fills this in on their child's behalf."
-                      : "Fill this in as the Tooth Fairy's reply to your child."}
+                      : occasion
+                        ? OCCASIONS[occasion].intro
+                        : "Fill this in as the Tooth Fairy's reply to your child."}
                   </p>
+                  {letterType === "from" && occasion && (
+                    <button type="button" onClick={() => setOccasion(null)} className="mt-2 text-sm text-primary hover:underline">
+                      Make a regular letter instead
+                    </button>
+                  )}
                 </div>
 
                 <form onSubmit={handleSubmit} onFocus={onFieldFocus} className="space-y-6">

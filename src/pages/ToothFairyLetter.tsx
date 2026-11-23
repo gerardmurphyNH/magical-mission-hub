@@ -179,7 +179,7 @@ const faqs = [
   {
     question: "Can I use this as a Tooth Fairy goodbye letter?",
     answer:
-      "Yes. Some families write a Tooth Fairy goodbye letter when a child is ready to move on from the tradition - a warm final note that thanks them for every tooth and celebrates how much they've grown. Fill the blanks with the qualities you've watched grow over the years, and let the last line be a gentle send-off. There are short goodbye notes for the last tooth on this page too.",
+      "Yes. Some families write a Tooth Fairy goodbye letter when a child is ready to move on from the tradition - a warm final note that thanks them for every tooth and celebrates how much they've grown. Fill the blanks with the qualities you've watched grow over the years, and let the last line be a gentle send-off. There is also a free printable Tooth Fairy goodbye letter for the last tooth on this page, plus short goodbye notes.",
   },
   {
     question: "Can you fill in the Tooth Fairy letter for me?",
@@ -203,6 +203,7 @@ const faqs = [
 const noteGroups = [
   {
     id: "first-tooth-notes",
+    printable: "first-tooth",
     heading: "Notes for a first lost tooth",
     notes: [
       "Your very first tooth. I keep a special drawer for first ones, and yours is in it now.",
@@ -224,6 +225,7 @@ const noteGroups = [
   },
   {
     id: "late-notes",
+    printable: "late",
     heading: "When the Tooth Fairy is late (or the tooth goes missing)",
     notes: [
       "I'm sorry I'm late. There were more teeth than stars last night, and I wanted to give yours the time it deserved.",
@@ -234,6 +236,7 @@ const noteGroups = [
   },
   {
     id: "goodbye-notes",
+    printable: "goodbye",
     heading: "Goodbye notes for the last tooth",
     notes: [
       "This was your last baby tooth, and my last visit. I kept a little of every quality you gave me. You grew all of it yourself.",
@@ -262,6 +265,38 @@ const legacyCopy = (text: string): boolean => {
   document.body.removeChild(ta);
   return ok;
 };
+
+// Printable letter variants, rendered from scripts/printables/build-letter-variants.py.
+const letterVariants = [
+  {
+    id: "first-tooth",
+    heading: "First Tooth Letter from the Tooth Fairy",
+    blurb: "For the very first one: a note about the shelf where she keeps first teeth, with blanks for the quality she found.",
+    file: "tooth-fairy-first-tooth-letter",
+    alt: "Free printable first tooth letter from the Tooth Fairy with blanks for the child's name and the special quality inside their first lost tooth",
+  },
+  {
+    id: "goodbye",
+    heading: "Tooth Fairy Goodbye Letter",
+    blurb: "For the last baby tooth: a warm send-off that tells your child the good things they grew are theirs to keep.",
+    file: "tooth-fairy-goodbye-letter",
+    alt: "Free printable Tooth Fairy goodbye letter for a child's last baby tooth, with blanks for the quality she will remember most",
+  },
+  {
+    id: "late",
+    heading: "Tooth Fairy Late Letter (Sorry I'm Late)",
+    blurb: "For the night she didn't make it: an apology that never blames your child and makes the wait part of the story.",
+    file: "tooth-fairy-late-letter",
+    alt: "Free printable Tooth Fairy late letter apologizing for a missed night, with a blank for the special quality found inside the tooth",
+  },
+  {
+    id: "to-the-tooth-fairy",
+    heading: "Letter to the Tooth Fairy (for Kids to Fill In)",
+    blurb: "For your child to write: their name, the quality they think is inside, and how she should use it. Big lines and tick circles for little hands.",
+    file: "letter-to-the-tooth-fairy-from-child",
+    alt: "Free printable letter to the Tooth Fairy for kids to fill in, with lines for their name, the day they lost their tooth, and circles to choose the quality inside",
+  },
+];
 
 const CopyableNote = ({ text, group }: { text: string; group: string }) => {
   const [copied, setCopied] = useState(false);
@@ -445,6 +480,18 @@ const structuredData = {
         url: PUBLISHER_URL,
       },
     },
+    ...letterVariants.map((v) => ({
+      "@type": "ImageObject",
+      contentUrl: `https://wigglytoothworkshop.com/downloads/${v.file}.jpg`,
+      url: `https://wigglytoothworkshop.com/downloads/${v.file}.jpg`,
+      name: v.heading,
+      description: v.alt,
+      creditText: "Wiggly Tooth Workshop",
+      creator: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: PUBLISHER_URL },
+      copyrightNotice: "© 2026 Wiggly Tooth Workshop",
+      license: PAGE_URL,
+      acquireLicensePage: "https://wigglytoothworkshop.com/terms",
+    })),
     {
       "@type": "FAQPage",
       mainEntity: faqs.map((faq) => ({
@@ -652,6 +699,7 @@ const ToothFairyLetter = () => {
             {[
               ["#template", "Blank template"],
               ["#example", "Filled-in example"],
+              ["#more-letters", "First tooth, goodbye & late letters"],
               ["#how-to-fill-in", "How to fill it in"],
               ["#short-notes", "Short notes"],
               ["#faq", "FAQ"],
@@ -848,6 +896,79 @@ const ToothFairyLetter = () => {
             </div>
           </div>
         </div>
+
+        {/* ── More printable letters ─────────────────────────── */}
+        <section id="more-letters" className="py-16 md:py-20 bg-primary/5 border-b border-border scroll-mt-20">
+          <div className="container px-6 max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
+                Free · No email required
+              </span>
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
+                More Printable Tooth Fairy Letters
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Letters for the moments families ask about most: the very first tooth, the
+                last one, the night she ran late, and a letter for your child to write to her.
+              </p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2">
+              {letterVariants.map((v) => (
+                <article
+                  key={v.id}
+                  id={`letter-${v.id}`}
+                  className="magical-card flex flex-col scroll-mt-24"
+                >
+                  <a href={`/downloads/${v.file}.jpg`} target="_blank" rel="noopener noreferrer" className="block mb-5">
+                    <img
+                      src={`/downloads/${v.file}.jpg`}
+                      alt={v.alt}
+                      width={1530}
+                      height={1980}
+                      loading="lazy"
+                      className="w-full max-w-[15rem] mx-auto rounded-lg bg-white border border-border shadow-sm hover:-translate-y-0.5 transition-transform"
+                    />
+                  </a>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">{v.heading}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">{v.blurb}</p>
+                  <div className="flex flex-col gap-2.5">
+                    <Button variant="magical" asChild className="w-full">
+                      <a
+                        href={`/downloads/${v.file}.pdf`}
+                        download={`${v.file}.pdf`}
+                        onClick={() => trackEvent("printable_letter_download", { variant: v.id, format: "pdf" })}
+                      >
+                        <Download className="w-4 h-4" /> Download PDF
+                      </a>
+                    </Button>
+                    <Button variant="outline" asChild className="w-full">
+                      <a
+                        href={`/downloads/${v.file}.jpg`}
+                        download={`${v.file}.jpg`}
+                        onClick={() => trackEvent("printable_letter_download", { variant: v.id, format: "jpg" })}
+                      >
+                        <ImageIcon className="w-4 h-4" /> Download JPG
+                      </a>
+                    </Button>
+                  </div>
+                  <p className="mt-3 text-sm text-center">
+                    <Link
+                      to={
+                        v.id === "to-the-tooth-fairy"
+                          ? "/letters-to-the-tooth-fairy?type=to"
+                          : `/letters-to-the-tooth-fairy?type=from&occasion=${v.id}`
+                      }
+                      onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: `printable_personalize:${v.id}` })}
+                      className="text-primary font-medium hover:underline"
+                    >
+                      Or personalize it: we'll fill it in for you, free
+                    </Link>
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* ── How to personalise ───────────────────────────────── */}
         <section id="how-to-fill-in" className="py-16 md:py-20 bg-secondary/20 border-b border-border scroll-mt-20">
@@ -1102,6 +1223,13 @@ const ToothFairyLetter = () => {
                       <CopyableNote key={note} text={note} group={group.id} />
                     ))}
                   </ul>
+                  {"printable" in group && group.printable && (
+                    <p className="mt-3 text-sm">
+                      <a href={`#letter-${group.printable}`} className="text-primary font-medium hover:underline">
+                        Want a full letter instead? See the printable version
+                      </a>
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

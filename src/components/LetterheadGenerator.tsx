@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Download, FileText, Image as ImageIcon } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import type { LetterType } from "@/lib/letters";
@@ -7,6 +7,8 @@ interface LetterheadGeneratorProps {
   letterType: LetterType;
   letterBody: string;
   childFirstName?: string;
+  /** first-tooth | goodbye | late, when opened from a matching printable */
+  occasion?: string;
 }
 
 const MASTHEAD: Record<LetterType, string> = {
@@ -21,13 +23,32 @@ const MASTHEAD: Record<LetterType, string> = {
  * embedding that same high-resolution capture into a single jsPDF page sized
  * to a US Letter sheet, so what prints matches what's on screen exactly.
  */
-const LetterheadGenerator = ({ letterType, letterBody, childFirstName }: LetterheadGeneratorProps) => {
+const LetterheadGenerator = ({ letterType, letterBody, childFirstName, occasion }: LetterheadGeneratorProps) => {
   const pageRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState<"pdf" | "jpg" | null>(null);
+  // The frame is a fixed letter shape with overflow hidden, so long answers used
+  // to push the ending and footer off the page (and out of the PDF/JPG). Shrink
+  // the body text in small steps until everything fits, never below 11px.
+  const [bodyFontSize, setBodyFontSize] = useState(15);
   const [error, setError] = useState<string | null>(null);
 
   const paragraphs = letterBody.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
   const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
+  useLayoutEffect(() => {
+    const inner = innerRef.current;
+    const body = bodyRef.current;
+    if (!inner || !body) return;
+    let size = 15;
+    body.style.fontSize = `${size}px`;
+    while (inner.scrollHeight > inner.clientHeight + 1 && size > 11) {
+      size -= 0.5;
+      body.style.fontSize = `${size}px`;
+    }
+    setBodyFontSize(size);
+  }, [letterBody]);
 
   const renderPng = async (): Promise<string | null> => {
     const node = pageRef.current;
@@ -48,7 +69,7 @@ const LetterheadGenerator = ({ letterType, letterBody, childFirstName }: Letterh
       a.href = dataUrl;
       a.download = `letter-${letterType}-the-tooth-fairy.png`;
       a.click();
-      trackEvent("letterhead_download", { letter_type: letterType, file_type: "image" });
+      trackEvent("letterhead_download", { letter_type: letterType, file_type: "image", occasion: occasion ?? "standard" });
     } catch {
       setError("Couldn't create the image. Please try again.");
     } finally {
@@ -78,7 +99,7 @@ const LetterheadGenerator = ({ letterType, letterBody, childFirstName }: Letterh
       const x = (pageW - w) / 2, y = (pageH - h) / 2;
       doc.addImage(dataUrl, "PNG", x, y, w, h);
       doc.save(`letter-${letterType}-the-tooth-fairy.pdf`);
-      trackEvent("letterhead_download", { letter_type: letterType, file_type: "pdf" });
+      trackEvent("letterhead_download", { letter_type: letterType, file_type: "pdf", occasion: occasion ?? "standard" });
     } catch {
       setError("Couldn't create the PDF. Please try again.");
     } finally {
@@ -103,15 +124,15 @@ const LetterheadGenerator = ({ letterType, letterBody, childFirstName }: Letterh
           <span key={i} style={{ position: "absolute", left: `${l}%`, top: `${t}%`, fontSize: 14, color: "#C9A227" }}>✦</span>
         ))}
 
-        <div className="relative h-full flex flex-col" style={{ padding: "56px 46px 40px" }}>
+        <div ref={innerRef} className="relative h-full flex flex-col" style={{ padding: "56px 46px 40px" }}>
           <p style={{ textAlign: "center", fontSize: 12, letterSpacing: 3, textTransform: "uppercase", color: "#8B6F1A", marginBottom: 6 }}>
             ✨ {MASTHEAD[letterType]} ✨
           </p>
           <div style={{ borderBottom: "1px solid #D9C68A", margin: "0 auto 28px", width: "60%" }} />
 
-          <div className="flex-1" style={{ color: "#2A2540", fontSize: 15, lineHeight: 1.85 }}>
+          <div ref={bodyRef} className="flex-1" style={{ color: "#2A2540", fontSize: bodyFontSize, lineHeight: 1.85 }}>
             {paragraphs.map((p, i) => (
-              <p key={i} style={{ margin: "0 0 16px" }}>{p}</p>
+              <p key={i} style={{ margin: "0 0 1.07em" }}>{p}</p>
             ))}
           </div>
 
