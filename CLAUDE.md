@@ -48,7 +48,6 @@ src/
 └── main.tsx             # Entry point
 
 public/
-├── CNAME                # Legacy GitHub Pages file (holds old tooth-safe.com); Netlify ignores it
 ├── favicon.ico          # Site favicon
 ├── robots.txt           # SEO robots file
 ├── sitemap.xml          # SEO sitemap
