@@ -59,9 +59,6 @@ public/
 netlify/functions/       # submit-letter, moderate-letter, join-workshop, etc.
 netlify.toml             # Build, functions dir, redirects, app-shell fallback
 scripts/printables/      # HTML sources for downloadable PDFs/JPGs (regenerate commands inside)
-
-.github/workflows/
-└── deploy.yml           # Legacy GitHub Pages deploy - publishes to an unused github.io URL
 ```
 
 ## Development
@@ -151,7 +148,7 @@ The live site is the Netlify project `chic-queijadas-c602d3` (site id `6a7c3674-
 - **If merges stop deploying:** check Netlify credits first. Builds are skipped with "account credit usage exceeded" when the account runs out (this happened in Nov 2026).
 - **DNS** (Squarespace Domains): the apex points at Netlify's load balancer (`75.2.60.5`, `99.83.231.61`) and `www` is a CNAME to `chic-queijadas-c602d3.netlify.app`.
 
-**Legacy, don't use:** before 2026-11-23 Netlify built from a second repo, `gerardmurphyNH/wiggly-tooth-workshop`, which had to be synced by hand. It's no longer linked. `.github/workflows/deploy.yml` still pushes each merge to GitHub Pages at an unused github.io URL; it is not the live site.
+**Legacy, don't use:** before 2026-11-23 Netlify built from a second repo, `gerardmurphyNH/wiggly-tooth-workshop`, which had to be synced by hand. It's no longer linked. The old GitHub Pages workflow was removed on 2026-11-23. The build and SEO tests now run only in Netlify's build, where a failing test blocks the deploy and leaves the previous one live.
 
 ## Key Features
 
