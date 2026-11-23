@@ -108,7 +108,7 @@ const Printables = () => {
           Free Downloads
         </span>
 
-        <h1 className="font-display text-4xl font-bold text-foreground mb-4 leading-tight">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
           Tooth Fairy Printables
         </h1>
         <p className="text-muted-foreground text-lg leading-relaxed mb-12">
@@ -140,7 +140,7 @@ const Printables = () => {
                 <item.icon className="w-6 h-6 text-accent-foreground" />
               </div>
               <div className="flex-1">
-                <h2 className="font-display font-semibold text-foreground mb-1">{item.title}</h2>
+                <h2 className="font-display text-lg font-semibold text-foreground mb-1">{item.title}</h2>
                 <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
               </div>
               <Button variant="magical" size="sm" asChild>

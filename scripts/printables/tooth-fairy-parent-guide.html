@@ -1,0 +1,173 @@
+<!doctype html>
+<!--
+  Source for public/downloads/tooth-fairy-parent-guide.pdf and .jpg
+  (linked from /tooth-fairy-letter). Content mirrors the `qualities` and
+  `magicByQuality` lists and the animals/places lists in
+  src/pages/ToothFairyLetter.tsx - keep them in sync.
+
+  Regenerate (from the repo root):
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+      --no-pdf-header-footer --print-to-pdf=public/downloads/tooth-fairy-parent-guide.pdf \
+      scripts/printables/tooth-fairy-parent-guide.html
+    pdftoppm -jpeg -jpegopt quality=85 -r 150 -singlefile \
+      public/downloads/tooth-fairy-parent-guide.pdf public/downloads/tooth-fairy-parent-guide
+  Check it is still exactly 1 page: pdfinfo public/downloads/tooth-fairy-parent-guide.pdf
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How to Write Your Tooth Fairy Letter - A Parent Guide | Wiggly Tooth Workshop</title>
+<meta name="author" content="Wiggly Tooth Workshop">
+<style>
+  @page { size: letter; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #2b2a4a;
+    --muted: #5f5d7a;
+    --accent: #5b4fa3;
+    --tint: #f1eefb;
+    --gold: #e8a33d;
+    --line: #dcd7ef;
+  }
+  html, body { width: 8.5in; height: 11in; }
+  body {
+    font-family: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    font-size: 9.6pt;
+    line-height: 1.38;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 8.5in;
+    height: 11in;
+    padding: 0.5in 0.55in 0.42in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  h1, h2, h3, .label { font-family: Futura, "Century Gothic", "Avenir Next", sans-serif; }
+  header { text-align: center; padding-bottom: 9pt; border-bottom: 1.5pt solid var(--line); }
+  .kicker { font-family: Futura, sans-serif; letter-spacing: 0.18em; font-size: 8pt; text-transform: uppercase; color: var(--accent); margin-bottom: 4pt; }
+  h1 { font-size: 23pt; font-weight: 500; line-height: 1.1; color: var(--ink); }
+  .sub { color: var(--muted); font-size: 10.5pt; margin-top: 5pt; }
+  .intro { font-size: 10pt; color: var(--muted); max-width: 6.2in; margin: 7pt auto 0; }
+
+  section { margin-top: 11pt; }
+  h2 { font-size: 13.5pt; font-weight: 500; color: var(--accent); display: flex; align-items: baseline; gap: 7pt; }
+  h2 .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 17pt; height: 17pt; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 9.5pt; flex: none;
+    transform: translateY(-1pt);
+  }
+  .lede { color: var(--muted); font-style: italic; margin: 2pt 0 6pt; }
+
+  .qualities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5pt; }
+  .q { background: var(--tint); border-radius: 6pt; padding: 5pt 7pt 6pt; }
+  .q .label { font-size: 10pt; color: var(--accent); font-weight: 500; }
+  .q p { font-size: 8.3pt; color: var(--ink); line-height: 1.28; margin-top: 1pt; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; }
+  h3 { font-size: 10.5pt; font-weight: 500; color: var(--ink); margin-bottom: 4pt; }
+  ul { list-style: none; }
+  li { padding: 1.6pt 0 1.6pt 13pt; position: relative; font-size: 9.2pt; border-bottom: 0.6pt solid var(--line); }
+  li:last-child { border-bottom: none; }
+  li::before { content: "\2726"; position: absolute; left: 0; top: 1.8pt; color: var(--gold); font-size: 8pt; }
+  li b { font-weight: 600; }
+
+  .match { width: 100%; border-collapse: collapse; margin-top: 2pt; }
+  .match td { padding: 3.2pt 6pt; border-bottom: 0.6pt solid var(--line); vertical-align: top; font-size: 9.2pt; }
+  .match tr:last-child td { border-bottom: none; }
+  .match td.k { font-family: Futura, sans-serif; color: var(--accent); width: 0.95in; white-space: nowrap; font-size: 10pt; }
+  .match td.v { font-style: italic; }
+
+  .tip {
+    margin-top: 9pt; background: #fdf5e7; border-left: 3pt solid var(--gold);
+    padding: 6pt 10pt; border-radius: 0 6pt 6pt 0; font-size: 9.3pt;
+  }
+  .tip b { font-family: Futura, sans-serif; font-weight: 500; color: #9a6514; }
+
+  footer {
+    margin-top: auto; padding-top: 7pt; border-top: 1pt solid var(--line);
+    display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted);
+  }
+  footer .site { font-family: Futura, sans-serif; color: var(--accent); letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="kicker">Free parent guide</div>
+    <h1>How to Write Your Tooth Fairy Letter</h1>
+    <p class="sub">Two choices make the letter feel true: the quality inside the tooth, and what she did with its magic.</p>
+  </header>
+
+  <section>
+    <h2><span class="num">1</span> Choose your child's quality</h2>
+    <p class="lede">Think of a real moment when you noticed this quality beginning to grow. The Tooth Fairy notices the small moments adults sometimes overlook.</p>
+    <div class="qualities">
+      <div class="q"><div class="label">Courage</div><p>Trying something new, speaking up, sleeping alone, joining a team, going to the dentist</p></div>
+      <div class="q"><div class="label">Kindness</div><p>Helping a sibling, including someone, comforting a friend, sharing without being asked</p></div>
+      <div class="q"><div class="label">Patience</div><p>Practicing something difficult, waiting calmly, sticking with a challenge, learning a new skill</p></div>
+      <div class="q"><div class="label">Creativity</div><p>Drawing, building, inventing stories, making music, solving problems in a new way</p></div>
+      <div class="q"><div class="label">Curiosity</div><p>Asking thoughtful questions, exploring how things work, noticing details adults miss</p></div>
+      <div class="q"><div class="label">Persistence</div><p>Continuing after frustration, trying again after mistakes, finishing something hard</p></div>
+      <div class="q"><div class="label">Wonder</div><p>Noticing nature, stars, animals, clouds, tiny details, or seeing magic in ordinary things</p></div>
+      <div class="q"><div class="label">Friendship</div><p>Making someone feel included, listening carefully, forgiving someone, being loyal</p></div>
+      <div class="q"><div class="label">Confidence</div><p>Trying something independently, performing, raising a hand, sharing an idea</p></div>
+      <div class="q"><div class="label">Helpfulness</div><p>Pitching in at home, cleaning up, helping a younger child, offering to solve a problem</p></div>
+      <div class="q"><div class="label">Imagination</div><p>Pretending, storytelling, building worlds, asking "what if?" questions</p></div>
+      <div class="q"><div class="label">Honesty</div><p>Telling the truth, owning a mistake, being trusted with something important</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span> Choose what she did with the magic</h2>
+    <p class="lede">The Tooth Fairy works in quiet ways. She doesn't need giant miracles. Choose something connected to your child's world.</p>
+    <div class="two">
+      <div>
+        <h3>Animals your child loves</h3>
+        <ul>
+          <li>Loves <b>owls</b>: helped a baby owl safely find its nest</li>
+          <li>Loves <b>dogs</b>: helped a lost puppy hear its owner calling</li>
+          <li>Loves <b>turtles</b>: helped a tiny turtle reach the water</li>
+          <li>Loves <b>butterflies</b>: helped one find flowers after a storm</li>
+          <li>Loves <b>dolphins</b>: guided them through dark water</li>
+          <li>Loves <b>rabbits</b>: helped one find a safe hiding place</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Places your child knows</h3>
+        <ul>
+          <li>A playground light flickering back on</li>
+          <li>A garden getting just enough rain</li>
+          <li>A squirrel finding its way across the yard</li>
+          <li>A bird finding a safe branch in the wind</li>
+          <li>A neighbour's flower blooming at just the right time</li>
+          <li>A lost mitten noticed before it disappeared forever</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span> Or match the magic to the quality</h2>
+    <table class="match">
+      <tr><td class="k">Courage</td><td class="v">Tonight, I used a little bit of that courage to help a nervous fox kit step out of its den and find its family.</td></tr>
+      <tr><td class="k">Kindness</td><td class="v">Tonight, I used a little bit of that kindness to help a lonely child feel brave enough to ask someone to play.</td></tr>
+      <tr><td class="k">Patience</td><td class="v">Tonight, I used a little bit of that patience to calm the wind just long enough for a small bird to land safely.</td></tr>
+      <tr><td class="k">Creativity</td><td class="v">Tonight, I used a little bit of that creativity to help someone solve a problem they had almost given up on.</td></tr>
+      <tr><td class="k">Wonder</td><td class="v">Tonight, I used a little bit of that wonder to make the stars shine a little brighter for someone who needed to look up.</td></tr>
+    </table>
+  </section>
+
+  <div class="tip"><b>One tip:</b> name a real moment. "You were brave when you went first at swimming" lands far deeper than "you are brave."</div>
+
+  <footer>
+    <span>Free to print and use at home or in class</span>
+    <span class="site">wigglytoothworkshop.com/tooth-fairy-letter</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -133,7 +133,7 @@ const Footer = () => {
                   to="/coloring-page"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Coloring page (free)
+                  Coloring pages (free)
                 </Link>
               </li>
               <li>

@@ -35,6 +35,11 @@ const faqs = [
       "You can say that the money is a thank-you and a celebration of the child growing up. If your child is ready for more, you can explain that parents help keep the tradition alive — and that being the one who keeps a little wonder going for someone else is its own kind of magic.",
   },
   {
+    question: "What should a teacher say if a student asks if the Tooth Fairy is real?",
+    answer:
+      "Neither confirm nor deny. Every family handles the Tooth Fairy differently, so a teacher can honor the question and hand it back to families: \"That's a great question to ask at home. Different families believe different things.\" Then turn the class toward wonder, for example by asking what special quality they think a tooth might hold.",
+  },
+  {
     question: "How do I keep an older child from ruining it for younger siblings?",
     answer:
       "Invite them into the tradition. Let them know that growing up sometimes means becoming one of the people who helps keep wonder alive for someone else. Most children respond well to being trusted with that — it gives them a new role instead of just taking something away.",
@@ -71,7 +76,7 @@ const WhatToSayToothFairy = () => {
             {
               "@type": "Article",
               datePublished: "2026-06-01",
-              dateModified: "2026-07-10",
+              dateModified: "2026-11-23",
               headline: "What to Say When Your Child Asks If the Tooth Fairy Is Real",
               url: "https://wigglytoothworkshop.com/what-to-say-when-child-asks-if-tooth-fairy-is-real",
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop" },
@@ -162,7 +167,7 @@ const WhatToSayToothFairy = () => {
           <section className="py-12 md:py-16 bg-background">
             <div className="container px-6 max-w-2xl mx-auto">
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8">
-                A Gentle Answer You Can Use
+                How to Answer: A Gentle Script You Can Use
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Here is one way to answer when your child asks if the Tooth Fairy is real:
@@ -295,6 +300,41 @@ const WhatToSayToothFairy = () => {
             </div>
           </section>
 
+          {/* Teachers */}
+          <section className="py-12 md:py-16 bg-primary/5">
+            <div className="container px-6 max-w-2xl mx-auto">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+                If You're a Teacher and a Student Asks
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed mb-6">
+                <p>
+                  It happens at show and tell: one child lost a tooth, another says an older
+                  sibling told them the Tooth Fairy isn't real, and the whole class looks at you.
+                </p>
+                <p>
+                  A teacher's job here is different from a parent's. Every family handles this
+                  in its own way, so the kindest answer neither confirms nor denies. It honors
+                  the question, leaves the answer to each family, and turns the class back to
+                  wonder.
+                </p>
+              </div>
+              <blockquote className="rounded-2xl border border-primary/20 bg-background px-8 md:px-10 py-7 text-foreground leading-loose text-[15px] mb-6">
+                <p>
+                  "That's a really good question, and it's a great one to ask at home. Different
+                  families believe different things. What I'd love to know is this: if your tooth
+                  held something special inside it, what do you think it would be?"
+                </p>
+              </blockquote>
+              <p className="text-muted-foreground leading-relaxed">
+                For a ready-made lesson built around that last question, see our free{" "}
+                <Link to="/for-teachers" className="text-primary font-medium hover:underline">
+                  lost tooth classroom activities
+                </Link>
+                .
+              </p>
+            </div>
+          </section>
+
           {/* What Not to Say */}
           <section className="py-12 md:py-16 bg-background">
             <div className="container px-6 max-w-2xl mx-auto">
@@ -380,39 +420,6 @@ const WhatToSayToothFairy = () => {
             </div>
           </section>
 
-          {/* Internal Links */}
-          <section className="py-12 md:py-16 bg-secondary/30">
-            <div className="container px-6 max-w-2xl mx-auto">
-              <h2 className="font-display text-xl font-bold text-foreground mb-3 text-center">
-                More Tooth Fairy Ideas for Families
-              </h2>
-              <p className="text-muted-foreground text-center mb-8 text-sm leading-relaxed max-w-lg mx-auto">
-                Looking for more ways to make losing a tooth feel meaningful? Explore free
-                printables, letters, coloring pages, and stories from Wiggly Tooth Workshop.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {[
-                  { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy real?", desc: "The honest answer, for children who ask" },
-                  { to: "/tooth-fairy-letter", label: "Free Tooth Fairy Letter Template", desc: "A printable letter from the Tooth Fairy for your child" },
-                  { to: "/tooth-fairy-printables", label: "Tooth Fairy Printables", desc: "Free activities and worksheets for kids" },
-                  { to: "/coloring-page", label: "Free Coloring Page", desc: "A magical scene to color and keep" },
-                  { to: "/is-the-tooth-fairy-real", label: "The Tooth Fairy story, explained", desc: "Where the tradition comes from and why it matters" },
-                ].map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                      {link.label}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{link.desc}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
           {/* Soft CTA */}
           <section className="py-16 md:py-20 night-sky-section relative overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
@@ -456,7 +463,7 @@ const WhatToSayToothFairy = () => {
         </main>
         <RelatedPages
           from="/what-to-say-when-child-asks-if-tooth-fairy-is-real"
-          links={["/tooth-fairy-letter", "/why-does-the-tooth-fairy-leave-money", "/what-does-the-tooth-fairy-do-with-teeth"]}
+          links={["/tooth-fairy-letter", "/why-does-the-tooth-fairy-leave-money", "/what-does-the-tooth-fairy-do-with-teeth", "/is-the-tooth-fairy-real", "/tooth-fairy-printables", "/coloring-page"]}
         />
         <Footer />
       </div>

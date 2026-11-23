@@ -13,8 +13,8 @@ import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
 import VirtueQuizSection from "@/components/VirtueQuizSection";
-import { YOUTUBE_VIDEO_URL } from "@/lib/config";
-import { trackCTAClick, trackEvent } from "@/lib/analytics";
+
+import { trackCTAClick } from "@/lib/analytics";
 
 const PAGE_URL = "https://wigglytoothworkshop.com/is-the-tooth-fairy-real";
 const SITE_URL = "https://wigglytoothworkshop.com/";
@@ -169,29 +169,6 @@ const faqCategories = [
 
 const faqs = faqCategories.flatMap((c) => c.faqs);
 
-const exploreLinks = [
-  {
-    to: "/what-does-the-tooth-fairy-do-with-teeth",
-    label: "What Does the Tooth Fairy Do With Teeth?",
-    desc: "Inside the workshop, and what happens after she visits.",
-  },
-  {
-    to: "/tooth-fairy-story",
-    label: "Read the Tooth Fairy Story",
-    desc: "The tale of Arlo, CeCe, and the workshop above the clouds.",
-  },
-  {
-    to: "/what-to-say-when-child-asks-if-tooth-fairy-is-real",
-    label: "What to Say When a Child Asks",
-    desc: "A guide for the conversation, when it comes.",
-  },
-  {
-    to: "/why-does-the-tooth-fairy-leave-money",
-    label: "Why Does the Tooth Fairy Leave Money?",
-    desc: "The real meaning behind the coin under the pillow.",
-  },
-];
-
 const IsToothFairyReal = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -277,14 +254,14 @@ const IsToothFairyReal = () => {
               className="inline-flex items-center gap-2 text-starlight/70 hover:text-starlight/80 transition-colors text-sm mb-12"
             >
               <ArrowLeft className="w-4 h-4" />
-              Wiggly Tooth Workshop
+              Back to Wiggly Tooth Workshop
             </Link>
 
             <p className="text-xs font-semibold uppercase tracking-widest text-primary/80 mb-6">
               A question worth asking
             </p>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-starlight leading-tight mb-8">
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-starlight leading-tight mb-8">
               Is the Tooth Fairy
               <br />
               <span className="text-primary">Real?</span>
@@ -368,7 +345,7 @@ const IsToothFairyReal = () => {
         {/* ── What if teeth hold more ── */}
         <section className="py-20 md:py-28 bg-secondary/30">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight">
               What If Teeth Hold More
               <br className="hidden sm:block" /> Than Memories?
             </h2>
@@ -459,7 +436,7 @@ const IsToothFairyReal = () => {
         {/* ── Why does she collect ── */}
         <section className="py-20 md:py-28 bg-background">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight">
               Why Does the Tooth Fairy
               <br className="hidden sm:block" /> Collect Teeth?
             </h2>
@@ -509,7 +486,7 @@ const IsToothFairyReal = () => {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary/80 mb-4 text-center">
               The Story Behind the Story
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight text-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight text-center">
               Where the Tradition
               <br className="hidden sm:block" /> Really Comes From
             </h2>
@@ -620,7 +597,7 @@ const IsToothFairyReal = () => {
           </div>
 
           <div className="container px-6 max-w-2xl mx-auto relative z-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight">
               The Hidden Work of
               <br className="hidden sm:block" /> the Tooth Fairy
             </h2>
@@ -659,7 +636,7 @@ const IsToothFairyReal = () => {
         {/* ── Proof / how do you know ── */}
         <section className="py-20 md:py-28 bg-background">
           <div className="container px-6 max-w-2xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 leading-tight">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 leading-tight">
               How Do You Know the
               <br className="hidden sm:block" /> Tooth Fairy Is Real?
             </h2>
@@ -704,7 +681,7 @@ const IsToothFairyReal = () => {
           </div>
 
           <div className="container px-6 max-w-2xl mx-auto relative z-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-starlight mb-10 text-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-starlight mb-10 text-center">
               So... Is the Tooth Fairy Real?
             </h2>
 
@@ -796,54 +773,6 @@ const IsToothFairyReal = () => {
           </div>
         </section>
 
-        {/* ── Continue exploring ── */}
-        <section className="py-20 md:py-28 bg-background">
-          <div className="container px-6 max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <Sparkles className="w-6 h-6 text-primary mx-auto mb-4" />
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
-                Continue Exploring the Workshop
-              </h2>
-              <p className="text-muted-foreground">
-                There is more to the Tooth Fairy's world than one question can hold.
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              {exploreLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => trackEvent("explore_click", { page: link.to, source: "is_tooth_fairy_real" })}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                    {link.label}
-                  </p>
-                  <p className="text-sm text-muted-foreground">{link.desc}</p>
-                </Link>
-              ))}
-            </div>
-
-            {/* Watch the film card */}
-            <a
-              href={YOUTUBE_VIDEO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent("social_click", { platform: "youtube", location: "is_tooth_fairy_real" })}
-              className="block w-full rounded-2xl bg-[hsl(244_45%_15%)] border border-primary/25 hover:border-primary/50 p-6 text-center transition-all hover:shadow-magical group"
-            >
-              <Sparkles className="w-5 h-5 text-primary mx-auto mb-3" />
-              <p className="font-display font-semibold text-starlight group-hover:text-primary transition-colors mb-1">
-                Watch the Animated Short Film
-              </p>
-              <p className="text-sm text-starlight/80">
-                See the Tooth Fairy's world come to life - free on YouTube.
-              </p>
-            </a>
-          </div>
-        </section>
-
         {/* ── Join the Workshop ── */}
         <section className="py-16 bg-secondary/30">
           <div className="container px-6 max-w-xl mx-auto text-center">
@@ -871,7 +800,7 @@ const IsToothFairyReal = () => {
 
       <RelatedPages
         from="/is-the-tooth-fairy-real"
-        links={["/what-to-say-when-child-asks-if-tooth-fairy-is-real", "/what-does-the-tooth-fairy-do-with-teeth", "/tooth-fairy-letter"]}
+        links={["/what-to-say-when-child-asks-if-tooth-fairy-is-real", "/what-does-the-tooth-fairy-do-with-teeth", "/tooth-fairy-letter", "/tooth-fairy-story", "/why-does-the-tooth-fairy-leave-money", "/watch"]}
       />
       <Footer />
     </div>

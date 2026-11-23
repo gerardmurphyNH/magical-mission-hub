@@ -260,7 +260,7 @@ const HowMuchDoesTheToothFairyLeave = () => {
           For Parents
         </span>
 
-        <h1 className="font-display text-4xl font-bold text-foreground mb-6 leading-tight">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
           How Much Does the Tooth Fairy Leave?
         </h1>
 

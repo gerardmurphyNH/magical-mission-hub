@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
-  ArrowRight,
   Download,
   Sparkles,
   Check,
+  Copy,
   FileText,
   Mail,
   AlertCircle,
@@ -22,6 +22,7 @@ import {
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import RelatedPages from "@/components/RelatedPages";
+import ToothFairyLetterSheet from "@/components/ToothFairyLetterSheet";
 import PageSeo from "@/components/PageSeo";
 import {
   trackToothFairyLetterPdfDownload,
@@ -42,15 +43,6 @@ const stars = Array.from({ length: 12 }, (_, i) => ({
   top: `${(i * 29 + 13) % 100}%`,
   delay: `${(i * 0.19) % 2}s`,
 }));
-
-// Blank fill-in line for the letter template
-const Blank = ({ wide = false }: { wide?: boolean }) => (
-  <span
-    className={`inline-block border-b-2 border-foreground/25 ${
-      wide ? "min-w-[220px]" : "min-w-[140px]"
-    } mx-1 align-bottom`}
-  />
-);
 
 const qualities = [
   {
@@ -148,36 +140,6 @@ const magicByQuality = [
   },
 ];
 
-const internalLinks = [
-  {
-    label: "Letters to the Tooth Fairy",
-    teaser: "Read letters from other families — and share your child's own to our gallery.",
-    to: "/letters-to-the-tooth-fairy",
-  },
-  {
-    label: "Free Tooth Fairy Printables",
-    teaser: "Worksheet, coloring page, and teacher guide — all free.",
-    to: "/tooth-fairy-printables",
-  },
-  {
-    label: "Free Tooth Fairy Coloring Page",
-    teaser: "A single printable coloring page for kids ages 3–10. No sign-up.",
-    to: "/coloring-page",
-  },
-  {
-    label: "Is the Tooth Fairy Real?",
-    teaser:
-      "Yes. She just does her work in ways most people don't see. Here's the honest answer.",
-    to: "/is-the-tooth-fairy-real",
-  },
-  {
-    label: "The Tooth Fairy Story, Explained",
-    teaser:
-      "Where the tradition comes from, why it exists in almost every culture, and what it's really about.",
-    to: "/is-the-tooth-fairy-real",
-  },
-];
-
 const faqs = [
   {
     question: "What should a Tooth Fairy letter say?",
@@ -217,9 +179,131 @@ const faqs = [
   {
     question: "Can I use this as a Tooth Fairy goodbye letter?",
     answer:
-      "Yes. Some families write a Tooth Fairy goodbye letter when a child is ready to move on from the tradition - a warm final note that thanks them for every tooth and celebrates how much they've grown. Fill the blanks with the qualities you've watched grow over the years, and let the last line be a gentle send-off.",
+      "Yes. Some families write a Tooth Fairy goodbye letter when a child is ready to move on from the tradition - a warm final note that thanks them for every tooth and celebrates how much they've grown. Fill the blanks with the qualities you've watched grow over the years, and let the last line be a gentle send-off. There are short goodbye notes for the last tooth on this page too.",
+  },
+  {
+    question: "Can you fill in the Tooth Fairy letter for me?",
+    answer:
+      "Yes. Our free letter maker writes a personalized letter from the Tooth Fairy for you: choose the quality inside your child's tooth and what the Tooth Fairy did with its magic, add their first name, and download the finished letter as a PDF or JPG to print. There's no login and no email required.",
+  },
+  {
+    question: "What should a short Tooth Fairy note say?",
+    answer:
+      "Two or three lines is plenty: thank your child for the tooth, name one real quality you found inside it, and hint at where that quality is going next. Written small, in tiny handwriting, it looks like it came from someone very small. There are ready-to-copy short notes on this page for first teeth, everyday teeth, late visits, and the last tooth.",
+  },
+  {
+    question: "What should the Tooth Fairy write if she forgot to come?",
+    answer:
+      "Keep it calm and give the tooth the importance. A line like \"Your tooth was worth waiting for - I took extra care with it, which is why I came a night late\" turns a missed night into part of the story. Leave the note with the gift the next night, and never make the child feel it was their fault.",
   },
 ];
+
+// Short notes in the Tooth Fairy's voice, grouped by the moment they're for.
+// Each group's heading uses the words parents search with.
+const noteGroups = [
+  {
+    id: "first-tooth-notes",
+    heading: "Notes for a first lost tooth",
+    notes: [
+      "Your very first tooth. I keep a special drawer for first ones, and yours is in it now.",
+      "A first tooth is a big day. Inside yours I found bravery - the quiet kind. Thank you for letting me have it.",
+      "First teeth hold the most. Yours held curiosity, and I already know where it's going.",
+      "Your first tooth now has a tiny label in my workshop. It says: kind.",
+    ],
+  },
+  {
+    id: "everyday-notes",
+    heading: "Short notes for any tooth",
+    notes: [
+      "Thank you for this tooth. It was full of patience, and someone out there needs some tonight.",
+      "Another tooth, another little piece of you out helping the world. This one carried kindness.",
+      "I noticed how brave you were this week. I found it in your tooth, too.",
+      "This tooth is going somewhere important. I can't tell you where yet.",
+      "Keep brushing. The best qualities shine through the cleanest teeth.",
+    ],
+  },
+  {
+    id: "late-notes",
+    heading: "When the Tooth Fairy is late (or the tooth goes missing)",
+    notes: [
+      "I'm sorry I'm late. There were more teeth than stars last night, and I wanted to give yours the time it deserved.",
+      "Your tooth was worth waiting for. I took extra care with it, which is why I came a night late.",
+      "You were sleeping so lightly last night that I didn't want to wake you. Thank you for waiting one more night.",
+      "Don't worry about the tooth that went missing. I always know where teeth end up, and I found what was inside it.",
+    ],
+  },
+  {
+    id: "goodbye-notes",
+    heading: "Goodbye notes for the last tooth",
+    notes: [
+      "This was your last baby tooth, and my last visit. I kept a little of every quality you gave me. You grew all of it yourself.",
+      "Every tooth you gave me held something good. From now on, I'm leaving the rest with you.",
+      "My work with you is done. The kindness, the courage, the curiosity - those were always yours.",
+      "You figured out my secret. That means you're part of it now.",
+    ],
+  },
+];
+
+// Older copy path for browsers or embeds that block the async clipboard API.
+const legacyCopy = (text: string): boolean => {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch {
+    ok = false;
+  }
+  document.body.removeChild(ta);
+  return ok;
+};
+
+const CopyableNote = ({ text, group }: { text: string; group: string }) => {
+  const [copied, setCopied] = useState(false);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const copy = async () => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    } catch {
+      ok = legacyCopy(text);
+    }
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      trackEvent("tooth_fairy_note_copy", { group });
+    } else if (textRef.current) {
+      // Last resort: select the note so the visitor can copy it themselves.
+      const range = document.createRange();
+      range.selectNodeContents(textRef.current);
+      const sel = window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+    }
+  };
+  return (
+    <li className="flex items-start justify-between gap-3 rounded-xl border border-border bg-card p-4">
+      <p className="font-display text-foreground leading-relaxed">
+        &ldquo;<span ref={textRef}>{text}</span>&rdquo;
+      </p>
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? "Copied" : "Copy this note"}
+        className="shrink-0 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline underline-offset-4 mt-1"
+      >
+        {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+        {copied ? "Copied" : "Copy"}
+      </button>
+    </li>
+  );
+};
 
 // Inline signup — same pattern as TeacherPrintables, different source
 const LetterSignup = () => {
@@ -302,7 +386,7 @@ const LetterSignup = () => {
         )}
       </Button>
       {error && (
-        <div className="flex items-center gap-2 text-red-500 text-sm col-span-full">
+        <div className="flex items-center gap-2 text-destructive text-sm col-span-full">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span>{error}</span>
         </div>
@@ -340,7 +424,7 @@ const structuredData = {
     {
       "@type": "Article",
       datePublished: "2026-06-01",
-      dateModified: "2026-10-23",
+      dateModified: "2026-11-23",
       headline: "Free Printable Tooth Fairy Letter Template",
       description:
         "A free printable Tooth Fairy letter template with fill-in blanks for a child's name and the special quality found inside their lost tooth. Available as a PDF for printing or an image to save and share.",
@@ -477,31 +561,107 @@ const ToothFairyLetter = () => {
             <p className="mt-4 text-xs text-starlight/60">
               Free printable · No email required · Print at home
             </p>
+            <p className="mt-5 text-starlight/90">
+              Rather not fill it in by hand?{" "}
+              <a href="#personalized-letter" className="font-semibold text-primary underline underline-offset-4 hover:text-starlight">
+                We'll make a personalized letter for you, free
+              </a>
+            </p>
+            <p className="mt-2 text-sm text-starlight/80">
+              Just need a few lines?{" "}
+              <a href="#short-notes" className="underline underline-offset-4 hover:text-starlight">
+                Short Tooth Fairy notes and messages
+              </a>
+            </p>
           </div>
         </section>
 
-        {/* ── Interactive UGC cross-promo ──────────────────────── */}
-        <section className="py-8 bg-primary/10 border-b border-border">
-          <div className="container px-6 max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div>
-              <p className="font-display font-bold text-foreground text-lg">
-                Want to write your own letter to the Tooth Fairy?
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Share the quality in your child's tooth, read letters from other
-                families, and make a card to post.
+        {/* ── We'll fill it in for you (letter maker) ──────────── */}
+        <section id="personalized-letter" className="py-12 md:py-14 bg-primary/10 border-b border-border scroll-mt-20">
+          <div className="container px-6 max-w-3xl mx-auto">
+            <div className="text-center">
+              <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-background/70 px-3 py-1 rounded-full mb-4">
+                Free · No login · Ready in a minute
+              </span>
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
+                We can fill in the letter for you
+              </h2>
+              <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Tell us your child's name, the quality you've seen growing in them, and what
+                the Tooth Fairy did with its magic. We'll turn it into a personalized letter
+                from the Tooth Fairy, ready to download as a PDF or JPG and print. No account,
+                and no email needed.
               </p>
             </div>
-            <Button variant="hero" size="lg" asChild className="shrink-0">
+            <ol className="grid sm:grid-cols-3 gap-3 mt-8 list-none">
+              {[
+                "Choose the quality in their tooth",
+                "Pick what the magic helped",
+                "Download, print, and leave it under the pillow",
+              ].map((step, i) => (
+                <li
+                  key={step}
+                  className="flex items-start gap-3 rounded-xl bg-background/80 border border-border p-4 text-sm text-foreground"
+                >
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
+                    {i + 1}
+                  </span>
+                  <span className="leading-snug pt-0.5">{step}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+              <Button variant="hero" size="lg" asChild>
+                <Link
+                  to="/letters-to-the-tooth-fairy?type=from"
+                  onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "tooth_fairy_letter_fill_for_me" })}
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Make my child's letter
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <a href="#template">I'll fill in the blank one</a>
+              </Button>
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-5">
+              Want your child to write to her instead?{" "}
               <Link
-                to="/letters-to-the-tooth-fairy"
-                onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "tooth_fairy_letter_banner" })}
+                to="/letters-to-the-tooth-fairy?type=to"
+                onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "tooth_fairy_letter_write_to" })}
+                className="text-primary font-medium hover:underline"
               >
-                Write a Letter
+                Write a letter to the Tooth Fairy
               </Link>
-            </Button>
+              {" · "}
+              <Link
+                to="/letters-to-the-tooth-fairy#wall"
+                onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "tooth_fairy_letter_wall" })}
+                className="text-primary font-medium hover:underline"
+              >
+                Read the Wall of Stories
+              </Link>
+            </p>
           </div>
         </section>
+
+        {/* ── On this page ─────────────────────────────────────── */}
+        <nav aria-label="On this page" className="border-b border-border bg-background">
+          <div className="container px-6 max-w-3xl mx-auto py-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+            <span className="text-muted-foreground">On this page:</span>
+            {[
+              ["#template", "Blank template"],
+              ["#example", "Filled-in example"],
+              ["#how-to-fill-in", "How to fill it in"],
+              ["#short-notes", "Short notes"],
+              ["#faq", "FAQ"],
+            ].map(([href, label]) => (
+              <a key={href} href={href} className="font-medium text-primary hover:underline underline-offset-4">
+                {label}
+              </a>
+            ))}
+          </div>
+        </nav>
 
         {/* ── Download area ────────────────────────────────────── */}
         <section className="py-14 md:py-16 bg-background border-b border-border">
@@ -558,7 +718,7 @@ const ToothFairyLetter = () => {
         </section>
 
         {/* ── Letter template display ───────────────────────────── */}
-        <section className="py-16 md:py-20 bg-primary/5 border-b border-border">
+        <section id="template" className="py-16 md:py-20 bg-primary/5 border-b border-border scroll-mt-20">
           <div className="container px-6 max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
@@ -568,61 +728,25 @@ const ToothFairyLetter = () => {
                 Tooth Fairy Letter Template
               </h2>
               <p className="text-muted-foreground text-sm">
-                Fill in the blanks to personalise for your child.
+                Fill in the four blanks by hand with{" "}
+                <a href="#how-to-fill-in" className="text-primary font-medium hover:underline">
+                  our step-by-step help
+                </a>
+                , or{" "}
+                <Link
+                  to="/letters-to-the-tooth-fairy?type=from"
+                  onClick={() => trackEvent("explore_click", { page: "/letters-to-the-tooth-fairy", source: "tooth_fairy_letter_template_intro" })}
+                  className="text-primary font-medium hover:underline"
+                >
+                  let us fill it in for you
+                </Link>
+                .
               </p>
             </div>
 
-            {/* Letter card */}
+            {/* Letter: same design as the downloadable PDF/JPG */}
             <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-sm border border-primary/10">
-              {/* Letter header */}
-              <div className="bg-primary/10 px-8 py-4 flex items-center justify-center gap-2 border-b border-primary/10">
-                <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
-                <span className="text-xs uppercase tracking-widest font-semibold text-primary">
-                  From the Tooth Fairy
-                </span>
-                <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
-              </div>
-
-              {/* Letter body */}
-              <div className="bg-amber-50/40 px-8 md:px-12 py-10 space-y-5 text-foreground leading-loose text-[15px]">
-                <p>
-                  Dear <Blank />,
-                </p>
-                <p>
-                  Thank you for leaving your tooth where I could find it safely.
-                </p>
-                <p>
-                  I examined it very carefully tonight, and I discovered something special
-                  growing inside it.
-                </p>
-                <p>
-                  Your tooth held a strong spark of <Blank />.
-                </p>
-                <p>
-                  That special quality grows every time you{" "}
-                  <Blank wide />.
-                </p>
-                <p>
-                  Many grown-ups forget that children are still becoming who they are meant to
-                  be. But every lost tooth tells part of the story. Yours showed signs of
-                  someone who is learning, growing, and helping make the world a little better.
-                </p>
-                <p>
-                  Tonight, I used a little bit of the magic from your tooth to help{" "}
-                  <Blank wide />.
-                </p>
-                <p>Even small qualities can make a very big difference.</p>
-                <p>
-                  I left this money as a thank-you for your tooth and the important qualities
-                  growing inside you.
-                </p>
-                <p>
-                  Please continue brushing carefully. Clean, healthy teeth hold onto their
-                  magic much better.
-                </p>
-                <p>Use your thank-you money in a way that keeps a little goodness going.</p>
-                <p className="pt-2 font-display font-semibold text-right">— The Tooth Fairy</p>
-              </div>
+              <ToothFairyLetterSheet label="Blank Tooth Fairy letter template" />
             </div>
           </div>
         </section>
@@ -662,7 +786,7 @@ const ToothFairyLetter = () => {
         </div>
 
         {/* ── Example filled-in letter ─────────────────────────── */}
-        <section className="py-16 md:py-20 bg-background border-b border-border">
+        <section id="example" className="py-16 md:py-20 bg-background border-b border-border scroll-mt-20">
           <div className="container px-6 max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
@@ -676,57 +800,17 @@ const ToothFairyLetter = () => {
               </p>
             </div>
 
-            {/* Filled letter card */}
+            {/* Filled letter */}
             <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-sm border border-primary/10">
-              <div className="bg-primary/10 px-8 py-4 flex items-center justify-center gap-2 border-b border-primary/10">
-                <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
-                <span className="text-xs uppercase tracking-widest font-semibold text-primary">
-                  From the Tooth Fairy
-                </span>
-                <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
-              </div>
-
-              <div className="bg-amber-50/40 px-8 md:px-12 py-10 space-y-5 text-foreground leading-loose text-[15px]">
-                <p>Dear Emma,</p>
-                <p>
-                  Thank you for leaving your tooth where I could find it safely.
-                </p>
-                <p>
-                  I examined it very carefully tonight, and I discovered something special
-                  growing inside it.
-                </p>
-                <p>
-                  Your tooth held a strong spark of <span className="font-semibold text-primary">kindness</span>.
-                </p>
-                <p>
-                  That special quality grows every time you{" "}
-                  <span className="font-semibold text-primary">
-                    help others feel included and cared for
-                  </span>.
-                </p>
-                <p>
-                  Many grown-ups forget that children are still becoming who they are meant to
-                  be. But every lost tooth tells part of the story. Yours showed signs of
-                  someone who is learning, growing, and helping make the world a little better.
-                </p>
-                <p>
-                  Tonight, I used a little bit of the magic from your tooth to help{" "}
-                  <span className="font-semibold text-primary">
-                    a frightened baby owl safely find its way back to its nest
-                  </span>.
-                </p>
-                <p>Even small qualities can make a very big difference.</p>
-                <p>
-                  I left this money as a thank-you for your tooth and the important qualities
-                  growing inside you.
-                </p>
-                <p>
-                  Please continue brushing carefully. Clean, healthy teeth hold onto their
-                  magic much better.
-                </p>
-                <p>Use your thank-you money in a way that keeps a little goodness going.</p>
-                <p className="pt-2 font-display font-semibold text-right">— The Tooth Fairy</p>
-              </div>
+              <ToothFairyLetterSheet
+                label="Example Tooth Fairy letter filled in for Emma"
+                answers={{
+                  name: "Emma",
+                  quality: "kindness",
+                  grows: "help others feel included and cared for",
+                  magic: "a frightened baby owl safely find its way back to its nest",
+                }}
+              />
             </div>
           </div>
         </section>
@@ -766,7 +850,7 @@ const ToothFairyLetter = () => {
         </div>
 
         {/* ── How to personalise ───────────────────────────────── */}
-        <section className="py-16 md:py-20 bg-secondary/20 border-b border-border">
+        <section id="how-to-fill-in" className="py-16 md:py-20 bg-secondary/20 border-b border-border scroll-mt-20">
           <div className="container px-6 max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
@@ -988,8 +1072,59 @@ const ToothFairyLetter = () => {
           </div>
         </section>
 
+        {/* ── Short notes & messages ───────────────────────────── */}
+        <section
+          id="short-notes"
+          className="py-16 md:py-20 bg-primary/5 border-b border-border scroll-mt-20"
+        >
+          <div className="container px-6 max-w-2xl mx-auto">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
+              Short Tooth Fairy Notes and Messages
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              Not every visit needs a full letter. Sometimes a few lines on a small scrap of
+              paper is exactly right. Copy any of these, swap in a quality you have actually
+              seen growing in your child, and leave it under the pillow.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-10">
+              One tip: write small. A note in tiny handwriting looks like it came from someone
+              very small.
+            </p>
+
+            <div className="space-y-10">
+              {noteGroups.map((group) => (
+                <div key={group.id}>
+                  <h3 className="font-display text-xl font-semibold text-foreground mb-4">
+                    {group.heading}
+                  </h3>
+                  <ul className="space-y-3">
+                    {group.notes.map((note) => (
+                      <CopyableNote key={note} text={note} group={group.id} />
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-muted-foreground leading-relaxed mt-10">
+              For a first tooth, the note pairs well with a{" "}
+              <Link to="/first-tooth-tradition" className="text-primary font-medium hover:underline">
+                free Tooth Fairy certificate
+              </Link>
+              . Want something longer? Use the printable letter template above, or{" "}
+              <Link
+                to="/letters-to-the-tooth-fairy"
+                className="text-primary font-medium hover:underline"
+              >
+                type your own letter and print it
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
+
         {/* ── FAQ ──────────────────────────────────────────────── */}
-        <section className="py-16 md:py-20 bg-secondary/20 border-b border-border">
+        <section id="faq" className="py-16 md:py-20 bg-secondary/20 border-b border-border scroll-mt-20">
           <div className="container px-6 max-w-2xl mx-auto">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
               Tooth Fairy Letter FAQs
@@ -1020,42 +1155,6 @@ const ToothFairyLetter = () => {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </section>
-
-        {/* ── Internal links ───────────────────────────────────── */}
-        <section className="py-16 md:py-20 bg-background border-b border-border">
-          <div className="container px-6">
-            <div className="text-center mb-10">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
-                More Tooth Fairy Printables and Ideas
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Looking for more ways to make losing a tooth feel meaningful? Explore more
-                free Tooth Fairy printables, coloring pages, classroom activities, and stories
-                from Wiggly Tooth Workshop.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-              {internalLinks.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5 flex flex-col gap-2"
-                >
-                  <h3 className="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {item.label}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">
-                    {item.teaser}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary mt-1">
-                    Explore
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </span>
-                </Link>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -1131,7 +1230,7 @@ const ToothFairyLetter = () => {
 
         <RelatedPages
           from="/tooth-fairy-letter"
-          links={["/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/what-to-say-when-child-asks-if-tooth-fairy-is-real"]}
+          links={["/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/what-to-say-when-child-asks-if-tooth-fairy-is-real", "/letters-to-the-tooth-fairy", "/tooth-fairy-printables", "/coloring-page"]}
         />
         <Footer />
         </main>

@@ -12,8 +12,8 @@ import Footer from "@/components/Footer";
 import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
-import { YOUTUBE_VIDEO_URL } from "@/lib/config";
-import { trackCTAClick, trackEvent } from "@/lib/analytics";
+
+import { trackCTAClick } from "@/lib/analytics";
 
 const PAGE_URL = "https://wigglytoothworkshop.com/what-does-the-tooth-fairy-look-like";
 const SITE_URL = "https://wigglytoothworkshop.com/";
@@ -148,7 +148,7 @@ const WhatDoesTheToothFairyLookLike = () => {
           </div>
           <div className="container px-6 relative z-10 max-w-2xl mx-auto text-center">
             <Link to="/" className="inline-flex items-center gap-2 text-starlight/70 hover:text-starlight transition-colors text-sm mb-10">
-              <ArrowLeft className="w-4 h-4" /> Wiggly Tooth Workshop
+              <ArrowLeft className="w-4 h-4" /> Back to Wiggly Tooth Workshop
             </Link>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-starlight mb-5 leading-tight">
               What Does the <span className="text-primary">Tooth Fairy</span> Look Like?
@@ -245,36 +245,6 @@ const WhatDoesTheToothFairyLookLike = () => {
           </div>
         </section>
 
-        {/* ── Cross-links ── */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className="container px-6 max-w-3xl mx-auto">
-            <div className="text-center mb-10">
-              <Sparkles className="w-6 h-6 text-primary mx-auto mb-4" />
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">Continue Exploring</h2>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              {[
-                { to: "/is-the-tooth-fairy-real", label: "Is the Tooth Fairy Real?", desc: "Where the legend comes from, around the world." },
-                { to: "/tooth-fairy-story", label: "Read the Tooth Fairy Story", desc: "The tale of Arlo, CeCe, and the workshop above the clouds." },
-                { to: "/letters-to-the-tooth-fairy", label: "Write a Letter to the Tooth Fairy", desc: "Share the quality in your child's tooth." },
-              ].map((link) => (
-                <Link key={link.to} to={link.to} onClick={() => trackEvent("explore_click", { page: link.to, source: "look_like" })}
-                  className="magical-card group hover:shadow-magical transition-all duration-300 hover:-translate-y-0.5">
-                  <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">{link.label}</p>
-                  <p className="text-sm text-muted-foreground">{link.desc}</p>
-                </Link>
-              ))}
-            </div>
-            <a href={YOUTUBE_VIDEO_URL} target="_blank" rel="noopener noreferrer"
-              onClick={() => trackEvent("social_click", { platform: "youtube", location: "look_like" })}
-              className="block w-full rounded-2xl bg-[hsl(244_45%_15%)] border border-primary/25 hover:border-primary/50 p-6 text-center transition-all hover:shadow-magical group">
-              <Sparkles className="w-5 h-5 text-primary mx-auto mb-3" />
-              <p className="font-display font-semibold text-starlight group-hover:text-primary transition-colors mb-1">Watch the Animated Short Film</p>
-              <p className="text-sm text-starlight/80">See the Tooth Fairy's world come to life - free on YouTube.</p>
-            </a>
-          </div>
-        </section>
-
         {/* ── Join the Workshop ── */}
         <section className="py-16 bg-secondary/30">
           <div className="container px-6 max-w-xl mx-auto text-center">
@@ -297,7 +267,7 @@ const WhatDoesTheToothFairyLookLike = () => {
 
       <RelatedPages
         from="/what-does-the-tooth-fairy-look-like"
-        links={["/coloring-page", "/is-the-tooth-fairy-real", "/tooth-fairy-story"]}
+        links={["/coloring-page", "/is-the-tooth-fairy-real", "/tooth-fairy-story", "/letters-to-the-tooth-fairy", "/watch"]}
       />
       <Footer />
     </div>
