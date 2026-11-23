@@ -201,7 +201,7 @@ npm run build
 
 ### Routing on Netlify
 
-The site uses `BrowserRouter`. Every real route is prerendered to `dist/<route>.html`, which Netlify serves directly. Unknown URLs fall through the `/*` rule in `netlify.toml` to `app-shell.html` (not `index.html`, which holds the rendered homepage), and React Router shows the 404 page. Retired URLs are 301'd by `[[redirects]]` entries in `netlify.toml`.
+The site uses `BrowserRouter`. Every real route is prerendered to `dist/<route>.html`, which Netlify serves directly. Unknown URLs fall through the `/*` rule in `netlify.toml` to `app-shell.html` (not `index.html`, which holds the rendered homepage) with a real **404 status**, and React Router shows the noindex NotFound page. Keep that rule at `status = 404` and last in the file - a 200 there creates "soft 404s" in Search Console (`seo.test.ts` guards it). Retired URLs are 301'd by `[[redirects]]` entries in `netlify.toml`.
 
 ### Images Not Loading
 
