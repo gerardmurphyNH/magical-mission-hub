@@ -3,6 +3,7 @@ import { Sparkles, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import LiteYouTube from "@/components/LiteYouTube";
 import { YOUTUBE_CHANNEL_URL, YOUTUBE_VIDEO_URL } from "@/lib/config";
@@ -347,6 +348,10 @@ const WhatDoesTheToothFairyDo = () => {
           </ul>
         </div>
       </main>
+      <RelatedPages
+        from="/what-does-the-tooth-fairy-do-with-teeth"
+        links={["/why-does-the-tooth-fairy-leave-money", "/is-the-tooth-fairy-real", "/tooth-fairy-story"]}
+      />
       <Footer />
     </div>
   );

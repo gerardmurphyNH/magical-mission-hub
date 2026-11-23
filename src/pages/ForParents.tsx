@@ -3,6 +3,7 @@ import { ArrowLeft, Sparkles, HelpCircle, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
 import { trackCTAClick } from "@/lib/analytics";
@@ -337,6 +338,10 @@ const ForParents = () => {
           </Button>
         </div>
       </main>
+      <RelatedPages
+        from="/for-parents"
+        links={["/how-much-does-the-tooth-fairy-leave", "/first-tooth-tradition", "/first-tooth-what-to-do"]}
+      />
       <Footer />
     </div>
   );

@@ -3,6 +3,7 @@ import { ArrowRight, Palette, FileText, ArrowLeft, Sparkles, GraduationCap, Awar
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import { YOUTUBE_CHANNEL_URL } from "@/lib/config";
 import { trackCTAClick } from "@/lib/analytics";
@@ -193,6 +194,10 @@ const Printables = () => {
           </ul>
         </div>
       </main>
+      <RelatedPages
+        from="/printables"
+        links={["/first-tooth-tradition", "/tooth-fairy-letter", "/for-teachers"]}
+      />
       <Footer />
     </div>
   );

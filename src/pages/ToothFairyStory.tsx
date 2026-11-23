@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
 import { trackCTAClick } from "@/lib/analytics";
@@ -43,7 +44,7 @@ const ToothFairyStory = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="The Tooth Fairy Story | Wiggly Tooth Workshop"
+        title="The Tooth Fairy Story: A Free Bedtime Story for Kids | Wiggly Tooth Workshop"
         description="Read the Tooth Fairy story - a curious boy discovers what the Tooth Fairy really does with lost teeth. A warm, magical tale for kids, free to read."
         canonical={PAGE_URL}
         image="https://wigglytoothworkshop.com/og-image.png"
@@ -331,6 +332,10 @@ const ToothFairyStory = () => {
         </section>
       </main>
 
+      <RelatedPages
+        from="/tooth-fairy-story"
+        links={["/watch", "/what-does-the-tooth-fairy-do-with-teeth", "/coloring-page"]}
+      />
       <Footer />
     </div>
   );

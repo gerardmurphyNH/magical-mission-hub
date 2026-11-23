@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import LetterheadGenerator from "@/components/LetterheadGenerator";
 import ShareableLetterCard from "@/components/ShareableLetterCard";
@@ -600,6 +601,10 @@ const LettersToTheToothFairy = () => {
         </section>
       </main>
 
+      <RelatedPages
+        from="/letters-to-the-tooth-fairy"
+        links={["/tooth-fairy-letter", "/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave"]}
+      />
       <Footer />
     </div>
   );

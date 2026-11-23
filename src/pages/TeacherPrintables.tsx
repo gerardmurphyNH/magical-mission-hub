@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import {
   trackTeacherWorksheetDownload,
@@ -339,7 +340,7 @@ const TeacherPrintables = () => {
   return (
     <>
       <PageSeo
-        title="Free Tooth Fairy Worksheets & Printables | Wiggly Tooth Workshop"
+        title="Free Tooth Fairy Worksheets for the Classroom (No Sign-Up) | Wiggly Tooth Workshop"
         description="Free back-to-school Tooth Fairy printables for grades 1-2: an SEL worksheet, coloring page, teacher guide, and parent note. No sign-up required."
         canonical="https://wigglytoothworkshop.com/tooth-fairy-printables"
         image="https://wigglytoothworkshop.com/images/tooth-fairy-worksheet-preview.jpg"
@@ -1067,6 +1068,10 @@ const TeacherPrintables = () => {
           </div>
         </section>
 
+        <RelatedPages
+          from="/tooth-fairy-printables"
+          links={["/for-teachers", "/coloring-page", "/tooth-fairy-letter"]}
+        />
         <Footer />
         </main>
       </div>

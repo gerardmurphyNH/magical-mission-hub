@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
 import { trackCTAClick } from "@/lib/analytics";
@@ -26,6 +27,16 @@ const faqs = [
     question: "Is this good for back-to-school activities?",
     answer:
       "Yes. The start of the school year is exactly when this works best - it's often when kindergarten and first-grade students are first losing teeth, and a simple, low-prep activity is a great way to build classroom community in the first weeks of school.",
+  },
+  {
+    question: "Can I use this for Children's Dental Health Month?",
+    answer:
+      "Yes, as a companion to your brushing and flossing lessons rather than a replacement for them. February's dental health lessons cover how to look after teeth; this covers the other half of the story children care about - what it means when one comes out. The Class Tooth Tracker and the discussion prompts fit easily into a dental health week.",
+  },
+  {
+    question: "Do I need to create an account or give an email to use these?",
+    answer:
+      "No. Every activity on this page and every printable on our classroom printables page is free to use and download, with no login, account, or email address required.",
   },
   {
     question: "What about kindergarten students who can't write yet?",
@@ -53,8 +64,8 @@ const ForTeachers = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Tooth Fairy Classroom Activities & Lesson Plan | Wiggly Tooth Workshop"
-        description="Free back-to-school Tooth Fairy classroom activities, bulletin board ideas, and discussion questions for grades K-5, including a kindergarten-friendly option."
+        title="Free Lost Tooth Classroom Activities for K-5 (No Sign-Up) | Wiggly Tooth Workshop"
+        description="Free lost tooth classroom activities for K-5: discussion prompts, a class tooth tracker, bulletin board ideas and a 4-minute film. No login, no sign-up, no cost."
         canonical="https://wigglytoothworkshop.com/for-teachers"
         jsonLd={{
           "@context": "https://schema.org",
@@ -79,8 +90,8 @@ const ForTeachers = () => {
             {
               "@type": "Article",
               datePublished: "2026-06-01",
-              dateModified: "2026-08-26",
-              headline: "Tooth Fairy Classroom Activities & Lesson Plan",
+              dateModified: "2026-11-23",
+              headline: "Lost Tooth Classroom Activities",
               description:
                 "Free Tooth Fairy classroom activities, a lesson plan, and discussion questions for grades K-5, built around the short film The Tooth Fairy's Secret Workshop.",
               about: [
@@ -124,21 +135,22 @@ const ForTeachers = () => {
         </Link>
 
         <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full mb-5">
-          Classroom Resources · Back to School
+          Grades K-5 · Free, No Sign-Up
         </span>
 
         <h1 className="font-display text-4xl font-bold text-foreground mb-4 leading-tight">
-          For Teachers &amp; Classrooms
+          Lost Tooth Classroom Activities
         </h1>
         <p className="text-muted-foreground text-lg leading-relaxed mb-4">
           Use <em>The Tooth Fairy's Secret Workshop</em> to open conversations about character,
           virtues, and the small ways children make the world better.
         </p>
         <p className="text-muted-foreground leading-relaxed mb-12">
-          The start of the school year is one of the best times to use this - kindergarten and
-          first-grade students are often losing their first teeth right as the year begins, which
-          makes it a natural, low-prep way to start building classroom community in the first
-          weeks of school.
+          Kindergarten and first-grade students lose teeth all year long, and the whole class
+          notices every time. That makes this a natural, low-prep way to mark the moment and build
+          classroom community - in the first weeks of school, during Children's Dental Health
+          Month in February, or any day a tooth comes out. Nothing here needs a login or an email
+          address.
         </p>
 
         {/* Film embed */}
@@ -370,6 +382,10 @@ const ForTeachers = () => {
           </Button>
         </div>
       </main>
+      <RelatedPages
+        from="/for-teachers"
+        links={["/tooth-fairy-printables", "/coloring-page", "/letters-to-the-tooth-fairy"]}
+      />
       <Footer />
     </div>
   );

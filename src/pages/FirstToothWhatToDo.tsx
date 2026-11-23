@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 
 const steps = [
@@ -337,6 +338,10 @@ const FirstToothWhatToDo = () => {
             </div>
           </section>
         </main>
+        <RelatedPages
+          from="/first-tooth-what-to-do"
+          links={["/first-tooth-tradition", "/how-much-does-the-tooth-fairy-leave", "/tooth-fairy-letter"]}
+        />
         <Footer />
       </div>
     </>

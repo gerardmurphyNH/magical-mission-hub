@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import FilmEmbed from "@/components/FilmEmbed";
 import { YOUTUBE_VIDEO_URL } from "@/lib/config";
@@ -294,6 +295,10 @@ const WhatDoesTheToothFairyLookLike = () => {
         </section>
       </main>
 
+      <RelatedPages
+        from="/what-does-the-tooth-fairy-look-like"
+        links={["/coloring-page", "/is-the-tooth-fairy-real", "/tooth-fairy-story"]}
+      />
       <Footer />
     </div>
   );

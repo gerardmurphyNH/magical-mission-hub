@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import { YOUTUBE_VIDEO_URL } from "@/lib/config";
 import { trackCTAClick, trackEvent } from "@/lib/analytics";
@@ -58,7 +59,7 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="Why Does the Tooth Fairy Leave Money? | Wiggly Tooth Workshop"
+        title="Why Does the Tooth Fairy Leave Money? What to Tell Your Child | Wiggly Tooth Workshop"
         description="Why does the Tooth Fairy leave money? It isn't payment for the tooth - it's a thank-you for what your child grew inside it. Discover what the gift really means."
         canonical={PAGE_URL}
         image={MACHINE_IMG_ABS}
@@ -341,6 +342,10 @@ const WhyDoesTheToothFairyLeaveMoney = () => {
           </ul>
         </div>
       </main>
+      <RelatedPages
+        from="/why-does-the-tooth-fairy-leave-money"
+        links={["/how-much-does-the-tooth-fairy-leave", "/first-tooth-tradition", "/what-to-say-when-child-asks-if-tooth-fairy-is-real"]}
+      />
       <Footer />
     </div>
   );

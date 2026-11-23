@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import { trackFAQOpen, trackButtonClick } from "@/lib/analytics";
 
@@ -453,6 +454,10 @@ const WhatToSayToothFairy = () => {
             </div>
           </section>
         </main>
+        <RelatedPages
+          from="/what-to-say-when-child-asks-if-tooth-fairy-is-real"
+          links={["/tooth-fairy-letter", "/why-does-the-tooth-fairy-leave-money", "/what-does-the-tooth-fairy-do-with-teeth"]}
+        />
         <Footer />
       </div>
     </>

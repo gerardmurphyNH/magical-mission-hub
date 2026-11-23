@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/accordion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import RelatedPages from "@/components/RelatedPages";
 import PageSeo from "@/components/PageSeo";
 import { YOUTUBE_VIDEO_URL } from "@/lib/config";
 import { trackEvent } from "@/lib/analytics";
@@ -116,8 +117,8 @@ const FirstToothTradition = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSeo
-        title="First Tooth Tradition & Certificate | Wiggly Tooth Workshop"
-        description="Create a warm, magical first tooth tradition with a free printable Tooth Fairy certificate that celebrates the special quality your child has been growing."
+        title="Free Tooth Fairy Certificate for a First Lost Tooth (PDF) | Wiggly Tooth Workshop"
+        description="Free printable Tooth Fairy certificate for your child's first lost tooth. Download the PDF or JPG, add the quality she found inside, and print at home. No sign-up."
         canonical={PAGE_URL}
         image={CERT_ABS}
         jsonLd={{
@@ -127,7 +128,7 @@ const FirstToothTradition = () => {
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Wiggly Tooth Workshop", item: SITE_URL },
-                { "@type": "ListItem", position: 2, name: "First Tooth Tradition", item: PAGE_URL },
+                { "@type": "ListItem", position: 2, name: "Tooth Fairy Certificate", item: PAGE_URL },
               ],
             },
             {
@@ -185,7 +186,7 @@ const FirstToothTradition = () => {
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div className="order-2 md:order-1">
                 <p className="text-xs font-semibold uppercase tracking-widest text-primary/80 mb-5">
-                  A First Tooth Tradition
+                  Free Printable Tooth Fairy Certificate
                 </p>
                 <h1 className="font-display text-4xl md:text-5xl font-bold text-starlight leading-tight mb-6">
                   A First Tooth Tradition That Makes the Tooth Fairy Feel Real
@@ -517,6 +518,10 @@ const FirstToothTradition = () => {
         </section>
       </main>
 
+      <RelatedPages
+        from="/first-tooth-tradition"
+        links={["/how-much-does-the-tooth-fairy-leave", "/tooth-fairy-letter", "/first-tooth-what-to-do"]}
+      />
       <Footer />
     </div>
   );
