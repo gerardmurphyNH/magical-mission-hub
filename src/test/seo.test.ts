@@ -282,6 +282,27 @@ describe("sitemap.xml", () => {
   });
 });
 
+describe("netlify.toml not-found fallback", () => {
+  // Unknown URLs used to get the app shell with a 200, which Google treats as
+  // "soft 404s". The catch-all must serve the shell with a real 404 status.
+  const toml = read(path.join(ROOT, "netlify.toml"));
+  const rules = toml.split("[[redirects]]").slice(1);
+  const catchAll = rules.find((r) => /from\s*=\s*"\/\*"/.test(r));
+
+  it("has a /* catch-all that serves the app shell", () => {
+    expect(catchAll, "netlify.toml is missing the /* fallback rule").toBeTruthy();
+    expect(catchAll!).toMatch(/to\s*=\s*"\/app-shell\.html"/);
+  });
+
+  it("returns a real 404 status for unknown URLs (no soft 404s)", () => {
+    expect(catchAll!).toMatch(/status\s*=\s*404\b/);
+  });
+
+  it("is the last redirect rule, so specific redirects win", () => {
+    expect(rules[rules.length - 1]).toBe(catchAll);
+  });
+});
+
 describe("stale domain (tooth-safe.com)", () => {
   // The site moved from tooth-safe.com to wigglytoothworkshop.com. The old
   // domain leaking into a URL (canonical, og:url, or a YouTube embed `origin=`)
