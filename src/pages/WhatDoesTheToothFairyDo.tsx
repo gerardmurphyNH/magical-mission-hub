@@ -109,7 +109,7 @@ const WhatDoesTheToothFairyDo = () => {
             {
               "@type": "Article",
               datePublished: "2026-06-01",
-              dateModified: "2026-09-01",
+              dateModified: "2026-11-23",
               author: { "@type": "Organization", name: "Wiggly Tooth Workshop", url: "https://wigglytoothworkshop.com/" },
               headline: "What Does the Tooth Fairy Do With Teeth?",
               description:
@@ -202,7 +202,7 @@ const WhatDoesTheToothFairyDo = () => {
 
         <div className="space-y-6">
           <h2 className="font-display text-2xl font-bold text-foreground">
-            Why teeth, specifically?
+            Why does the Tooth Fairy collect teeth?
           </h2>
           <p className="text-foreground leading-relaxed">
             You might wonder why she doesn't collect something else: your drawings, your
@@ -249,6 +249,18 @@ const WhatDoesTheToothFairyDo = () => {
             door open when you really needed it. The child who shared when it cost them
             something. The courage that appeared, unexpectedly, when someone needed to
             be brave.
+          </p>
+          <figure className="my-8 py-6 px-8 rounded-2xl bg-secondary/40 border border-border text-center">
+            <blockquote className="font-display text-xl md:text-2xl font-semibold text-foreground leading-snug italic">
+              "Not as miracles. Not as wishes granted.
+              <br className="hidden md:block" />
+              As small, invisible nudges."
+            </blockquote>
+          </figure>
+          <p className="text-foreground leading-relaxed">
+            A moment of patience that keeps something from falling apart. An unexpected
+            kindness that arrives at exactly the right time. The Tooth Fairy doesn't change
+            the world dramatically. She tends to it - gently, precisely, while it sleeps.
           </p>
 
           <h2 className="font-display text-2xl font-bold text-foreground">
